@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Compose.css';
 
-export default class Compose extends Component {
-  render() {
-    return (
-      <div className="compose">
-        <input
-          type="text"
-          className="compose-input"
-          placeholder="Type a message, @name"
-        />
+const Compose = (props) => {
+  const { rightItems } = props;
+  return (
+    <div className="compose">
+      <input
+        type="text"
+        className="compose-input"
+        placeholder="Type a message, @name"
+      />
 
-        {
-          this.props.rightItems
-        }
-      </div>
-    );
-  }
+      {
+        rightItems
+      }
+    </div>
+  );
 }
+
+export default Compose
