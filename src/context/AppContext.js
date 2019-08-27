@@ -66,8 +66,13 @@ const AppContextProvider = (props) => {
     },
   ])
 
+  const removeMessage = (id) => {
+    console.log(id)
+    setMessages(messages.filter(message => message.id !== id))
+  }
+
   return (
-    <AppContext.Provider value={{messages}}>
+    <AppContext.Provider value={{messages, removeMessage}}>
       { props.children }
     </AppContext.Provider>
   )

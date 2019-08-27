@@ -71,7 +71,6 @@ function MessageList() {
 
     return messagesList;
   }
-
   return (
     <div className="message-list">
       <Toolbar
