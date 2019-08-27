@@ -1,23 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import shave from 'shave';
 
 import './ConversationListItem.css';
+import { AppContext } from '../../../context/AppContext'
 
 function ConversationListItem(props) {
+  const { updateMessages } = useContext(AppContext);
   useEffect(() => {
     shave('.conversation-snippet', 20);
   }, []);
 
   const { photo, name, text } = props.data;
 
-  function handleClick(e) {
+  function getUserMessages(e) {
     e.preventDefault();
-    console.log(photo)
+    const messages = {
+      id: 1,
+      message: name + text,
+      author: name
+    }
+    updateMessages(messages);
   }
 
 
   return (
-    <div className="conversation-list-item" onClick={handleClick}>
+    <div className="conversation-list-item" onClick={getUserMessages}>
       <img className="conversation-photo" src={photo} alt="conversation" />
       <div className="conversation-info">
         <h1 className="conversation-title">{ name }</h1>
