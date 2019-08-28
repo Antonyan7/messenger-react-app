@@ -67,19 +67,19 @@ const AppContextProvider = (props) => {
   ])
 
   const updateMessages = (messagesList) => {
-    setMessages([messagesList])
+    setMessages(messagesList)
   }
 
   const addMessage = (author, message) => {
     setMessages([...messages, {author, message}])
   }
 
-  const removeMessage = (id) => {
+  const removeMessageById = (id) => {
     setMessages(messages.filter(message => message.id !== id))
   }
 
   return (
-    <AppContext.Provider value={{messages, removeMessage, updateMessages, addMessage}}>
+    <AppContext.Provider value={{messages, removeMessageById, updateMessages, addMessage}}>
       { props.children }
     </AppContext.Provider>
   )

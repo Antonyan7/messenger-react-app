@@ -4,7 +4,7 @@ import './Message.css'
 import { AppContext } from '../../../context/AppContext'
 
 const Message = (props) => {
-  const { removeMessage } = useContext(AppContext);
+  const { removeMessageById } = useContext(AppContext);
   const {
     data,
     isMine,
@@ -16,7 +16,7 @@ const Message = (props) => {
   const friendlyTimestamp = moment(data.timestamp).format('LLLL')
 
   return (
-    <div onClick={() => removeMessage(data.id)} className={[
+    <div onClick={() => removeMessageById(data.id)} className={[
       'message',
       `${isMine ? 'mine' : ''}`,
       `${startsSequence ? 'start' : ''}`,
