@@ -1,9 +1,10 @@
-import React, { createContext, useState } from 'react'
+import React, {useState} from 'react'
+import { IAppContext, IAppContextProvider, IAppContextMessage } from '../interfaces/interfaces';
 
-export const AppContext = createContext();
+export const AppContext = React.createContext<IAppContext>({} as IAppContext);
 
-const AppContextProvider = (props) => {
-  const [messages, setMessages] = useState([
+const AppContextProvider = (props: IAppContextProvider) => {
+  const [messages, setMessages] = useState<Array<IAppContextMessage>>([
     {
       id: 1,
       author: 'apple',
@@ -64,25 +65,21 @@ const AppContextProvider = (props) => {
       message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
       timestamp: new Date().getTime()
     },
-  ])
+  ]);
 
-  const updateMessages = (messagesList) => {
+  const updateMessages = (messagesList: Array<IAppContextMessage>) => {
     setMessages(messagesList)
-  }
+  };
 
-  const addMessage = (author, message) => {
-    setMessages([...messages, {author, message}])
-  }
-
-  const removeMessageById = (id) => {
-    setMessages(messages.filter(message => message.id !== id))
-  }
+  const removeMessageById = (id: number) => {
+    setMessages(messages.filter((message: IAppContextMessage) => message.id !== id))
+  };
 
   return (
-    <AppContext.Provider value={{messages, removeMessageById, updateMessages, addMessage}}>
+    <AppContext.Provider value={{messages, updateMessages, removeMessageById}}>
       { props.children }
     </AppContext.Provider>
   )
-}
+};
 
 export default AppContextProvider

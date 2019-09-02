@@ -1,7 +1,8 @@
 import React from 'react';
 import './Compose.css';
+import {ICompose} from "../../../interfaces/interfaces";
 
-const Compose = (props) => {
+const Compose = (props: ICompose) => {
   const { rightItems } = props;
   return (
     <div className="compose">

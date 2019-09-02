@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import moment from 'moment'
 import './Message.css'
 import { AppContext } from '../../../context/AppContext'
+import {IMessage} from "../../../interfaces/interfaces";
 
-const Message = (props) => {
+const Message = (props: IMessage) => {
   const { removeMessageById } = useContext(AppContext);
   const {
     data,
@@ -11,9 +12,9 @@ const Message = (props) => {
     startsSequence,
     endsSequence,
     showTimestamp,
-  } = props
+  } = props;
 
-  const friendlyTimestamp = moment(data.timestamp).format('LLLL')
+  const friendlyTimestamp = moment(data.timestamp).format('LLLL');
 
   return (
     <div onClick={() => removeMessageById(data.id)} className={[
@@ -36,6 +37,6 @@ const Message = (props) => {
       </div>
     </div>
   )
-}
+};
 
 export default Message
