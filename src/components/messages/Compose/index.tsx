@@ -1,1 +1,1 @@
-export { default } from './Compose';
+export {default} from './Compose';

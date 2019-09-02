@@ -1,1 +1,1 @@
-export { default } from './ConversationSearch';
+export {default} from './ConversationSearch';

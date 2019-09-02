@@ -3,7 +3,7 @@ import './Compose.css';
 import {ICompose} from "../../../interfaces/interfaces";
 
 const Compose = (props: ICompose) => {
-  const { rightItems } = props;
+  const {rightItems} = props;
   return (
     <div className="compose">
       <input
@@ -17,6 +17,6 @@ const Compose = (props: ICompose) => {
       }
     </div>
   );
-}
+};
 
 export default Compose

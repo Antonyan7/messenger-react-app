@@ -1,10 +1,10 @@
-import React, { useState, useEffect }  from 'react';
+import React, {useState, useEffect} from 'react';
 import ConversationSearch from '../ConversationSearch';
 import ConversationListItem from '../ConversationListItem';
 import Toolbar from '../../layouts/Toolbar';
 import ToolbarButton from '../../layouts/ToolbarButton';
 import axios from 'axios';
-import { IConversations } from "../../../interfaces/interfaces";
+import {IConversations} from "../../../interfaces/interfaces";
 
 import './ConversationList.css';
 
@@ -24,7 +24,7 @@ function ConversationList() {
       });
       setConversations(conversationsList)
     });
-  }
+  };
 
   useEffect(() => {
     getConversations();
@@ -35,13 +35,13 @@ function ConversationList() {
       <Toolbar
         title="Messenger"
         leftItems={[
-          <ToolbarButton key="cog" icon="ion-ios-cog" />
+          <ToolbarButton key="cog" icon="ion-ios-cog"/>
         ]}
         rightItems={[
-          <ToolbarButton key="add" icon="ion-ios-add-circle-outline" />
+          <ToolbarButton key="add" icon="ion-ios-add-circle-outline"/>
         ]}
       />
-      <ConversationSearch />
+      <ConversationSearch/>
       {
         conversations.map(conversation =>
           <ConversationListItem
@@ -52,6 +52,6 @@ function ConversationList() {
       }
     </div>
   );
-};
+}
 
 export default ConversationList;

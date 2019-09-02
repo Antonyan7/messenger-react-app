@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import './ConversationSearch.css';
 
 const ConversationSearch = () => {
@@ -11,7 +11,6 @@ const ConversationSearch = () => {
       />
     </div>
   );
-}
+};
 
 export default ConversationSearch
-

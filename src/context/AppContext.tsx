@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { IAppContext, IAppContextProvider, IAppContextMessage } from '../interfaces/interfaces';
+import {IAppContext, IAppContextProvider, IAppContextMessage} from '../interfaces/interfaces';
 
 export const AppContext = React.createContext<IAppContext>({} as IAppContext);
 
@@ -77,7 +77,7 @@ const AppContextProvider = (props: IAppContextProvider) => {
 
   return (
     <AppContext.Provider value={{messages, updateMessages, removeMessageById}}>
-      { props.children }
+      {props.children}
     </AppContext.Provider>
   )
 };

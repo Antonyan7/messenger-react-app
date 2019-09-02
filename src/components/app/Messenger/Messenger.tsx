@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import ConversationList from '../../conversations/ConversationList';
 import MessageList from '../../messages/MessageList';
 import './Messenger.css';
@@ -7,11 +7,11 @@ function Messenger() {
   return (
     <div className="messenger">
       <div className="scrollable sidebar">
-        <ConversationList />
+        <ConversationList/>
       </div>
 
       <div className="scrollable content">
-        <MessageList />
+        <MessageList/>
       </div>
     </div>
   );

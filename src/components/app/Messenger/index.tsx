@@ -1,1 +1,1 @@
-export { default } from './Messenger';
+export {default} from './Messenger';
