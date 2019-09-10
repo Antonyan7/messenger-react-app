@@ -20,7 +20,7 @@ function ConversationListItem(props: IConversationsList) {
         id: 1,
         message: name + text,
         author: name,
-        timestamp: new Date().getTime()
+        timestamp: new Date().toISOString(),
       },
     ];
     updateMessages(messages)

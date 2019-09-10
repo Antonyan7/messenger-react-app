@@ -17,7 +17,7 @@ export interface IAppContextMessage {
   id: number,
   author: string,
   message: string,
-  timestamp: number
+  timestamp: string
 }
 
 /* Conversations List Types */

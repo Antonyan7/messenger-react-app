@@ -9,61 +9,61 @@ const AppContextProvider = (props: IAppContextProvider) => {
       id: 1,
       author: 'apple',
       message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-      timestamp: new Date().getTime()
+      timestamp: new Date().toISOString()
     },
     {
       id: 2,
       author: 'orange',
       message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-      timestamp: new Date().getTime()
+      timestamp: new Date().toISOString()
     },
     {
       id: 3,
       author: 'orange',
       message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-      timestamp: new Date().getTime()
+      timestamp: new Date().toISOString()
     },
     {
       id: 4,
       author: 'apple',
       message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-      timestamp: new Date().getTime()
+      timestamp: new Date().toISOString()
     },
     {
       id: 5,
       author: 'apple',
       message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-      timestamp: new Date().getTime()
+      timestamp: new Date().toISOString()
     },
     {
       id: 6,
       author: 'apple',
       message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-      timestamp: new Date().getTime()
+      timestamp: new Date().toISOString()
     },
     {
       id: 7,
       author: 'orange',
       message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-      timestamp: new Date().getTime()
+      timestamp: new Date().toISOString()
     },
     {
       id: 8,
       author: 'orange',
       message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-      timestamp: new Date().getTime()
+      timestamp: new Date().toISOString()
     },
     {
       id: 9,
       author: 'apple',
       message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-      timestamp: new Date().getTime()
+      timestamp: new Date().toISOString()
     },
     {
       id: 10,
       author: 'orange',
       message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-      timestamp: new Date().getTime()
+      timestamp: new Date().toISOString()
     },
   ]);
 
