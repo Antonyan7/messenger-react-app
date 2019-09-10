@@ -63,3 +63,22 @@ export interface IToolbarButton {
   icon: string
 }
 
+export interface IUsersListResponse {
+  cell: string,
+  dob: object,
+  email: string,
+  gender: string,
+  id: object,
+  location: object,
+  login: object,
+  name: {
+    first: string,
+    last: string
+  },
+  nat: string,
+  phone: string,
+  picture: {
+    large: string
+  },
+  registered: object
+}

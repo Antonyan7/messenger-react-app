@@ -4,7 +4,7 @@ import ConversationListItem from '../ConversationListItem';
 import Toolbar from '../../layouts/Toolbar';
 import ToolbarButton from '../../layouts/ToolbarButton';
 import axios from 'axios';
-import {IConversations} from "../../../interfaces/interfaces";
+import {IConversations, IUsersListResponse} from "../../../interfaces/interfaces";
 
 import './ConversationList.css';
 
@@ -15,7 +15,7 @@ function ConversationList() {
 
   const getConversations = () => {
     axios.get('https://randomuser.me/api/?results=20').then(response => {
-      let conversationsList = response.data.results.map((result: any) => {
+      const conversationsList = response.data.results.map((result: IUsersListResponse) => {
         return {
           photo: result.picture.large,
           name: `${result.name.first} ${result.name.last}`,
