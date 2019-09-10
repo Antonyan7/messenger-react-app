@@ -43,7 +43,7 @@ function ConversationList() {
       />
       <ConversationSearch/>
       {
-        conversations.map(conversation =>
+        conversations.map((conversation: IConversations) =>
           <ConversationListItem
             key={conversation.name}
             data={conversation}
