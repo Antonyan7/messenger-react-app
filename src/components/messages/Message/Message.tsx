@@ -17,6 +17,7 @@ const Message = (props: IMessage) => {
   const friendlyTimestamp = moment(data.timestamp).format('LLLL');
 
   return (
+
     <div onClick={() => removeMessageById(data.id)} className={[
       'message',
       `${isMine ? 'mine' : ''}`,
@@ -32,7 +33,7 @@ const Message = (props: IMessage) => {
 
       <div className="bubble-container">
         <div className="bubble" title={friendlyTimestamp}>
-          {data.message}
+          {data.content}
         </div>
       </div>
     </div>

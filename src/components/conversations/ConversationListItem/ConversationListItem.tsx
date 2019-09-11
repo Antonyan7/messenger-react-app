@@ -3,27 +3,31 @@ import shave from 'shave'
 
 import './ConversationListItem.css'
 import {AppContext} from '../../../context/AppContext'
-import {IAppContextMessage, IConversations, IConversationsList} from "../../../interfaces/interfaces";
+import {
+  IConversations,
+  IConversationsList,
+} from "../../../interfaces/interfaces";
 
 function ConversationListItem(props: IConversationsList) {
-  const {updateMessages} = useContext(AppContext);
+  const { addMessage } = useContext(AppContext);
+  const { updateMessages } = useContext(AppContext);
   useEffect(() => {
     shave('.conversation-snippet', 20)
   }, []);
 
-  const {photo, name, text}: IConversations = props.data;
+  const {id, photo, name, text}: IConversations = props.data;
 
-  const getUserMessages = (e: React.MouseEvent) => {
+  const config = {
+    headers: {'Authorization': "bearer " + process.env.REACT_APP_AUTH_TOKEN}
+  };
+
+  const getChannelMessages = (e: React.MouseEvent) => {
     e.preventDefault();
-    const messages: Array<IAppContextMessage> = [
-      {
-        id: 1,
-        message: name + text,
-        author: name,
-        timestamp: new Date().toISOString(),
-      },
-    ];
-    updateMessages(messages)
+    console.log(e);
+    axios.get("https://dev-api.gidstaging.net/v1/channels/"+ id +"/messages", config).then(response => {
+      const channelMessagesList = response.data.data.messages;
+      updateMessages(channelMessagesList);
+    });
   };
 
   // TODO change any type
@@ -32,7 +36,7 @@ function ConversationListItem(props: IConversationsList) {
   };
 
   return (
-    <div className="conversation-list-item" onClick={getUserMessages}>
+    <div className="conversation-list-item" onClick={(e) => getChannelMessages(e)}>
       <img className="conversation-photo" src={photo} alt="conversation" onError={setDefaultImage}/>
       <div className="conversation-info">
         <h1 className="conversation-title">{name}</h1>

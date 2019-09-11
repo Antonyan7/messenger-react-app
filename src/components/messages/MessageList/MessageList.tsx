@@ -11,7 +11,7 @@ import './MessageList.css';
 const MY_USER_ID = 'apple';
 
 function MessageList() {
-  const {messages} = useContext(AppContext)
+  const {messages} = useContext(AppContext);
 
   const renderMessages = () => {
     let i = 0;
@@ -68,7 +68,6 @@ function MessageList() {
       // Proceed to the next message.
       i += 1;
     }
-
     return messagesList;
   };
 

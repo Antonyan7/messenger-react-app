@@ -3,6 +3,7 @@
 /* AppContext Types */
 export interface IAppContext {
     messages: Array<IAppContextMessage>,
+    addMessage: (singleMessage: IAppContextMessage) => void,
     updateMessages: (value: Array<IAppContextMessage>) => void,
     removeMessageById: (value: number) => void,
     channels: Array<IConversations>,
@@ -19,12 +20,13 @@ export interface IAppContextProvider {
 export interface IAppContextMessage {
     id: number,
     author: string,
-    message: string,
+    content: string,
     timestamp: string
 }
 
 /* Conversations List Types */
 export interface IConversations {
+    id: number,
     photo: string,
     name: string,
     text: string
@@ -33,6 +35,7 @@ export interface IConversations {
 /* Conversation List Component Props Types */
 export interface IConversationsList {
     data: {
+        id: number,
         photo: string,
         name: string,
         text: string

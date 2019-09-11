@@ -21,6 +21,7 @@ function ConversationList() {
         axios.get('https://dev-api.gidstaging.net/v1/channels', config).then(response => {
             const channelsList = response.data.data.channels.map((result: IUsersListResponse) => {
                 return {
+                    id: result.id,
                     photo: result.image_url,
                     name: result.title,
                     text: result.description

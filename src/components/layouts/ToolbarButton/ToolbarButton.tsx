@@ -7,6 +7,7 @@ const ToolbarButton = (props: IToolbarButton) => {
   const {icon} = props;
 
   const channel: IConversations = {
+    id: 3561,
     photo: "https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568248-stock-illustration-male-face-avatar-logo-template.jpg",
     name: "test",
     text: "tsadfsadf"
