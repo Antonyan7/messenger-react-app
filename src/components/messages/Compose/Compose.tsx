@@ -3,20 +3,28 @@ import './Compose.css';
 import {ICompose} from "../../../interfaces/interfaces";
 
 const Compose = (props: ICompose) => {
-  const {rightItems} = props;
-  return (
-    <div className="compose">
-      <input
-        type="text"
-        className="compose-input"
-        placeholder="Type a message, @name"
-      />
+    const {rightItems} = props;
 
-      {
-        rightItems
-      }
-    </div>
-  );
+    const publishMessage = (e: React.KeyboardEvent) => {
+        if(e.key === 'Enter'){
+            console.log('entered')
+        }
+    };
+
+    return (
+        <div className="compose">
+            <input
+                type="text"
+                className="compose-input"
+                placeholder="Type a message, @name"
+                onKeyPress={publishMessage}
+            />
+
+            {
+                rightItems
+            }
+        </div>
+    );
 };
 
 export default Compose
