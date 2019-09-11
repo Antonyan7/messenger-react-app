@@ -14,12 +14,17 @@ function ConversationList() {
   );
 
   const getConversations = () => {
-    axios.get('https://randomuser.me/api/?results=20').then(response => {
-      const conversationsList = response.data.results.map((result: IUsersListResponse) => {
+    const config = {
+      headers: {'Authorization': "bearer " + process.env.REACT_APP_AUTH_TOKEN}
+    };
+
+    axios.get('https://dev-api.gidstaging.net/v1/channels', config).then(response => {
+      const conversationsList = response.data.data.channels.map((result: IUsersListResponse) => {
+        console.log(result);
         return {
-          photo: result.picture.large,
-          name: `${result.name.first} ${result.name.last}`,
-          text: 'Hello world! This is a long message that needs to be truncated.'
+          photo: result.image_url,
+          name: result.title,
+          text: result.description
         };
       });
       setConversations(conversationsList)
