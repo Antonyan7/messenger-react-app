@@ -5,6 +5,9 @@ export interface IAppContext {
     messages: Array<IAppContextMessage>,
     updateMessages: (value: Array<IAppContextMessage>) => void,
     removeMessageById: (value: number) => void,
+    channels: Array<IConversations>,
+    addChannels: (channelsList: Array<IConversations>) => void,
+    addChannel: (singleChannel: IConversations) => void,
 }
 
 /* AppContext Provider Types */

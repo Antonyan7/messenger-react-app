@@ -1,71 +1,11 @@
 import React, {useState} from 'react'
-import {IAppContext, IAppContextProvider, IAppContextMessage} from '../interfaces/interfaces';
+import {IAppContext, IAppContextProvider, IAppContextMessage, IConversations} from '../interfaces/interfaces';
 
 export const AppContext = React.createContext<IAppContext>({} as IAppContext);
 
 const AppContextProvider = (props: IAppContextProvider) => {
-  const [messages, setMessages] = useState<Array<IAppContextMessage>>([
-    {
-      id: 1,
-      author: 'apple',
-      message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 2,
-      author: 'orange',
-      message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 3,
-      author: 'orange',
-      message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 4,
-      author: 'apple',
-      message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 5,
-      author: 'apple',
-      message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 6,
-      author: 'apple',
-      message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 7,
-      author: 'orange',
-      message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 8,
-      author: 'orange',
-      message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 9,
-      author: 'apple',
-      message: 'Hello world! This is a long message that will hopefully get wrapped by our message bubble component! We will see how well it works.',
-      timestamp: new Date().toISOString()
-    },
-    {
-      id: 10,
-      author: 'orange',
-      message: 'It looks like it wraps exactly as it is supposed to. Lets see what a reply looks like!',
-      timestamp: new Date().toISOString()
-    },
-  ]);
+  const [messages, setMessages] = useState<Array<IAppContextMessage>>([]);
+  const [channels, setChannels] = useState<Array<IConversations>>([]);
 
   const updateMessages = (messagesList: Array<IAppContextMessage>) => {
     setMessages(messagesList)
@@ -75,8 +15,16 @@ const AppContextProvider = (props: IAppContextProvider) => {
     setMessages(messages.filter((message: IAppContextMessage) => message.id !== id))
   };
 
+  const addChannels = (channelsList: Array<IConversations>) => {
+    setChannels(channelsList)
+  };
+
+  const addChannel = (singleChannel: IConversations) => {
+    setChannels([...channels, singleChannel])
+  };
+
   return (
-    <AppContext.Provider value={{messages, updateMessages, removeMessageById}}>
+    <AppContext.Provider value={{messages, updateMessages, removeMessageById, channels, addChannels, addChannel}}>
       {props.children}
     </AppContext.Provider>
   )
