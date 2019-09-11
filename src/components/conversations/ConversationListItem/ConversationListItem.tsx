@@ -1,12 +1,13 @@
 import React, {useEffect, useContext} from 'react'
 import shave from 'shave'
+import axios from "axios"
 
 import './ConversationListItem.css'
 import {AppContext} from '../../../context/AppContext'
 import {
   IConversations,
   IConversationsList,
-} from "../../../interfaces/interfaces";
+} from "../../../interfaces/interfaces"
 
 function ConversationListItem(props: IConversationsList) {
   const { addMessage } = useContext(AppContext);
