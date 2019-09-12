@@ -9,6 +9,59 @@ import {
   IConversationsList,
 } from "../../../interfaces/interfaces"
 
+import PubNub from 'pubnub';
+
+const pubnub = new PubNub({
+  // subscribeKey: "sub-c-c7c006a6-9270-11e9-8277-da7aa9a31542",
+  subscribeKey: "sub-c-c7c006a6-9270-11e9-8277-da7aa9a31542",
+});
+pubnub.addListener({
+  status: function(statusEvent) {
+    console.log(statusEvent)
+  },
+  message: function(message) {
+    console.log(message)
+  },
+  presence: function(presenceEvent) {
+    console.log(presenceEvent);
+  }
+});
+
+pubnub.subscribe({
+  channels: ["3408","3409","3767","3771"],
+});
+
+// pubnub.publish(
+//     {
+//       message: {
+//         uuid: "66306f66-fdb9-4d89-98e0-203a8de382b2",
+//         type: "TEXT",
+//         content: "{\"text\":\"asd\"}"
+//       },
+//       channel: '3767',
+//       sendByPost: true, // true to send via post
+//       storeInHistory: true, //override default storage options
+//       meta: {
+//         "cool": "meta"
+//       }   // publish extra meta with the request
+//     },
+//     function (status, response) {
+//       if (status.error) {
+//         // handle error
+//         console.log(status)
+//       } else {
+//         console.log("message Published w/ timetoken", response.timetoken)
+//       }
+//     }
+// );
+
+// pubnub.hereNow({
+//   channels: []
+// }, function (status, response){
+//   console.log(status);
+//   console.log(response);
+// });
+
 function ConversationListItem(props: IConversationsList) {
   const { addMessage } = useContext(AppContext);
   const { updateMessages } = useContext(AppContext);
