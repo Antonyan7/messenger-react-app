@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import {IMessageContext, IMessageContextProvider} from "../interfaces/interfaces";
+import {IMessageContext} from "../interfaces/IMessageContext";
+import {IMessageContextProvider} from "../interfaces/IMessageContextProvider";
 
 export const MessageContext = React.createContext<IMessageContext>({} as IMessageContext);
 

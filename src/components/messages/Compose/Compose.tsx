@@ -1,10 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import './Compose.css';
-import {IAppContextMessage, ICompose, IUsersListResponse} from "../../../interfaces/interfaces";
 import {AppContext} from "../../../context/AppContext";
 import axios from "axios";
 import uuid from "uuid";
 import {MessageContext} from "../../../context/MessageContext";
+import {ICompose} from "../../../interfaces/ICompose";
 
 const Compose = (props: ICompose) => {
     const {rightItems} = props;

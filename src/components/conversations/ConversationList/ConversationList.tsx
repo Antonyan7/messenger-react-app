@@ -4,10 +4,11 @@ import ConversationListItem from '../ConversationListItem';
 import Toolbar from '../../layouts/Toolbar';
 import ToolbarButton from '../../layouts/ToolbarButton';
 import axios from 'axios';
-import {IConversations, IUsersListResponse} from "../../../interfaces/interfaces";
 
 import './ConversationList.css';
 import {AppContext} from "../../../context/AppContext";
+import {IConversations} from "../../../interfaces/IConversations";
+import {IUsersListResponse} from "../../../interfaces/IUsersListResponse";
 
 function ConversationList() {
     const {channels} = useContext(AppContext);

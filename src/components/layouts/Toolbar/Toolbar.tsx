@@ -1,6 +1,6 @@
 import React from 'react';
 import './Toolbar.css';
-import {IToolbar} from '../../../interfaces/interfaces'
+import {IToolbar} from "../../../interfaces/IToolbar";
 
 const Toolbar = (props: IToolbar) => {
   const {title, leftItems, rightItems} = props;

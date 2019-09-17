@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import './ToolbarButton.css';
-import {IConversations, IToolbarButton, IUsersListResponse} from "../../../interfaces/interfaces";
 import {AppContext} from "../../../context/AppContext";
 import axios from "axios";
 import uuid from "uuid";
 import {MessageContext} from "../../../context/MessageContext";
+import {IToolbarButton} from "../../../interfaces/IToolbarButton";
 
 const ToolbarButton = (props: IToolbarButton) => {
     const {icon} = props;
@@ -13,17 +13,8 @@ const ToolbarButton = (props: IToolbarButton) => {
     const {message, updateMessage} = useContext(MessageContext);
     const {addChannel} = useContext(AppContext);
 
-    // console.log(message);
-    // const channel: IConversations = {
-    //     id: 3561,
-    //     photo: "https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568248-stock-illustration-male-face-avatar-logo-template.jpg",
-    //     name: "test",
-    //     text: "tsadfsadf"
-    // };
-    //
-
     const addChannelEventHandler = () => {
-        if (icon == "ion-md-send") {
+        if (icon === "ion-md-send") {
             const props = {
                 message: {
                     uuid: uuid(),
@@ -51,7 +42,7 @@ const ToolbarButton = (props: IToolbarButton) => {
                 updateMessage("");
             });
         }
-        if (icon == "ion-ios-add-circle-outline") {
+        if (icon === "ion-ios-add-circle-outline") {
             const props = {
                 participants: [
                     "967eb266-14a1-4190-9c0b-c4b1f1799fa9"

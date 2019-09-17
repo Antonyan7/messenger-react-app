@@ -1,5 +1,8 @@
 import React, {useState} from 'react'
-import {IAppContext, IAppContextProvider, IAppContextMessage, IConversations} from '../interfaces/interfaces';
+import {IAppContext} from "../interfaces/IAppContext";
+import {IAppContextProvider} from "../interfaces/IAppContextProvider";
+import {IAppContextMessage} from "../interfaces/IAppContextMessage";
+import {IConversations} from "../interfaces/IConversations";
 
 export const AppContext = React.createContext<IAppContext>({} as IAppContext);
 

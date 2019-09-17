@@ -4,12 +4,10 @@ import axios from "axios"
 
 import './ConversationListItem.css'
 import {AppContext} from '../../../context/AppContext'
-import {
-  IConversations,
-  IConversationsList,
-} from "../../../interfaces/interfaces"
 
 import PubNub from 'pubnub';
+import {IConversations} from "../../../interfaces/IConversations";
+import {IConversationsList} from "../../../interfaces/IConversationsList";
 
 const pubnub = new PubNub({
   // subscribeKey: "sub-c-c7c006a6-9270-11e9-8277-da7aa9a31542",

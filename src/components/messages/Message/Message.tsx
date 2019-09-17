@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import moment from 'moment'
 import './Message.css'
 import {AppContext} from '../../../context/AppContext'
-import {IMessage} from "../../../interfaces/interfaces";
+import {IMessage} from "../../../interfaces/IMessage";
 
 const Message = (props: IMessage) => {
   const {removeMessageById} = useContext(AppContext);
