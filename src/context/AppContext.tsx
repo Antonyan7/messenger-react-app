@@ -9,6 +9,7 @@ export const AppContext = React.createContext<IAppContext>({} as IAppContext);
 const AppContextProvider = (props: IAppContextProvider) => {
     const [messages, setMessages] = useState<Array<IAppContextMessage>>([]);
     const [channels, setChannels] = useState<Array<IConversations>>([]);
+    const [filteredChannels, setFilteredChannels] = useState<Array<IConversations>>( []);
     const [activeChannelId, setActiveChannelId] = useState<number>(0);
 
 
@@ -36,8 +37,12 @@ const AppContextProvider = (props: IAppContextProvider) => {
         setActiveChannelId(id);
     };
 
+    const updateFilteredChannels = (channelsList: Array<IConversations>) => {
+        setFilteredChannels(channelsList);
+    };
+
     return (
-        <AppContext.Provider value={{messages, addMessage, updateMessages, removeMessageById, channels, addChannels, addChannel, activeChannelId, updateActiveChannelId}}>
+        <AppContext.Provider value={{messages, addMessage, updateMessages, removeMessageById, channels, addChannels, addChannel, activeChannelId, updateActiveChannelId, filteredChannels, updateFilteredChannels}}>
             {props.children}
         </AppContext.Provider>
     )

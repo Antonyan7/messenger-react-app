@@ -11,4 +11,6 @@ export interface IAppContext {
     addChannels: (channelsList: Array<IConversations>) => void,
     addChannel: (singleChannel: IConversations) => void,
     updateActiveChannelId: (id: number) => void,
+    filteredChannels: Array<IConversations>,
+    updateFilteredChannels: (channelsList: Array<IConversations>) => void,
 }

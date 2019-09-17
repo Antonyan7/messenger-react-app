@@ -11,7 +11,8 @@ import {IConversations} from "../../../interfaces/IConversations";
 import {IUsersListResponse} from "../../../interfaces/IUsersListResponse";
 
 function ConversationList() {
-    const {channels} = useContext(AppContext);
+    const {updateFilteredChannels} = useContext(AppContext);
+    const {filteredChannels} = useContext(AppContext);
     const {addChannels} = useContext(AppContext);
 
     const getChannels = () => {
@@ -28,7 +29,8 @@ function ConversationList() {
                     text: result.description
                 };
             });
-            addChannels(channelsList)
+            addChannels(channelsList);
+            updateFilteredChannels(channelsList);
         });
     };
 
@@ -49,7 +51,7 @@ function ConversationList() {
             />
             <ConversationSearch/>
             {
-                channels.map((channel: IConversations) =>
+                filteredChannels.map((channel: IConversations) =>
                     <ConversationListItem
                         key={channel.name}
                         data={channel}
