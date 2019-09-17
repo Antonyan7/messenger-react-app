@@ -28,7 +28,7 @@ pubnub.addListener({
 });
 
 pubnub.subscribe({
-  channels: ["3408","3409","3767","3771"],
+  channels: ["3804","3806","3808","3810"],
 });
 
 // pubnub.publish(
@@ -63,23 +63,25 @@ pubnub.subscribe({
 // });
 
 function ConversationListItem(props: IConversationsList) {
-  const { addMessage } = useContext(AppContext);
   const { updateMessages } = useContext(AppContext);
+  const { updateActiveChannelId } = useContext(AppContext);
+
   useEffect(() => {
     shave('.conversation-snippet', 20)
   }, []);
 
   const {id, photo, name, text}: IConversations = props.data;
 
+  // console.log(id);
   const config = {
     headers: {'Authorization': "bearer " + process.env.REACT_APP_AUTH_TOKEN}
   };
 
   const getChannelMessages = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log(e);
     axios.get("https://dev-api.gidstaging.net/v1/channels/"+ id +"/messages", config).then(response => {
       const channelMessagesList = response.data.data.messages;
+      updateActiveChannelId(id);
       updateMessages(channelMessagesList);
     });
   };

@@ -3,12 +3,23 @@
 /* AppContext Types */
 export interface IAppContext {
     messages: Array<IAppContextMessage>,
+    activeChannelId: number,
     addMessage: (singleMessage: IAppContextMessage) => void,
     updateMessages: (value: Array<IAppContextMessage>) => void,
     removeMessageById: (value: number) => void,
     channels: Array<IConversations>,
     addChannels: (channelsList: Array<IConversations>) => void,
     addChannel: (singleChannel: IConversations) => void,
+    updateActiveChannelId: (id: number) => void,
+}
+
+export interface IMessageContext {
+    message: string,
+    updateMessage: (newMessage: string) => void,
+}
+
+export interface IMessageContextProvider {
+    children: object
 }
 
 /* AppContext Provider Types */

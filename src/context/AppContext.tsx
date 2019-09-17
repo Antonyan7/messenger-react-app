@@ -4,9 +4,9 @@ import {IAppContext, IAppContextProvider, IAppContextMessage, IConversations} fr
 export const AppContext = React.createContext<IAppContext>({} as IAppContext);
 
 const AppContextProvider = (props: IAppContextProvider) => {
-    const [messages, setMessages] = useState<Array<IAppContextMessage>>([
-    ]);
+    const [messages, setMessages] = useState<Array<IAppContextMessage>>([]);
     const [channels, setChannels] = useState<Array<IConversations>>([]);
+    const [activeChannelId, setActiveChannelId] = useState<number>(0);
 
 
     const addMessage = (singleMessage: IAppContextMessage) => {
@@ -29,8 +29,12 @@ const AppContextProvider = (props: IAppContextProvider) => {
         setChannels([...channels, singleChannel])
     };
 
+    const updateActiveChannelId = (id: number) => {
+        setActiveChannelId(id);
+    };
+
     return (
-        <AppContext.Provider value={{messages, addMessage, updateMessages, removeMessageById, channels, addChannels, addChannel}}>
+        <AppContext.Provider value={{messages, addMessage, updateMessages, removeMessageById, channels, addChannels, addChannel, activeChannelId, updateActiveChannelId}}>
             {props.children}
         </AppContext.Provider>
     )

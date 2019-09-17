@@ -4,15 +4,17 @@ import {IAppContextMessage, ICompose, IUsersListResponse} from "../../../interfa
 import {AppContext} from "../../../context/AppContext";
 import axios from "axios";
 import uuid from "uuid";
+import {MessageContext} from "../../../context/MessageContext";
 
 const Compose = (props: ICompose) => {
     const {rightItems} = props;
-    const [message, setMessage] = useState<string>("");
+    const { message, updateMessage } = useContext(MessageContext);
 
     const {addMessage} = useContext(AppContext);
+    const { activeChannelId } = useContext(AppContext);
 
     const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setMessage(event.target.value);
+        updateMessage(event.target.value);
     };
 
     const publishMessage = (e: React.KeyboardEvent) => {
@@ -22,7 +24,7 @@ const Compose = (props: ICompose) => {
                 type: "TEXT",
                 content: JSON.stringify({text: message})
             },
-            channels: [ "3767" ]
+            channels: [ activeChannelId ]
         };
 
         if(e.key === 'Enter'){
@@ -32,22 +34,24 @@ const Compose = (props: ICompose) => {
 
 
             axios.post('https://dev-api.gidstaging.net/v1/messages', props, config).then(response => {
-                // const message = response.map((result: any) => {
-                //     console.log(result);
-                //     return {
-                //         id: result.id,
-                //         photo: result.image_url,
-                //         name: result.title,
-                //         text: result.description
-                //     };
-                // });
-                // addMessage(response)
+                const messageInfo = response.data[0];
+
+                let newMessage = {
+                    id: messageInfo.id,
+                    author: messageInfo.author,
+                    content: messageInfo.content,
+                    timestamp: messageInfo.created_at
+                };
+
+                addMessage(newMessage);
+                updateMessage("");
             });
         }
     };
 
     return (
         <div className="compose">
+
             <input
                 type="text"
                 className="compose-input"
@@ -57,9 +61,11 @@ const Compose = (props: ICompose) => {
                 onKeyPress={publishMessage}
             />
 
-            {
-                rightItems
-            }
+            <div className="compose-icons">
+                {
+                    rightItems
+                }
+            </div>
         </div>
     );
 };

@@ -33,7 +33,7 @@ const Message = (props: IMessage) => {
 
       <div className="bubble-container">
         <div className="bubble" title={friendlyTimestamp}>
-          {data.content}
+          {JSON.parse(data.content).text}
         </div>
       </div>
     </div>
