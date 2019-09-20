@@ -1,15 +1,22 @@
 import React from 'react';
-import Messenger from '../Messenger';
-import AppContextProvider from '../../../context/AppContext'
+import AuthContextProvider from "../../../context/AuthContext";
+import Home from "../Home";
+import AppContextProvider from "../../../context/AppContext";
+import {BrowserRouter} from "react-router-dom";
+
 
 function App() {
-  return (
-    <div className="App">
-      <AppContextProvider>
-        <Messenger/>
-      </AppContextProvider>
-    </div>
-  );
+    return (
+        <BrowserRouter>
+            <AuthContextProvider>
+                <AppContextProvider>
+                    <div className="App">
+                        <Home/>
+                    </div>
+                </AppContextProvider>
+            </AuthContextProvider>
+        </BrowserRouter>
+    );
 };
 
 export default App;

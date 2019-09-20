@@ -70,7 +70,6 @@ function ConversationListItem(props: IConversationsList) {
 
   const {id, photo, name, text}: IConversations = props.data;
 
-  // console.log(id);
   const config = {
     headers: {'Authorization': "bearer " + process.env.REACT_APP_AUTH_TOKEN}
   };
