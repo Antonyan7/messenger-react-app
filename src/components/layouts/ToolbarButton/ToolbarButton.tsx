@@ -5,10 +5,12 @@ import axios from "axios";
 import uuid from "uuid";
 import {MessageContext} from "../../../context/MessageContext";
 import {IToolbarButton} from "../../../interfaces/IToolbarButton";
+import {AuthContext} from "../../../context/AuthContext";
 
 const ToolbarButton = (props: IToolbarButton) => {
     const {icon} = props;
     const {activeChannelId} = useContext(AppContext);
+    const {authToken} = useContext(AuthContext);
     const {addMessage} = useContext(AppContext);
     const {message, updateMessage} = useContext(MessageContext);
     const {addChannel} = useContext(AppContext);
@@ -25,10 +27,10 @@ const ToolbarButton = (props: IToolbarButton) => {
             };
 
             const config = {
-                headers: {'Authorization': "bearer " + process.env.REACT_APP_AUTH_TOKEN}
+                headers: {'Authorization': "bearer " + authToken}
             };
 
-            axios.post('https://dev-api.gidstaging.net/v1/messages', props, config).then(response => {
+            axios.post(process.env.REACT_APP_BASE_URL+'v1/messages', props, config).then(response => {
                 const messageInfo = response.data[0];
 
                 let newMessage = {
@@ -56,10 +58,10 @@ const ToolbarButton = (props: IToolbarButton) => {
             };
 
             const config = {
-                headers: {'Authorization': "bearer " + process.env.REACT_APP_AUTH_TOKEN}
+                headers: {'Authorization': "bearer " + authToken}
             };
 
-            axios.post('https://dev-api.gidstaging.net/v1/channels', props, config).then(response => {
+            axios.post(process.env.REACT_APP_BASE_URL+'v1/channels', props, config).then(response => {
 
                 const newChannel = {
                     id: response.data.id,

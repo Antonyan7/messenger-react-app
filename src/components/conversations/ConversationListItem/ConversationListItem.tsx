@@ -8,6 +8,7 @@ import {AppContext} from '../../../context/AppContext'
 import PubNub from 'pubnub';
 import {IConversations} from "../../../interfaces/IConversations";
 import {IConversationsList} from "../../../interfaces/IConversationsList";
+import {AuthContext} from "../../../context/AuthContext";
 
 const pubnub = new PubNub({
   // subscribeKey: "sub-c-c7c006a6-9270-11e9-8277-da7aa9a31542",
@@ -63,6 +64,8 @@ pubnub.subscribe({
 function ConversationListItem(props: IConversationsList) {
   const { updateMessages } = useContext(AppContext);
   const { updateActiveChannelId } = useContext(AppContext);
+  const { authToken } = useContext(AuthContext);
+
 
   useEffect(() => {
     shave('.conversation-snippet', 20)
@@ -71,12 +74,12 @@ function ConversationListItem(props: IConversationsList) {
   const {id, photo, name, text}: IConversations = props.data;
 
   const config = {
-    headers: {'Authorization': "bearer " + process.env.REACT_APP_AUTH_TOKEN}
+    headers: {'Authorization': "bearer " + authToken}
   };
 
   const getChannelMessages = (e: React.MouseEvent) => {
     e.preventDefault();
-    axios.get("https://dev-api.gidstaging.net/v1/channels/"+ id +"/messages", config).then(response => {
+    axios.get(process.env.REACT_APP_BASE_URL+"v1/channels/"+ id +"/messages", config).then(response => {
       const channelMessagesList = response.data.data.messages;
       updateActiveChannelId(id);
       updateMessages(channelMessagesList);

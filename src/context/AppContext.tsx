@@ -30,7 +30,8 @@ const AppContextProvider = (props: IAppContextProvider) => {
     };
 
     const addChannel = (singleChannel: IConversations) => {
-        setChannels([...channels, singleChannel])
+        setChannels([...channels, singleChannel]);
+        setFilteredChannels([...filteredChannels, singleChannel]);
     };
 
     const updateActiveChannelId = (id: number) => {

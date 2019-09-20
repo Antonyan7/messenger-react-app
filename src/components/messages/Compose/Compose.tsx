@@ -5,10 +5,12 @@ import axios from "axios";
 import uuid from "uuid";
 import {MessageContext} from "../../../context/MessageContext";
 import {ICompose} from "../../../interfaces/ICompose";
+import {AuthContext} from "../../../context/AuthContext";
 
 const Compose = (props: ICompose) => {
     const {rightItems} = props;
     const { message, updateMessage } = useContext(MessageContext);
+    const {authToken} = useContext(AuthContext);
 
     const {addMessage} = useContext(AppContext);
     const { activeChannelId } = useContext(AppContext);
@@ -29,11 +31,11 @@ const Compose = (props: ICompose) => {
 
         if(e.key === 'Enter'){
             const config = {
-                headers: {'Authorization': "bearer " + process.env.REACT_APP_AUTH_TOKEN}
+                headers: {'Authorization': "bearer " + authToken}
             };
 
 
-            axios.post('https://dev-api.gidstaging.net/v1/messages', props, config).then(response => {
+            axios.post(process.env.REACT_APP_BASE_URL+'v1/messages', props, config).then(response => {
                 const messageInfo = response.data[0];
 
                 let newMessage = {

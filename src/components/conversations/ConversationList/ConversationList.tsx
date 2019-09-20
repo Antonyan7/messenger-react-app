@@ -9,18 +9,20 @@ import './ConversationList.css';
 import {AppContext} from "../../../context/AppContext";
 import {IConversations} from "../../../interfaces/IConversations";
 import {IUsersListResponse} from "../../../interfaces/IUsersListResponse";
+import {AuthContext} from "../../../context/AuthContext";
 
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);
     const {filteredChannels} = useContext(AppContext);
     const {addChannels} = useContext(AppContext);
+    const {authToken} = useContext(AuthContext);
 
     const getChannels = () => {
         const config = {
-            headers: {'Authorization': "bearer " + process.env.REACT_APP_AUTH_TOKEN}
+            headers: {'Authorization': "bearer " + authToken}
         };
 
-        axios.get('https://dev-api.gidstaging.net/v1/channels', config).then(response => {
+        axios.get(process.env.REACT_APP_BASE_URL+'v1/channels', config).then(response => {
             const channelsList = response.data.data.channels.map((result: IUsersListResponse) => {
                 return {
                     id: result.id,
