@@ -6,6 +6,7 @@ import uuid from "uuid";
 import {MessageContext} from "../../../context/MessageContext";
 import {IToolbarButton} from "../../../interfaces/IToolbarButton";
 import {AuthContext} from "../../../context/AuthContext";
+import {ConversationListContext} from "../../../context/ConversationListContext";
 
 const ToolbarButton = (props: IToolbarButton) => {
     const {icon} = props;
@@ -14,6 +15,7 @@ const ToolbarButton = (props: IToolbarButton) => {
     const {addMessage} = useContext(AppContext);
     const {message, updateMessage} = useContext(MessageContext);
     const {addChannel} = useContext(AppContext);
+    const {updateIsUsersListOpened} = useContext(ConversationListContext);
 
     const addChannelEventHandler = () => {
         if (icon === "ion-md-send") {
@@ -45,33 +47,7 @@ const ToolbarButton = (props: IToolbarButton) => {
             });
         }
         if (icon === "ion-ios-add-circle-outline") {
-            const props = {
-                participants: [
-                    "967eb266-14a1-4190-9c0b-c4b1f1799fa9"
-                ],
-                uuid: uuid(),
-                type: "PERSONAL",
-                exposed: true,
-                title: "TestChannel" + Math.random(),
-                description: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
-                image_url: "https://st2.depositphotos.com/9223672/12056/v/950/depositphotos_120568248-stock-illustration-male-face-avatar-logo-template.jpg"
-            };
-
-            const config = {
-                headers: {'Authorization': "bearer " + authToken}
-            };
-
-            axios.post(process.env.REACT_APP_BASE_URL+'v1/channels', props, config).then(response => {
-
-                const newChannel = {
-                    id: response.data.id,
-                    photo: response.data.image_url,
-                    name: response.data.title,
-                    text: response.data.description
-                };
-
-                addChannel(newChannel);
-            });
+            updateIsUsersListOpened(true);
         }
     };
 

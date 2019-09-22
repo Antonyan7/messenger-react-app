@@ -93,7 +93,7 @@ function ConversationListItem(props: IConversationsList) {
 
   return (
     <div className="conversation-list-item" onClick={(e) => getChannelMessages(e)}>
-      <img className="conversation-photo" src={photo} alt="conversation" onError={setDefaultImage}/>
+      <img className="conversation-photo" src={photo != null ? photo : process.env.REACT_APP_USER_DEFAULT_AVATAR_URL} alt="conversation" onError={setDefaultImage}/>
       <div className="conversation-info">
         <h1 className="conversation-title">{name}</h1>
         <p className="conversation-snippet">{text}</p>

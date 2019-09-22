@@ -10,6 +10,8 @@ import {AppContext} from "../../../context/AppContext";
 import {IConversations} from "../../../interfaces/IConversations";
 import {IUsersListResponse} from "../../../interfaces/IUsersListResponse";
 import {AuthContext} from "../../../context/AuthContext";
+import ConversationListContextProvider from "../../../context/ConversationListContext";
+import UsersListDialog from "../Dialog/UsersListDialog";
 
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);
@@ -42,24 +44,27 @@ function ConversationList() {
 
     return (
         <div className="conversation-list">
-            <Toolbar
-                title="Messenger"
-                leftItems={[
-                    <ToolbarButton key="cog" icon="ion-ios-cog"/>
-                ]}
-                rightItems={[
-                    <ToolbarButton key="add" icon="ion-ios-add-circle-outline"/>
-                ]}
-            />
-            <ConversationSearch/>
-            {
-                filteredChannels.map((channel: IConversations) =>
-                    <ConversationListItem
-                        key={channel.name}
-                        data={channel}
-                    />
-                )
-            }
+            <ConversationListContextProvider>
+                <Toolbar
+                    title="Messenger"
+                    leftItems={[
+                        <ToolbarButton key="cog" icon="ion-ios-cog"/>
+                    ]}
+                    rightItems={[
+                        <ToolbarButton key="add" icon="ion-ios-add-circle-outline"/>
+                    ]}
+                />
+                <ConversationSearch/>
+                {
+                    filteredChannels.map((channel: IConversations) =>
+                        <ConversationListItem
+                            key={channel.name}
+                            data={channel}
+                        />
+                    )
+                }
+                <UsersListDialog/>
+            </ConversationListContextProvider>
         </div>
     );
 }
