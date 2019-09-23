@@ -18,7 +18,7 @@ const Message = (props: IMessage) => {
 
   return (
 
-    <div onClick={() => removeMessageById(data.id)} className={[
+    <div className={[
       'message',
       `${isMine ? 'mine' : ''}`,
       `${startsSequence ? 'start' : ''}`,
