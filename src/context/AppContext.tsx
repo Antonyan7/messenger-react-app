@@ -11,6 +11,7 @@ const AppContextProvider = (props: IAppContextProvider) => {
     const [channels, setChannels] = useState<Array<IConversations>>([]);
     const [filteredChannels, setFilteredChannels] = useState<Array<IConversations>>( []);
     const [activeChannelId, setActiveChannelId] = useState<number>(0);
+    const [activeChannelName, setActiveChannelName] = useState<string>("");
 
 
     const addMessage = (singleMessage: IAppContextMessage) => {
@@ -42,8 +43,12 @@ const AppContextProvider = (props: IAppContextProvider) => {
         setFilteredChannels(channelsList);
     };
 
+    const updateActiveChannelName = (channelName: string) => {
+        setActiveChannelName(channelName);
+    };
+
     return (
-        <AppContext.Provider value={{messages, addMessage, updateMessages, removeMessageById, channels, addChannels, addChannel, activeChannelId, updateActiveChannelId, filteredChannels, updateFilteredChannels}}>
+        <AppContext.Provider value={{messages, addMessage, updateMessages, removeMessageById, channels, addChannels, addChannel, activeChannelId, updateActiveChannelId, filteredChannels, updateFilteredChannels, activeChannelName, updateActiveChannelName}}>
             {props.children}
         </AppContext.Provider>
     )

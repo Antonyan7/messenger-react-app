@@ -9,10 +9,10 @@ import {AppContext} from '../../../context/AppContext';
 import './MessageList.css';
 import MessageContextProvider from "../../../context/MessageContext";
 
-const MY_USER_ID = 'apple';
+const MY_USER_ID = 'MY_USER_ID';
 
 function MessageList() {
-  const {messages} = useContext(AppContext);
+  const {messages, activeChannelName} = useContext(AppContext);
 
   const renderMessages = () => {
     let i = 0;
@@ -75,7 +75,7 @@ function MessageList() {
   return (
     <div className="message-list">
       <Toolbar
-        title="Conversation Title"
+        title={activeChannelName}
         rightItems={[
           <ToolbarButton key="info" icon="ion-ios-information-circle-outline"/>,
           <ToolbarButton key="video" icon="ion-ios-videocam"/>,

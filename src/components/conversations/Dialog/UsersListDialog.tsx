@@ -50,7 +50,7 @@ export default function UsersListDialog() {
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
-        searchChannels(searchQuery);
+        searchChannels(e.target.value);
     };
 
     const handleListItemClick = (channel: IConversations) => {

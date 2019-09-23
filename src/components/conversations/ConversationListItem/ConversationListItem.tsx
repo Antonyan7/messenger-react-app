@@ -62,8 +62,7 @@ pubnub.subscribe({
 // });
 
 function ConversationListItem(props: IConversationsList) {
-  const { updateMessages } = useContext(AppContext);
-  const { updateActiveChannelId } = useContext(AppContext);
+  const { updateMessages, updateActiveChannelId, updateActiveChannelName } = useContext(AppContext);
   const { authToken } = useContext(AuthContext);
 
 
@@ -79,6 +78,7 @@ function ConversationListItem(props: IConversationsList) {
 
   const getChannelMessages = (e: React.MouseEvent) => {
     e.preventDefault();
+    updateActiveChannelName(name);
     axios.get(process.env.REACT_APP_BASE_URL+"v1/channels/"+ id +"/messages", config).then(response => {
       const channelMessagesList = response.data.data.messages;
       updateActiveChannelId(id);

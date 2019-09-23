@@ -13,4 +13,6 @@ export interface IAppContext {
     updateActiveChannelId: (id: number) => void,
     filteredChannels: Array<IConversations>,
     updateFilteredChannels: (channelsList: Array<IConversations>) => void,
+    activeChannelName: string,
+    updateActiveChannelName: (channelName: string) => void,
 }
