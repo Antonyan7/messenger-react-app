@@ -8,11 +8,11 @@ import {AppContext} from '../../../context/AppContext';
 
 import './MessageList.css';
 import MessageContextProvider from "../../../context/MessageContext";
-
-const MY_USER_ID = 'MY_USER_ID';
+import {AuthContext} from "../../../context/AuthContext";
 
 function MessageList() {
   const {messages, activeChannelName} = useContext(AppContext);
+  const {currentUser} = useContext(AuthContext);
 
   const renderMessages = () => {
     let i = 0;
@@ -23,7 +23,7 @@ function MessageList() {
       let previous = messages[i - 1];
       let current = messages[i];
       let next = messages[i + 1];
-      let isMine = current.author === MY_USER_ID;
+      let isMine = current.author === currentUser.id;
       let currentMoment = moment(current.timestamp);
       let prevBySameAuthor = false;
       let nextBySameAuthor = false;

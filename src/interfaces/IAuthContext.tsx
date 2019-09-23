@@ -3,4 +3,6 @@ export interface IAuthContext {
     setIsAuthenticated: (status: boolean) => void,
     authToken: string,
     updateAuthToken: (token: string) => void,
+    currentUser: any
+    updateCurrentUser: (user: any) => void,
 }
