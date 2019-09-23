@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from 'react';
-import ConversationSearch from '../ConversationSearch';
+import ConversationLocalSearch from '../ConversationSearch';
 import ConversationListItem from '../ConversationListItem';
 import Toolbar from '../../layouts/Toolbar';
 import ToolbarButton from '../../layouts/ToolbarButton';
@@ -54,7 +54,7 @@ function ConversationList() {
                         <ToolbarButton key="add" icon="ion-ios-add-circle-outline"/>
                     ]}
                 />
-                <ConversationSearch/>
+                <ConversationLocalSearch/>
                 {
                     filteredChannels.map((channel: IConversations) =>
                         <ConversationListItem

@@ -31,7 +31,7 @@ The Compose component allows the user to send messages and attachments.
 
 ### ConversationList
 
-This is a simple component that renders `ConversationSearch` and uses `axios` to fetch users from the [Random User API](https://randomuser.me/).
+This is a simple component that renders `ConversationLocalSearch` and uses `axios` to fetch users from the [Random User API](https://randomuser.me/).
 
 ### ConversationListItem
 
@@ -43,7 +43,7 @@ This component provides an overview of a single conversation, including a photo,
 | `name` | `String` | The name of the conversation, whether it is a group or individual. |
 | `text` | `String` | The text of the most recent message; you do not have to truncate this yourself. |
 
-### ConversationSearch
+### ConversationLocalSearch
 
 This is a simple `input` element that is styled to resemble the Facebook Messenger search bar. Its placeholder is centered until the input is focused, moving the placeholder to the left.
 

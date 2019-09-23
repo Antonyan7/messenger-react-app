@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react';
-import './ConversationSearch.css';
+import './ConversationLocalSearch.css';
 import {AppContext} from "../../../context/AppContext";
 
-const ConversationSearch = () => {
+const ConversationLocalSearch = () => {
     const { updateFilteredChannels } = useContext(AppContext);
     const { channels } = useContext(AppContext);
     const [searchQuery, setSearchQuery] = useState<string>("");
@@ -32,4 +32,4 @@ const ConversationSearch = () => {
     );
 };
 
-export default ConversationSearch
+export default ConversationLocalSearch
