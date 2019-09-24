@@ -12,54 +12,30 @@ import {AuthContext} from "../../../context/AuthContext";
 
 const pubnub = new PubNub({
   // subscribeKey: "sub-c-c7c006a6-9270-11e9-8277-da7aa9a31542",
-  subscribeKey: "sub-c-c7c006a6-9270-11e9-8277-da7aa9a31542",
+  subscribeKey: "sub-c-da8e2b82-c9ac-11e9-9cc7-622122667ebb",
+  ssl: true
 });
 pubnub.addListener({
   status: function(statusEvent) {
     console.log(statusEvent)
+    if (statusEvent.category === "PNConnectedCategory") {
+     // console.log(status)
+    }
   },
-  message: function(message) {
-    console.log(message)
+  message: function(msg) {
+    console.log(msg.message.title);
+    console.log(msg.message.description);
   },
   presence: function(presenceEvent) {
-    console.log(presenceEvent);
+    // handle presence
   }
-});
+})
 
+console.log("Subscribing..");
 pubnub.subscribe({
-  channels: ["3804","3806","3808","3810"],
+  channels: ['5401'],
 });
 
-// pubnub.publish(
-//     {
-//       message: {
-//         uuid: "66306f66-fdb9-4d89-98e0-203a8de382b2",
-//         type: "TEXT",
-//         content: "{\"text\":\"asd\"}"
-//       },
-//       channel: '3767',
-//       sendByPost: true, // true to send via post
-//       storeInHistory: true, //override default storage options
-//       meta: {
-//         "cool": "meta"
-//       }   // publish extra meta with the request
-//     },
-//     function (status, response) {
-//       if (status.error) {
-//         // handle error
-//         console.log(status)
-//       } else {
-//         console.log("message Published w/ timetoken", response.timetoken)
-//       }
-//     }
-// );
-
-// pubnub.hereNow({
-//   channels: []
-// }, function (status, response){
-//   console.log(status);
-//   console.log(response);
-// });
 
 function ConversationListItem(props: IConversationsList) {
   const { updateMessages, updateActiveChannelId, updateActiveChannelName } = useContext(AppContext);
