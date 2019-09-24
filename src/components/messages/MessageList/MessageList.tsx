@@ -9,6 +9,7 @@ import {AppContext} from '../../../context/AppContext';
 import './MessageList.css';
 import MessageContextProvider from "../../../context/MessageContext";
 import {AuthContext} from "../../../context/AuthContext";
+import {Link} from "react-router-dom";
 
 function MessageList() {
   const {messages, activeChannelName} = useContext(AppContext);
@@ -77,7 +78,7 @@ function MessageList() {
       <Toolbar
         title={activeChannelName}
         rightItems={[
-          <ToolbarButton key="info" icon="ion-ios-information-circle-outline"/>,
+          <ToolbarButton key="info" icon="ion-ios-log-out"/>,
           <ToolbarButton key="video" icon="ion-ios-videocam"/>,
           <ToolbarButton key="phone" icon="ion-ios-call"/>
         ]}

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import './ToolbarButton.css';
 import {AppContext} from "../../../context/AppContext";
 import axios from "axios";
@@ -7,14 +7,16 @@ import {MessageContext} from "../../../context/MessageContext";
 import {IToolbarButton} from "../../../interfaces/IToolbarButton";
 import {AuthContext} from "../../../context/AuthContext";
 import {ConversationListContext} from "../../../context/ConversationListContext";
+import createBrowserHistory from "history/createBrowserHistory"; createBrowserHistory();
+
 
 const ToolbarButton = (props: IToolbarButton) => {
+    const history = createBrowserHistory();
     const {icon} = props;
     const {activeChannelId} = useContext(AppContext);
-    const {authToken} = useContext(AuthContext);
+    const {authToken, updateAuthToken, setIsAuthenticated} = useContext(AuthContext);
     const {addMessage} = useContext(AppContext);
     const {message, updateMessage} = useContext(MessageContext);
-    const {addChannel} = useContext(AppContext);
     const {updateIsUsersListOpened} = useContext(ConversationListContext);
 
     const addChannelEventHandler = () => {
@@ -48,6 +50,12 @@ const ToolbarButton = (props: IToolbarButton) => {
         }
         if (icon === "ion-ios-add-circle-outline") {
             updateIsUsersListOpened(true);
+        }
+        if (icon === "ion-ios-log-out") {
+            updateAuthToken("");
+            setIsAuthenticated(false);
+            window.localStorage.removeItem("token");
+            history.push("/login");
         }
     };
 
