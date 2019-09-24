@@ -1,5 +1,4 @@
 import React, {useEffect, useContext} from 'react'
-import shave from 'shave'
 import axios from "axios"
 
 import './ConversationListItem.css'
@@ -40,11 +39,6 @@ pubnub.subscribe({
 function ConversationListItem(props: IConversationsList) {
   const { updateMessages, updateActiveChannelId, updateActiveChannelName } = useContext(AppContext);
   const { authToken } = useContext(AuthContext);
-
-
-  useEffect(() => {
-    shave('.conversation-snippet', 20)
-  }, []);
 
   const {id, photo, name, text}: IConversations = props.data;
 
