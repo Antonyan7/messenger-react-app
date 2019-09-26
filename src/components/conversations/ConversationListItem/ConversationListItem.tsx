@@ -1,40 +1,12 @@
-import React, {useEffect, useContext} from 'react'
+import React, {useContext} from 'react'
 import axios from "axios"
 
 import './ConversationListItem.css'
 import {AppContext} from '../../../context/AppContext'
 
-import PubNub from 'pubnub';
 import {IConversations} from "../../../interfaces/IConversations";
 import {IConversationsList} from "../../../interfaces/IConversationsList";
 import {AuthContext} from "../../../context/AuthContext";
-
-const pubnub = new PubNub({
-  // subscribeKey: "sub-c-c7c006a6-9270-11e9-8277-da7aa9a31542",
-  subscribeKey: "sub-c-da8e2b82-c9ac-11e9-9cc7-622122667ebb",
-  ssl: true
-});
-pubnub.addListener({
-  status: function(statusEvent) {
-    console.log(statusEvent)
-    if (statusEvent.category === "PNConnectedCategory") {
-     // console.log(status)
-    }
-  },
-  message: function(msg) {
-    console.log(msg.message.title);
-    console.log(msg.message.description);
-  },
-  presence: function(presenceEvent) {
-    // handle presence
-  }
-})
-
-console.log("Subscribing..");
-pubnub.subscribe({
-  channels: ['5401'],
-});
-
 
 function ConversationListItem(props: IConversationsList) {
   const { updateMessages, updateActiveChannelId, updateActiveChannelName } = useContext(AppContext);
