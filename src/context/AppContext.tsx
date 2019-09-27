@@ -10,7 +10,7 @@ const AppContextProvider = (props: IAppContextProvider) => {
     const [messages, setMessages] = useState<Array<IAppContextMessage>>([]);
     const [channels, setChannels] = useState<Array<IConversations>>([]);
     const [filteredChannels, setFilteredChannels] = useState<Array<IConversations>>( []);
-    const [activeChannelId, setActiveChannelId] = useState<number>(0);
+    const [activeChannelId, setActiveChannelId] = useState<string>("0");
     const [activeChannelName, setActiveChannelName] = useState<string>("");
 
 
@@ -22,7 +22,7 @@ const AppContextProvider = (props: IAppContextProvider) => {
         setMessages(messagesList)
     };
 
-    const removeMessageById = (id: number) => {
+    const removeMessageById = (id: string) => {
         setMessages(messages.filter((message: IAppContextMessage) => message.id !== id))
     };
 
@@ -35,7 +35,7 @@ const AppContextProvider = (props: IAppContextProvider) => {
         setFilteredChannels([...filteredChannels, singleChannel]);
     };
 
-    const updateActiveChannelId = (id: number) => {
+    const updateActiveChannelId = (id: string) => {
         setActiveChannelId(id);
     };
 

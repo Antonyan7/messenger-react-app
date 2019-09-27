@@ -30,7 +30,7 @@ function Home() {
     };
 
     useEffect(() => {
-        getCurrentUser()
+        getCurrentUser();
     },[]);
 
 
