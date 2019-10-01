@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import {AuthContext} from "../../context/AuthContext";
 import {Redirect} from "react-router";
+import createBrowserHistory from "history/createBrowserHistory";
 
 function Auth() {
     const {setIsAuthenticated, updateAuthToken} = useContext(AuthContext);
@@ -9,10 +10,9 @@ function Auth() {
     setIsAuthenticated(true);
     window.localStorage.setItem("token", token);
     updateAuthToken(token);
-    // initSdk(token);
+    window.top.location.href = '/';
     return (
         <div className="Auth">
-            <Redirect to="/" />
         </div>
     );
 };

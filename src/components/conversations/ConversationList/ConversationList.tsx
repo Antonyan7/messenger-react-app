@@ -61,10 +61,10 @@ function ConversationList() {
                 <Toolbar
                     title="Messenger"
                     leftItems={[
-                        <SettingsIcon/>
+                        <SettingsIcon key="settingsIcon"/>
                     ]}
                     rightItems={[
-                        <PlusCircleIcon/>
+                        <PlusCircleIcon key="plusCircleIcon"/>
                     ]}
                 />
                 <ConversationLocalSearch/>

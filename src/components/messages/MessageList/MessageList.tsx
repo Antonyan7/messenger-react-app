@@ -80,7 +80,7 @@ function MessageList() {
       <Toolbar
           title={activeChannelName}
           rightItems={[
-              <LogoutButton/>
+              <LogoutButton key="logoutButton"/>
           ]}
       />
 
@@ -92,7 +92,7 @@ function MessageList() {
 
       <MessageContextProvider>
         <Compose rightItems={[
-          <SendIcon/>
+          <SendIcon key="sendIcon"/>
         ]}/>
       </MessageContextProvider>
     </div>
