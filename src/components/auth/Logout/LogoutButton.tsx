@@ -12,7 +12,7 @@ function LogoutButton() {
         updateAuthToken("");
         setIsAuthenticated(false);
         window.localStorage.removeItem("token");
-        history.push("/login");
+        history.push("/preview");
     };
     return (
         <div className="LogoutButton">

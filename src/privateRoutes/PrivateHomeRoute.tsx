@@ -13,7 +13,7 @@ function PrivateHomeRoute({component: Component, ...rest}) {
                 ) : (
                     <Redirect
                         to={{
-                            pathname: "/login",
+                            pathname: "/preview",
                         }}
                     />
                 )

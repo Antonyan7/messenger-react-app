@@ -50,12 +50,6 @@ const ToolbarButton = (props: IToolbarButton) => {
         if (icon === "ion-ios-add-circle-outline") {
             updateIsUsersListOpened(true);
         }
-        if (icon === "ion-ios-log-out") {
-            updateAuthToken("");
-            setIsAuthenticated(false);
-            window.localStorage.removeItem("token");
-            history.push("/login");
-        }
     };
 
     return (
