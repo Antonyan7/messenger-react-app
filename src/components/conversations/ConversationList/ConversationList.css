@@ -2,6 +2,9 @@
   display: flex;
   flex-direction: column;
 }
+.conversation-selected {
+  background: #eeeef1;
+}
 
 .conversation-list .toolbar{
   height: 50px;
