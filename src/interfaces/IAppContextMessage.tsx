@@ -1,6 +1,6 @@
 export interface IAppContextMessage {
-    id: number,
+    id: string,
     author: string,
-    content: string,
-    timestamp: string
+    content: any,
+    timestamp?: string
 }

@@ -3,15 +3,16 @@ import ConversationLocalSearch from '../ConversationSearch';
 import ConversationListItem from '../ConversationListItem';
 import Toolbar from '../../layouts/Toolbar';
 import ToolbarButton from '../../layouts/ToolbarButton';
-import axios from 'axios';
 
 import './ConversationList.css';
 import {AppContext} from "../../../context/AppContext";
 import {IConversations} from "../../../interfaces/IConversations";
-import {IUsersListResponse} from "../../../interfaces/IUsersListResponse";
 import {AuthContext} from "../../../context/AuthContext";
 import ConversationListContextProvider from "../../../context/ConversationListContext";
 import UsersListDialog from "../Dialog/UsersListDialog";
+import {ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
+
+import {client} from "../../../helpers/initMessengerSdk"
 
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);
@@ -19,28 +20,38 @@ function ConversationList() {
     const {addChannels} = useContext(AppContext);
     const {authToken} = useContext(AuthContext);
 
-    const getChannels = () => {
-        const config = {
-            headers: {'Authorization': "bearer " + authToken}
-        };
-
-        axios.get(process.env.REACT_APP_BASE_URL+'v1/channels', config).then(response => {
-            const channelsList = response.data.data.channels.map((result: IUsersListResponse) => {
-                return {
-                    id: result.id,
-                    photo: result.image_url,
-                    name: result.title,
-                    text: result.description
-                };
-            });
-            addChannels(channelsList);
-            updateFilteredChannels(channelsList);
-        });
-    };
 
     useEffect(() => {
-        getChannels();
+        if (client) {
+            getChannels()
+        }
+        console.log(client);
     }, []);
+
+    const getChannels = async () => {
+
+        const channels: ChannelsResponse = await client.channel().getChannels(1, 1);
+        const channelsList = channels.data.channels.map((result: any) => {
+            return {
+                id: result.id,
+                photo: result.image_url,
+                name: result.title,
+                text: result.description
+            };
+        });
+        addChannels(channelsList);
+        updateFilteredChannels(channelsList);
+    };
+
+    // useEffect(() => {
+    //     (async () => {
+    //         client = await initSdk(authToken);
+    //         getChannels()
+    //     })();
+    // });
+    // (async () => {
+    //     client = await initSdk(authToken);
+    // })();
 
     return (
         <div className="conversation-list">

@@ -9,7 +9,6 @@ import {AuthContext} from "../../../context/AuthContext";
 import {ConversationListContext} from "../../../context/ConversationListContext";
 import createBrowserHistory from "history/createBrowserHistory"; createBrowserHistory();
 
-
 const ToolbarButton = (props: IToolbarButton) => {
     const history = createBrowserHistory();
     const {icon} = props;

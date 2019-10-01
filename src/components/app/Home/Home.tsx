@@ -8,6 +8,7 @@ import PrivateHomeRoute from "../../../privateRoutes/PrivateHomeRoute";
 import PrivateLoginRoute from "../../../privateRoutes/PrivateLoginRoute";
 import {AuthContext} from "../../../context/AuthContext";
 import axios from "axios";
+import {ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
 
 function Home() {
     const {authToken} = useContext(AuthContext);
@@ -29,9 +30,9 @@ function Home() {
         });
     };
 
-    useEffect(() => {
-        getCurrentUser()
-    },[]);
+    useEffect(() =>{
+        getCurrentUser();
+    }, []);
 
 
     return (
