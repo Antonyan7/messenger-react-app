@@ -75,24 +75,10 @@ function MessageList() {
 
   return (
     <div className="message-list">
-      <Toolbar
-        title={activeChannelName}
-        rightItems={[
-          <ToolbarButton key="info" icon="ion-ios-log-out"/>,
-          <ToolbarButton key="video" icon="ion-ios-videocam"/>,
-          <ToolbarButton key="phone" icon="ion-ios-call"/>
-        ]}
-      />
-
       <div className="message-list-container">{renderMessages()}</div>
 
       <MessageContextProvider>
         <Compose rightItems={[
-          <ToolbarButton key="photo" icon="ion-ios-camera"/>,
-          <ToolbarButton key="image" icon="ion-ios-image"/>,
-          <ToolbarButton key="audio" icon="ion-ios-mic"/>,
-          <ToolbarButton key="money" icon="ion-ios-card"/>,
-          <ToolbarButton key="games" icon="ion-logo-game-controller-b"/>,
           <ToolbarButton key="send" icon="ion-md-send"/>
         ]}/>
       </MessageContextProvider>
