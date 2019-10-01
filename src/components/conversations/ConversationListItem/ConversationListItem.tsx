@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import axios from "axios"
 
 import './ConversationListItem.css'
@@ -16,10 +16,11 @@ import {
 } from "globalid-messaging-web-sdk/dist";
 
 import {client} from "../../../helpers/initMessengerSdk";
+import {IAppContextMessage} from "../../../interfaces/IAppContextMessage";
 
 function ConversationListItem(props: IConversationsList) {
     const {updateMessages, updateActiveChannelId} = useContext(AppContext);
-
+    const [isSelected, setIsSelected] = useState<boolean>(false);
     const {id, photo, name, text}: IConversations = props.data;
 
     const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
@@ -37,6 +38,7 @@ function ConversationListItem(props: IConversationsList) {
 
     const handleChannelClick = async (e: React.MouseEvent) => {
         await getChannelMessages();
+        setIsSelected(true);
     };
 
     // TODO change any type
@@ -45,7 +47,7 @@ function ConversationListItem(props: IConversationsList) {
     };
 
     return (
-        <div className="conversation-list-item" onClick={(e) => handleChannelClick(e)}>
+        <div className={`conversation-list-item ${isSelected ? 'conversation-selected' : ''}`} onClick={(e) => handleChannelClick(e)}>
             <img className="conversation-photo"
                  src={photo != null ? photo : process.env.REACT_APP_USER_DEFAULT_AVATAR_URL}
                  alt="conversation" onError={setDefaultImage}/>

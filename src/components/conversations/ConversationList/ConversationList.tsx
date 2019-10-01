@@ -13,6 +13,8 @@ import UsersListDialog from "../Dialog/UsersListDialog";
 import {ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
 
 import {client} from "../../../helpers/initMessengerSdk"
+import SettingsIcon from "../../../assets/icons/SettingsIcon";
+import PlusCircleIcon from "../../../assets/icons/PlusCircleIcon";
 
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);
@@ -59,10 +61,10 @@ function ConversationList() {
                 <Toolbar
                     title="Messenger"
                     leftItems={[
-                        <ToolbarButton key="cog" icon="ion-ios-cog"/>
+                        <SettingsIcon key="settingsIcon"/>
                     ]}
                     rightItems={[
-                        <ToolbarButton key="add" icon="ion-ios-add-circle-outline"/>
+                        <PlusCircleIcon key="plusCircleIcon"/>
                     ]}
                 />
                 <ConversationLocalSearch/>

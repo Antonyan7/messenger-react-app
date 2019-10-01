@@ -1,0 +1,23 @@
+.preview-content {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.preview-messageMe-logo{
+    text-align: center;
+    margin-top: 150px;
+}
+
+.preview-login-link {
+    margin-top: 50px;
+    height: 60px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background: url("../../../assets/globalId.svg") center no-repeat #FFFFFF;
+    background-size: 160px;
+    cursor: pointer;
+    outline: none;
+}

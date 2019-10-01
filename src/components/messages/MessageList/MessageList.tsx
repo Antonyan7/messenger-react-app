@@ -10,6 +10,8 @@ import './MessageList.css';
 import MessageContextProvider from "../../../context/MessageContext";
 import {AuthContext} from "../../../context/AuthContext";
 import {Link} from "react-router-dom";
+import SendIcon from "../../../assets/icons/SendIcon";
+import LogoutButton from "../../auth/Logout";
 
 function MessageList() {
   const {messages, activeChannelName} = useContext(AppContext);
@@ -76,24 +78,21 @@ function MessageList() {
   return (
     <div className="message-list">
       <Toolbar
-        title={activeChannelName}
-        rightItems={[
-          <ToolbarButton key="info" icon="ion-ios-log-out"/>,
-          <ToolbarButton key="video" icon="ion-ios-videocam"/>,
-          <ToolbarButton key="phone" icon="ion-ios-call"/>
-        ]}
+          title={activeChannelName}
+          rightItems={[
+              <LogoutButton key="logoutButton"/>
+          ]}
       />
 
-      <div className="message-list-container">{renderMessages()}</div>
+      <div className="message-list-container">
+        <div className="messages">
+          {renderMessages()}
+        </div>
+      </div>
 
       <MessageContextProvider>
         <Compose rightItems={[
-          <ToolbarButton key="photo" icon="ion-ios-camera"/>,
-          <ToolbarButton key="image" icon="ion-ios-image"/>,
-          <ToolbarButton key="audio" icon="ion-ios-mic"/>,
-          <ToolbarButton key="money" icon="ion-ios-card"/>,
-          <ToolbarButton key="games" icon="ion-logo-game-controller-b"/>,
-          <ToolbarButton key="send" icon="ion-md-send"/>
+          <SendIcon key="sendIcon"/>
         ]}/>
       </MessageContextProvider>
     </div>
