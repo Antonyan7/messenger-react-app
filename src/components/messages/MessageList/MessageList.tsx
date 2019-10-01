@@ -10,6 +10,8 @@ import './MessageList.css';
 import MessageContextProvider from "../../../context/MessageContext";
 import {AuthContext} from "../../../context/AuthContext";
 import {Link} from "react-router-dom";
+import ArrowOutIcon from "../../../assets/icons/ArrowOutIcon";
+import SendIcon from "../../../assets/icons/SendIcon";
 
 function MessageList() {
   const {messages, activeChannelName} = useContext(AppContext);
@@ -75,9 +77,12 @@ function MessageList() {
 
   return (
     <div className="message-list">
-      {/*<Toolbar*/}
-      {/*  title={activeChannelName}*/}
-      {/*/>*/}
+      <Toolbar
+          title={activeChannelName}
+          rightItems={[
+            <ArrowOutIcon/>
+          ]}
+      />
 
       <div className="message-list-container">
         <div className="messages">
@@ -87,7 +92,7 @@ function MessageList() {
 
       <MessageContextProvider>
         <Compose rightItems={[
-          <ToolbarButton key="send" icon="ion-md-send"/>
+          <SendIcon/>
         ]}/>
       </MessageContextProvider>
     </div>
