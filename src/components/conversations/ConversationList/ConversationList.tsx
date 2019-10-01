@@ -12,29 +12,24 @@ import ConversationListContextProvider from "../../../context/ConversationListCo
 import UsersListDialog from "../Dialog/UsersListDialog";
 import {ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
 
+import {client} from "../../../helpers/initMessengerSdk"
+
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);
     const {filteredChannels} = useContext(AppContext);
     const {addChannels} = useContext(AppContext);
     const {authToken} = useContext(AuthContext);
-    let client: GlobalidMessagingClient;
 
-    const initSdk = async () => {
-        const config: Config = {
-            accessToken: authToken,
-        };
-        client = await init(config);
-    };
 
-    useEffect(() =>{
-        initSdk().then((data) => {
-            getChannels();
-        }).catch((error) => {
-            console.log(error);
-        });
-    },[]);
+    useEffect(() => {
+        if (client) {
+            getChannels()
+        }
+        console.log(client);
+    }, []);
 
-    const getChannels  = async () => {
+    const getChannels = async () => {
+
         const channels: ChannelsResponse = await client.channel().getChannels(1, 1);
         const channelsList = channels.data.channels.map((result: any) => {
             return {
@@ -48,6 +43,15 @@ function ConversationList() {
         updateFilteredChannels(channelsList);
     };
 
+    // useEffect(() => {
+    //     (async () => {
+    //         client = await initSdk(authToken);
+    //         getChannels()
+    //     })();
+    // });
+    // (async () => {
+    //     client = await initSdk(authToken);
+    // })();
 
     return (
         <div className="conversation-list">

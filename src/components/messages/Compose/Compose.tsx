@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import './Compose.css';
 import {AppContext} from "../../../context/AppContext";
 import axios from "axios";
@@ -6,14 +6,30 @@ import uuid from "uuid";
 import {MessageContext} from "../../../context/MessageContext";
 import {ICompose} from "../../../interfaces/ICompose";
 import {AuthContext} from "../../../context/AuthContext";
+import {
+    ChannelsResponse,
+    Config,
+    GlobalidMessagingClient,
+    init,
+    SendMessageResponse
+} from "globalid-messaging-web-sdk/dist";
+import {client} from "../../../helpers/initMessengerSdk";
 
 const Compose = (props: ICompose) => {
     const {rightItems} = props;
-    const { message, updateMessage } = useContext(MessageContext);
+    const {message, updateMessage} = useContext(MessageContext);
     const {authToken} = useContext(AuthContext);
 
     const {addMessage} = useContext(AppContext);
     const { activeChannelId } = useContext(AppContext);
+
+    const sendMessage  = async (messagePayload: any) => {
+        const message: SendMessageResponse = await client.message().sendMessage(messagePayload);
+        console.log(message[0]);
+        addMessage(message[0]);
+        updateMessage("");
+    };
+
 
     const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         updateMessage(event.target.value);
@@ -30,24 +46,9 @@ const Compose = (props: ICompose) => {
         };
 
         if(e.key === 'Enter'){
-            const config = {
-                headers: {'Authorization': "bearer " + authToken}
-            };
 
+            sendMessage(props);
 
-            axios.post(process.env.REACT_APP_BASE_URL+'v1/messages', props, config).then(response => {
-                const messageInfo = response.data[0];
-
-                let newMessage = {
-                    id: messageInfo.id,
-                    author: messageInfo.author,
-                    content: messageInfo.content,
-                    timestamp: messageInfo.created_at
-                };
-
-                addMessage(newMessage);
-                updateMessage("");
-            });
         }
     };
 

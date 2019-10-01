@@ -12,42 +12,31 @@ import {
     Config,
     GlobalidMessagingClient,
     init,
-    MessagesResponse
+    MessagesResponse, ServiceNotification
 } from "globalid-messaging-web-sdk/dist";
+
+import {client} from "../../../helpers/initMessengerSdk";
 
 function ConversationListItem(props: IConversationsList) {
     const {updateMessages, updateActiveChannelId} = useContext(AppContext);
 
-    const {authToken} = useContext(AuthContext);
-
     const {id, photo, name, text}: IConversations = props.data;
-    let client: GlobalidMessagingClient;
 
-    const initSdk = async () => {
-        const config: Config = {
-            accessToken: authToken,
-        };
-        client = await init(config);
-    };
-
-    useEffect(() =>{
-        initSdk().then((data) => {
-            console.log(data);
-        }).catch((error) => {
-            console.log(error);
-        });
-    },[]);
+    const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
+        console.log('Channel alias', channel)
+        console.log('Notification payload', notification)
+    });
 
     const getChannelMessages = async () => {
-          const messages: MessagesResponse = await client.message().getMessages(id, 1, 1);
-          const channelMessagesList = messages.data.messages;
-          updateActiveChannelId(id);
-          updateMessages(channelMessagesList);
+        const messages: MessagesResponse = await client.message().getMessages(id, 1,100);
+        const channelMessagesList = messages.data.messages;
+        console.log(messages);
+        updateActiveChannelId(id);
+        updateMessages(channelMessagesList);
     };
 
-    const handleChannelClick = (e: React.MouseEvent) => {
-        e.preventDefault();
-        getChannelMessages();
+    const handleChannelClick = async (e: React.MouseEvent) => {
+        await getChannelMessages();
     };
 
     // TODO change any type
