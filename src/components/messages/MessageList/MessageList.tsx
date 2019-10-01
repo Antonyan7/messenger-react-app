@@ -75,7 +75,15 @@ function MessageList() {
 
   return (
     <div className="message-list">
-      <div className="message-list-container">{renderMessages()}</div>
+      {/*<Toolbar*/}
+      {/*  title={activeChannelName}*/}
+      {/*/>*/}
+
+      <div className="message-list-container">
+        <div className="messages">
+          {renderMessages()}
+        </div>
+      </div>
 
       <MessageContextProvider>
         <Compose rightItems={[

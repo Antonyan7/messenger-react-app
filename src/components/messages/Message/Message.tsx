@@ -17,11 +17,9 @@ const Message = (props: IMessage) => {
   const friendlyTimestamp = moment(data.timestamp).format('LLLL');
 
   return (
-
     <div className={[
       'message',
       `${isMine ? 'mine' : ''}`,
-      `${startsSequence ? 'start' : ''}`,
       `${endsSequence ? 'end' : ''}`,
     ].join(' ')}>
       {

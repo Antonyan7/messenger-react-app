@@ -2,3 +2,8 @@
   display: flex;
   flex-direction: column;
 }
+
+.conversation-list .toolbar{
+  height: 50px;
+  border-bottom: 1px solid #e4e4e4;
+}
