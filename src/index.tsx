@@ -4,8 +4,19 @@ import './assets/index.css';
 import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
 import dotenv from 'dotenv'
-dotenv.config();
-ReactDOM.render(<App/>, document.getElementById('root'));
+import {initClient} from './helpers/initMessengerSdk';
+
+(async () => {
+    try {
+        await initClient();
+    } catch (e) {
+        console.log(e)
+    }
+
+    dotenv.config();
+    ReactDOM.render(<App/>, document.getElementById('root'));
+
+})()
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

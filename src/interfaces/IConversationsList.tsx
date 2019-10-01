@@ -1,6 +1,6 @@
 export interface IConversationsList {
     data: {
-        id: number,
+        id: string,
         photo: string,
         name: string,
         text: string

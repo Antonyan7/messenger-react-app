@@ -9,6 +9,7 @@ function Auth() {
     setIsAuthenticated(true);
     window.localStorage.setItem("token", token);
     updateAuthToken(token);
+    // initSdk(token);
     return (
         <div className="Auth">
             <Redirect to="/" />

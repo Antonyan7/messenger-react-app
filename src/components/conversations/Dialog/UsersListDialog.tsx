@@ -70,7 +70,6 @@ export default function UsersListDialog() {
 
     const getChannelsList = () => {
         axios.get(process.env.REACT_APP_BASE_URL + 'v1/identities', config).then(response => {
-            console.log(response);
             const channelsList = response.data.map((result: any) => {
                 return {
                     id: result.gid_uuid,
