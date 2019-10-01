@@ -10,8 +10,8 @@ import './MessageList.css';
 import MessageContextProvider from "../../../context/MessageContext";
 import {AuthContext} from "../../../context/AuthContext";
 import {Link} from "react-router-dom";
-import ArrowOutIcon from "../../../assets/icons/ArrowOutIcon";
 import SendIcon from "../../../assets/icons/SendIcon";
+import LogoutButton from "../../auth/Logout";
 
 function MessageList() {
   const {messages, activeChannelName} = useContext(AppContext);
@@ -80,7 +80,7 @@ function MessageList() {
       <Toolbar
           title={activeChannelName}
           rightItems={[
-            <ArrowOutIcon/>
+              <LogoutButton/>
           ]}
       />
 
