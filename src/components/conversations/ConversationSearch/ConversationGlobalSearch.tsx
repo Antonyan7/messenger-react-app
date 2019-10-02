@@ -4,7 +4,7 @@ import axios from "axios";
 import {AuthContext} from "../../../context/AuthContext";
 import {ConversationListContext} from "../../../context/ConversationListContext";
 import {client} from "../../../helpers/initMessengerSdk";
-import {ChannelsResponse} from "globalid-messaging-web-sdk/dist";
+import {ChannelsResponse} from "globalid-messaging-web-sdk";
 
 const ConversationGlobalSearch = () => {
 
