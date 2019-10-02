@@ -30,7 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "aws s3 sync build/ s3://messenger.cloud.dev.kubefarm.xyz --acl public-read"
+    "deploy": "aws s3 sync build/ s3://messenger.cloud.dev.kubefarm.xyz --acl public-read",
+    "invalidate": "aws cloudfront create-invalidation --distribution-id=E3FV6UFV9381R5 --paths '/*'"
   },
   "eslintConfig": {
     "extends": "react-app"
