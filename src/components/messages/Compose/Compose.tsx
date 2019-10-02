@@ -18,7 +18,6 @@ import {client} from "../../../helpers/initMessengerSdk";
 const Compose = (props: ICompose) => {
     const {rightItems} = props;
     const {message, updateMessage} = useContext(MessageContext);
-    const {authToken} = useContext(AuthContext);
 
     const {addMessage} = useContext(AppContext);
     const { activeChannelId } = useContext(AppContext);

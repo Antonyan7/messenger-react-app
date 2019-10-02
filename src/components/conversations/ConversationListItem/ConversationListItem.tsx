@@ -22,7 +22,7 @@ import {deepOrange} from "@material-ui/core/colors";
 
 
 function ConversationListItem(props: IConversationsList) {
-    const {updateMessages, updateActiveChannelId} = useContext(AppContext);
+    const {updateMessages, updateActiveChannelId, updateActiveChannelName} = useContext(AppContext);
     const [isSelected, setIsSelected] = useState<boolean>(false);
     const {id, photo, name, text}: IConversations = props.data;
 
@@ -34,8 +34,8 @@ function ConversationListItem(props: IConversationsList) {
     const getChannelMessages = async () => {
         const messages: MessagesResponse = await client.message().getMessages(id, 1,100);
         const channelMessagesList = messages.data.messages;
-        console.log(messages);
         updateActiveChannelId(id);
+        updateActiveChannelName(name);
         updateMessages(channelMessagesList);
     };
 
