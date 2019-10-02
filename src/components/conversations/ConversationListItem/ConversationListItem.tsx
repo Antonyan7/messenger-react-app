@@ -17,6 +17,9 @@ import {
 
 import {client} from "../../../helpers/initMessengerSdk";
 import {IAppContextMessage} from "../../../interfaces/IAppContextMessage";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import {deepOrange} from "@material-ui/core/colors";
+
 
 function ConversationListItem(props: IConversationsList) {
     const {updateMessages, updateActiveChannelId} = useContext(AppContext);
@@ -41,16 +44,23 @@ function ConversationListItem(props: IConversationsList) {
         setIsSelected(true);
     };
 
-    // TODO change any type
-    const setDefaultImage = (e: any) => {
-        e.target.src = process.env.REACT_APP_USER_DEFAULT_AVATAR_URL;
-    };
+    const useStyles = makeStyles({
+        userPhoto: {
+            backgroundImage: "url("+photo+")",
+            backgroundSize: "contain"
+        },
+    });
+
+    const classes = useStyles();
 
     return (
         <div className={`conversation-list-item ${isSelected ? 'conversation-selected' : ''}`} onClick={(e) => handleChannelClick(e)}>
-            <img className="conversation-photo"
-                 src={photo != null ? photo : process.env.REACT_APP_USER_DEFAULT_AVATAR_URL}
-                 alt="conversation" onError={setDefaultImage}/>
+            <div className={`conversation-photo default-avatar ${photo != null ? classes.userPhoto : ""}`}>
+                <h3>
+                    {photo == null ? name.charAt(0) : ""}
+                </h3>
+            </div>
+
             <div className="conversation-info">
                 <h1 className="conversation-title">{name}</h1>
                 <p className="conversation-snippet">{text}</p>
