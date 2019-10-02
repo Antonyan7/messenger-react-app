@@ -5,17 +5,20 @@ import './Messenger.css';
 import Header from "../Header";
 
 function Messenger() {
-  return (
-    <div className="messenger">
-      <div className="scrollable sidebar">
-        <ConversationList/>
-      </div>
+    return (
+        <div>
+            <Header/>
+            <div className="messenger">
+                <div className="scrollable sidebar">
+                    <ConversationList/>
+                </div>
 
-      <div className="scrollable content">
-        <MessageList/>
-      </div>
-    </div>
-  );
+                <div className="scrollable content">
+                    <MessageList/>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Messenger;
