@@ -22,15 +22,15 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.1.1",
     "typescript": "^3.6.2",
-    "uuid": "^3.3.3",
-    "globalid-messaging-web-sdk": "globalid-messaging-web-sdk/dist"
+    "uuid": "^3.3.3"
   },
   "scripts": {
     "start": "set HTTPS=true&&react-scripts start",
     "startHttps": "HTTPS=true npm start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "aws s3 sync build/ s3://messenger.cloud.dev.kubefarm.xyz --acl public-read"
   },
   "eslintConfig": {
     "extends": "react-app"
