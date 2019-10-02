@@ -77,12 +77,6 @@ function MessageList() {
 
   return (
     <div className="message-list">
-      {/*<Toolbar*/}
-      {/*    title={activeChannelName}*/}
-      {/*    rightItems={[*/}
-      {/*        <LogoutButton key="logoutButton"/>*/}
-      {/*    ]}*/}
-      {/*/>*/}
 
       <div className="message-list-container">
         <div className="messages">
