@@ -58,15 +58,15 @@ function ConversationList() {
     return (
         <div className="conversation-list">
             <ConversationListContextProvider>
-                <Toolbar
-                    title="Messenger"
-                    leftItems={[
-                        <SettingsIcon key="settingsIcon"/>
-                    ]}
-                    rightItems={[
-                        <PlusCircleIcon key="plusCircleIcon"/>
-                    ]}
-                />
+                {/*<Toolbar*/}
+                {/*    title="Messenger"*/}
+                {/*    leftItems={[*/}
+                {/*        <SettingsIcon key="settingsIcon"/>*/}
+                {/*    ]}*/}
+                {/*    rightItems={[*/}
+                {/*        <PlusCircleIcon key="plusCircleIcon"/>*/}
+                {/*    ]}*/}
+                {/*/>*/}
                 <ConversationLocalSearch/>
                 {
                     filteredChannels.map((channel: IConversations) =>

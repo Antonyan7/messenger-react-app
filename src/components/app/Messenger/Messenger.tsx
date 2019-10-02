@@ -2,6 +2,7 @@ import React from 'react';
 import ConversationList from '../../conversations/ConversationList';
 import MessageList from '../../messages/MessageList';
 import './Messenger.css';
+import Header from "../Header";
 
 function Messenger() {
   return (

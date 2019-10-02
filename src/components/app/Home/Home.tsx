@@ -10,6 +10,7 @@ import {AuthContext} from "../../../context/AuthContext";
 import axios from "axios";
 import {ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
 import Preview from "../Preview";
+import Header from "../Header";
 
 function Home() {
     const {authToken} = useContext(AuthContext);
@@ -38,6 +39,7 @@ function Home() {
 
     return (
         <div className="Home">
+            <Header/>
             <Switch>
                 <PrivateHomeRoute path="/" exact component={Messenger}/>
                 <PrivateLoginRoute path="/login" exact component={Login}/>
