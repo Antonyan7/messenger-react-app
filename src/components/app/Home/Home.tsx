@@ -39,7 +39,6 @@ function Home() {
 
     return (
         <div className="Home">
-            <Header/>
             <Switch>
                 <PrivateHomeRoute path="/" exact component={Messenger}/>
                 <PrivateLoginRoute path="/login" exact component={Login}/>
