@@ -16,6 +16,9 @@
   object-fit: cover;
   margin-right: 10px;
 }
+.conversation-photo h3 {
+  margin: 0;
+}
 
 .conversation-title {
   font-size: 14px;
@@ -28,4 +31,13 @@
   font-size: 14px;
   color: #888;
   margin: 0;
+}
+
+.default-avatar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  color: #fff;
+  background-color: #43c89a;
 }
