@@ -84,11 +84,13 @@ export default function UsersListDialog() {
         });
     };
 
-    const addConversation = async (channelInfo: Channel) => {
+    const addConversation = async (channelInfo: any) => {
         const channelPayload: ChannelPayload = {
             uuid: uuid(),
             type: ChannelType.Personal,
             exposed: false,
+            title: channelInfo.name,
+            image_url: channelInfo.photo,
             participants: [channelInfo.id]
         };
 
