@@ -1,4 +1,4 @@
-import {Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
+import {Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk";
 
 const token = localStorage.getItem('token')
 export let client: GlobalidMessagingClient;

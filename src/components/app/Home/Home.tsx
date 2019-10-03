@@ -8,7 +8,7 @@ import PrivateHomeRoute from "../../../privateRoutes/PrivateHomeRoute";
 import PrivateLoginRoute from "../../../privateRoutes/PrivateLoginRoute";
 import {AuthContext} from "../../../context/AuthContext";
 import axios from "axios";
-import {ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
+import {ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk";
 import Preview from "../Preview";
 import Header from "../Header";
 
@@ -50,4 +50,3 @@ function Home() {
 };
 
 export default Home;
-

@@ -14,7 +14,7 @@ import {
     GlobalidMessagingClient,
     init,
     MessagesResponse, ServiceNotification
-} from "globalid-messaging-web-sdk/dist";
+} from "globalid-messaging-web-sdk";
 
 import {client} from "../../../helpers/initMessengerSdk";
 import {IAppContextMessage} from "../../../interfaces/IAppContextMessage";
