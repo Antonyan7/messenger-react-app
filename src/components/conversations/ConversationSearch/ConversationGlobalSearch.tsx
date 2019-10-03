@@ -3,8 +3,6 @@ import './ConversationLocalSearch.css';
 import axios from "axios";
 import {AuthContext} from "../../../context/AuthContext";
 import {ConversationListContext} from "../../../context/ConversationListContext";
-import {client} from "../../../helpers/initMessengerSdk";
-import {ChannelsResponse} from "globalid-messaging-web-sdk/dist";
 
 const ConversationGlobalSearch = () => {
 
@@ -12,16 +10,29 @@ const ConversationGlobalSearch = () => {
     const {authToken} = useContext(AuthContext);
     const {updateSearchedChannels, updateIsSearching} = useContext(ConversationListContext);
 
+    const config = {
+        headers: {'Authorization': "bearer " + authToken}
+    };
+
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         updateIsSearching(true);
         setSearchQuery(e.target.value);
         searchChannels(e.target.value);
     };
 
-    const searchChannels = async (query: any) => {
-        const channels: ChannelsResponse = await client.channel().searchChannels([query]);
-        // updateSearchedChannels(channels.data);
-        // updateIsSearching(false);
+    const searchChannels = (query: any) => {
+        axios.get(process.env.REACT_APP_BASE_URL + 'v1/identities?gid_name=' + query, config).then(response => {
+            const channelsList = response.data.map((result: any) => {
+                return {
+                    id: result.gid_uuid,
+                    photo: result.display_image_url,
+                    name: result.display_name,
+                    text: result.description
+                };
+            });
+            updateSearchedChannels(channelsList);
+            updateIsSearching(false);
+        });
     };
 
     return (

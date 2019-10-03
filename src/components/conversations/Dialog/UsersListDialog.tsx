@@ -13,19 +13,22 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import {AppContext} from "../../../context/AppContext";
 import {IConversations} from "../../../interfaces/IConversations";
-import {deepOrange} from "@material-ui/core/colors";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ConversationGlobalSearch from "../ConversationSearch/ConversationGlobalSearch";
+import {Channel, ChannelPayload, ChannelType} from "globalid-messaging-web-sdk/dist";
+import {client} from "../../../helpers/initMessengerSdk";
+import "./UsersListDialog.css";
 
 const useStyles = makeStyles({
     orangeAvatar: {
         margin: 10,
         color: '#fff',
-        backgroundColor: deepOrange[500],
+        backgroundColor: '#43c89a',
         fontFamily: 'Lato',
     },
     channelText: {
-        fontFamily: 'Lato',
+        color: '#212121',
+        fontFamily: 'Lato'
     },
     dialogPaper: {
         minHeight: '80vh',
@@ -48,7 +51,7 @@ export default function UsersListDialog() {
     const classes = useStyles();
     const [channels, setChannels] = useState<Array<object>>([]);
     const {isUsersListOpened, updateIsUsersListOpened, searchedChannels, isSearching} = useContext(ConversationListContext);
-    const {authToken} = useContext(AuthContext);
+    const {authToken, currentUser} = useContext(AuthContext);
     const {addChannel} = useContext(AppContext);
 
     useEffect(() => {
@@ -63,8 +66,7 @@ export default function UsersListDialog() {
         updateIsUsersListOpened(false);
     };
 
-    const handleListItemClick = (channel: IConversations) => {
-        console.log(channel);
+    const handleListItemClick = (channel: Channel) => {
         addConversation(channel)
     };
 
@@ -82,31 +84,17 @@ export default function UsersListDialog() {
         });
     };
 
-    const addConversation = (channel: IConversations) => {
-        const props = {
-            participants: [
-                channel.id
-            ],
+    const addConversation = async (channelInfo: Channel) => {
+        const channelPayload: ChannelPayload = {
             uuid: uuid(),
-            type: "PERSONAL",
-            exposed: true,
-            title: channel.name,
-            description: channel.text,
-            image_url: channel.photo
+            type: ChannelType.Personal,
+            exposed: false,
+            participants: [channelInfo.id]
         };
 
-        axios.post(process.env.REACT_APP_BASE_URL + 'v1/channels', props, config).then(response => {
-
-            const newChannel = {
-                id: response.data.id,
-                photo: response.data.image_url,
-                name: response.data.title,
-                text: response.data.description
-            };
-
-            addChannel(newChannel);
-            handleClose();
-        });
+        const channel: Channel = await client.channel().createChannel(channelPayload);
+        addChannel(channel);
+        updateIsUsersListOpened(false);
     };
 
     return (
@@ -120,13 +108,13 @@ export default function UsersListDialog() {
                 classes={{ paper: classes.dialogPaper }}>
                 <ConversationGlobalSearch/>
 
-                <DialogContent dividers={true}>
+                <DialogContent dividers={true} className="dialog-wrapper">
                     {/*<CircularProgress  className={[*/}
                     {/*    `${isSearching ? classes.showComponent : classes.hideComponent}`,*/}
                     {/*].join('')} />*/}
 
                     {(searchedChannels.length != 0 ? searchedChannels : channels).map((channel: any) => (
-                        <ListItem button onClick={() => handleListItemClick(channel)} key={channel.name}>
+                        <ListItem button onClick={() => handleListItemClick(channel)} key={channel.id}>
                             <ListItemAvatar>
                                 <Avatar src={channel.photo} className={classes.orangeAvatar}>{channel.name.charAt(0)}</Avatar>
                             </ListItemAvatar>
@@ -135,7 +123,7 @@ export default function UsersListDialog() {
                     ))}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} color="primary" className={classes.channelText}>
+                    <Button onClick={handleClose} className={classes.channelText}>
                         Cancel
                     </Button>
                 </DialogActions>

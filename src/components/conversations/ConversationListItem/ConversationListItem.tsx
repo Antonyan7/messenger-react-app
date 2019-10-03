@@ -8,6 +8,7 @@ import {IConversations} from "../../../interfaces/IConversations";
 import {IConversationsList} from "../../../interfaces/IConversationsList";
 import {AuthContext} from "../../../context/AuthContext";
 import {
+    Channel,
     ChannelsResponse,
     Config,
     GlobalidMessagingClient,
@@ -24,7 +25,7 @@ import {deepOrange} from "@material-ui/core/colors";
 function ConversationListItem(props: IConversationsList) {
     const {updateMessages, updateActiveChannelId, updateActiveChannelName} = useContext(AppContext);
     const [isSelected, setIsSelected] = useState<boolean>(false);
-    const {id, photo, name, text}: IConversations = props.data;
+    const {id, image_url, title, description} : Channel = props.data;
 
     const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
         console.log('Channel alias', channel)
@@ -33,9 +34,10 @@ function ConversationListItem(props: IConversationsList) {
 
     const getChannelMessages = async () => {
         const messages: MessagesResponse = await client.message().getMessages(id, 1,100);
+        console.log(messages);
         const channelMessagesList = messages.data.messages;
         updateActiveChannelId(id);
-        updateActiveChannelName(name);
+        updateActiveChannelName(title);
         updateMessages(channelMessagesList);
     };
 
@@ -46,7 +48,7 @@ function ConversationListItem(props: IConversationsList) {
 
     const useStyles = makeStyles({
         userPhoto: {
-            backgroundImage: "url("+photo+")",
+            backgroundImage: "url("+image_url+")",
             backgroundSize: "contain"
         },
     });
@@ -55,15 +57,15 @@ function ConversationListItem(props: IConversationsList) {
 
     return (
         <div className={`conversation-list-item ${isSelected ? 'conversation-selected' : ''}`} onClick={(e) => handleChannelClick(e)}>
-            <div className={`conversation-photo default-avatar ${photo != null ? classes.userPhoto : ""}`}>
+            <div className={`conversation-photo default-avatar ${image_url != null ? classes.userPhoto : ""}`}>
                 <h3>
-                    {photo == null ? name.charAt(0) : ""}
+                    {image_url == null && title ? title.charAt(0) : ""}
                 </h3>
             </div>
 
             <div className="conversation-info">
-                <h1 className="conversation-title">{name}</h1>
-                <p className="conversation-snippet">{text}</p>
+                <h1 className="conversation-title">{title}</h1>
+                <p className="conversation-snippet">{description}</p>
             </div>
         </div>
     )

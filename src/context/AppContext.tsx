@@ -3,13 +3,14 @@ import {IAppContext} from "../interfaces/IAppContext";
 import {IAppContextProvider} from "../interfaces/IAppContextProvider";
 import {IAppContextMessage} from "../interfaces/IAppContextMessage";
 import {IConversations} from "../interfaces/IConversations";
+import {Channel} from "globalid-messaging-web-sdk/dist";
 
 export const AppContext = React.createContext<IAppContext>({} as IAppContext);
 
 const AppContextProvider = (props: IAppContextProvider) => {
     const [messages, setMessages] = useState<Array<IAppContextMessage>>([]);
-    const [channels, setChannels] = useState<Array<IConversations>>([]);
-    const [filteredChannels, setFilteredChannels] = useState<Array<IConversations>>( []);
+    const [channels, setChannels] = useState<Array<Channel>>([]);
+    const [filteredChannels, setFilteredChannels] = useState<Array<Channel>>( []);
     const [activeChannelId, setActiveChannelId] = useState<string>("0");
     const [activeChannelName, setActiveChannelName] = useState<string>("");
 
@@ -26,11 +27,11 @@ const AppContextProvider = (props: IAppContextProvider) => {
         setMessages(messages.filter((message: IAppContextMessage) => message.id !== id))
     };
 
-    const addChannels = (channelsList: Array<IConversations>) => {
+    const addChannels = (channelsList: Array<Channel>) => {
         setChannels(channelsList)
     };
 
-    const addChannel = (singleChannel: IConversations) => {
+    const addChannel = (singleChannel: Channel) => {
         setChannels([...channels, singleChannel]);
         setFilteredChannels([...filteredChannels, singleChannel]);
     };
@@ -39,11 +40,11 @@ const AppContextProvider = (props: IAppContextProvider) => {
         setActiveChannelId(id);
     };
 
-    const updateFilteredChannels = (channelsList: Array<IConversations>) => {
+    const updateFilteredChannels = (channelsList: Array<Channel>) => {
         setFilteredChannels(channelsList);
     };
 
-    const updateActiveChannelName = (channelName: string) => {
+    const updateActiveChannelName = (channelName: any) => {
         setActiveChannelName(channelName);
     };
 

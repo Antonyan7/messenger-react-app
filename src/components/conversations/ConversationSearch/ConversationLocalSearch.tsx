@@ -1,22 +1,28 @@
 import React, {useContext, useState} from 'react';
 import './ConversationLocalSearch.css';
 import {AppContext} from "../../../context/AppContext";
+import {ChannelsResponse} from "globalid-messaging-web-sdk/dist";
+import {client} from "../../../helpers/initMessengerSdk";
 
 const ConversationLocalSearch = () => {
     const { updateFilteredChannels } = useContext(AppContext);
     const { channels } = useContext(AppContext);
     const [searchQuery, setSearchQuery] = useState<string>("");
 
-    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(e.target.value);
+    const handleSearch = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const query = e.target.value;
+        setSearchQuery(query);
 
-        let filteredList = channels.filter(
-            (channel) => {
-                return channel.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1;
-            }
-        );
-
-        updateFilteredChannels(filteredList);
+        // const channels: ChannelsResponse = await client.channel().searchChannels([query]);
+        // console.log(channels);
+        // let filteredList = channels.filter(
+        //     (channel) => {
+        //         return channel.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1;
+        //     }
+        // );
+        // let filteredList = channels.data.channels;
+        //
+        // updateFilteredChannels(filteredList);
     };
 
     return (

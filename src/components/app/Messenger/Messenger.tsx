@@ -3,20 +3,23 @@ import ConversationList from '../../conversations/ConversationList';
 import MessageList from '../../messages/MessageList';
 import './Messenger.css';
 import Header from "../Header";
+import ConversationListContextProvider from "../../../context/ConversationListContext";
 
 function Messenger() {
     return (
         <div>
-            <Header/>
-            <div className="messenger">
-                <div className="scrollable sidebar">
-                    <ConversationList/>
-                </div>
+            <ConversationListContextProvider>
+                <Header/>
+                <div className="messenger">
+                    <div className="scrollable sidebar">
+                        <ConversationList/>
+                    </div>
 
-                <div className="scrollable content">
-                    <MessageList/>
+                    <div className="scrollable content">
+                        <MessageList/>
+                    </div>
                 </div>
-            </div>
+            </ConversationListContextProvider>
         </div>
     );
 };

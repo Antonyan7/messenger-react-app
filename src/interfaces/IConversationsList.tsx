@@ -1,9 +1,6 @@
+import {Channel} from "globalid-messaging-web-sdk/dist";
+
 export interface IConversationsList {
-    data: {
-        id: string,
-        photo: string,
-        name: string,
-        text: string
-    },
+    data: Channel,
     key: string
 }

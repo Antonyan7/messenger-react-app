@@ -10,7 +10,7 @@ import {IConversations} from "../../../interfaces/IConversations";
 import {AuthContext} from "../../../context/AuthContext";
 import ConversationListContextProvider from "../../../context/ConversationListContext";
 import UsersListDialog from "../Dialog/UsersListDialog";
-import {ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
+import {Channel, ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
 
 import {client} from "../../../helpers/initMessengerSdk"
 import SettingsIcon from "../../../assets/icons/SettingsIcon";
@@ -32,43 +32,45 @@ function ConversationList() {
 
     const getChannels = async () => {
 
-        const channels: ChannelsResponse = await client.channel().getChannels(1, 1);
-        const channelsList = channels.data.channels.map((result: any) => {
+        const channels: ChannelsResponse = await client.channel().getChannels(1, 20);
+
+        const channelsList = channels.data.channels.map((result: Channel) => {
+            console.log(result);
             return {
+                alias: result.alias,
+                created_at: result.created_at,
+                created_by: result.created_by,
+                deleted: result.deleted,
+                description: result.description,
+                exposed: result.exposed,
                 id: result.id,
-                photo: result.image_url,
-                name: result.title,
-                text: result.description
+                image_url: result.image_url,
+                message: result.message,
+                participants: result.participants,
+                title: result.title,
+                type: result.type,
+                unread_count: result.unread_count,
+                updated_at: result.updated_at,
+                updated_by: result.updated_by,
+                uuid: result.uuid
             };
         });
         addChannels(channelsList);
         updateFilteredChannels(channelsList);
     };
 
-    // useEffect(() => {
-    //     (async () => {
-    //         client = await initSdk(authToken);
-    //         getChannels()
-    //     })();
-    // });
-    // (async () => {
-    //     client = await initSdk(authToken);
-    // })();
-
     return (
         <div className="conversation-list">
-            <ConversationListContextProvider>
-                <ConversationLocalSearch/>
-                {
-                    filteredChannels.map((channel: IConversations) =>
-                        <ConversationListItem
-                            key={channel.name}
-                            data={channel}
-                        />
-                    )
-                }
-                <UsersListDialog/>
-            </ConversationListContextProvider>
+            <ConversationLocalSearch/>
+            {
+                filteredChannels.map((channel: Channel) =>
+                    <ConversationListItem
+                        key={channel.uuid}
+                        data={channel}
+                    />
+                )
+            }
+            <UsersListDialog/>
         </div>
     );
 }
