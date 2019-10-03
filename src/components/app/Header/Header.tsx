@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import SettingsIcon from "../../../assets/icons/SettingsIcon";
-import PlusCircleIcon from "../../../assets/icons/PlusCircleIcon";
 import Toolbar from "../../layouts/Toolbar";
 import LogoutButton from "../../auth/Logout";
 import './Header.css';
+import {AppContext} from "../../../context/AppContext";
+import AddChannelButton from "../../conversations/ConversationButtons";
 
 
 function Header() {
+    const {activeChannelName} = useContext(AppContext);
+
     return (
         <div className="Header">
             <div className="conversations-toolbar">
@@ -16,13 +19,13 @@ function Header() {
                         <SettingsIcon key="settingsIcon"/>
                     ]}
                     rightItems={[
-                        <PlusCircleIcon key="plusCircleIcon"/>
+                        <AddChannelButton key="addChannelButton"/>
                     ]}
                 />
             </div>
             <div className="messages-toolbar">
                 <Toolbar
-                    title={"activeChannelName"}
+                    title={activeChannelName}
                     rightItems={[
                         <LogoutButton key="logoutButton"/>
                     ]}

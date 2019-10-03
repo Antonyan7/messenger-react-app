@@ -47,9 +47,6 @@ const ToolbarButton = (props: IToolbarButton) => {
                 updateMessage("");
             });
         }
-        if (icon === "ion-ios-add-circle-outline") {
-            updateIsUsersListOpened(true);
-        }
     };
 
     return (
