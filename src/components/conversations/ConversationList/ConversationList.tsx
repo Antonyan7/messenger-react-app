@@ -27,7 +27,6 @@ function ConversationList() {
         if (client) {
             getChannels()
         }
-        console.log(client);
     }, []);
 
     const getChannels = async () => {
@@ -35,7 +34,6 @@ function ConversationList() {
         const channels: ChannelsResponse = await client.channel().getChannels(1, 20);
 
         const channelsList = channels.data.channels.map((result: Channel) => {
-            console.log(result);
             return {
                 alias: result.alias,
                 created_at: result.created_at,

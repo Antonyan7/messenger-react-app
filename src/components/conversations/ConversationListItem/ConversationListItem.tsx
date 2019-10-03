@@ -23,7 +23,7 @@ import {deepOrange} from "@material-ui/core/colors";
 
 
 function ConversationListItem(props: IConversationsList) {
-    const {updateMessages, updateActiveChannelId, updateActiveChannelName} = useContext(AppContext);
+    const {activeChannelId, updateMessages, updateActiveChannelId, updateActiveChannelName} = useContext(AppContext);
     const [isSelected, setIsSelected] = useState<boolean>(false);
     const {id, image_url, title, description} : Channel = props.data;
 
@@ -43,7 +43,7 @@ function ConversationListItem(props: IConversationsList) {
 
     const handleChannelClick = async (e: React.MouseEvent) => {
         await getChannelMessages();
-        setIsSelected(true);
+        const conversationsItems = document.getElementsByClassName("conversation-list-item");
     };
 
     const useStyles = makeStyles({
@@ -56,7 +56,7 @@ function ConversationListItem(props: IConversationsList) {
     const classes = useStyles();
 
     return (
-        <div className={`conversation-list-item ${isSelected ? 'conversation-selected' : ''}`} onClick={(e) => handleChannelClick(e)}>
+        <div className={`conversation-list-item ${activeChannelId == id ? 'conversation-selected' : ''}`} onClick={(e) => handleChannelClick(e)}>
             <div className={`conversation-photo default-avatar ${image_url != null ? classes.userPhoto : ""}`}>
                 <h3>
                     {image_url == null && title ? title.charAt(0) : ""}
