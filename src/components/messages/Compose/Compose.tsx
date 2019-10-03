@@ -12,7 +12,7 @@ import {
     GlobalidMessagingClient,
     init,
     SendMessageResponse
-} from "globalid-messaging-web-sdk";
+} from "globalid-messaging-web-sdk/dist";
 import {client} from "../../../helpers/initMessengerSdk";
 
 const Compose = (props: ICompose) => {
