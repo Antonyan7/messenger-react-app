@@ -19,16 +19,15 @@ function Home() {
     const {addChannel} = useContext(AppContext);
 
 
-    const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
-        console.log('Channel alias', channel);
-        console.log('Notification payload', notification);
-        if(notification.action == "NEW_CHANNEL_CREATED") {
-            addChannel(notification.payload as Channel);
-        }
-    });
-
-    console.log(token);
-
+    if(authToken){
+        const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
+            console.log('Channel alias', channel);
+            console.log('Notification payload', notification);
+            if(notification.action == "NEW_CHANNEL_CREATED") {
+                addChannel(notification.payload as Channel);
+            }
+        });
+    }
 
     const getCurrentUser = () => {
         const config = {
