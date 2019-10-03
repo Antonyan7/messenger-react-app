@@ -4,7 +4,6 @@ import Home from "../Home";
 import AppContextProvider from "../../../context/AppContext";
 import {BrowserRouter} from "react-router-dom";
 
-
 function App() {
     return (
         <BrowserRouter>

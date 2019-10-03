@@ -95,7 +95,6 @@ export default function UsersListDialog() {
         };
 
         const channel: Channel = await client.channel().createChannel(channelPayload);
-        addChannel(channel);
         updateIsUsersListOpened(false);
     };
 

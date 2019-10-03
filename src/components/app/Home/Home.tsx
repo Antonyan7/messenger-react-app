@@ -10,10 +10,25 @@ import {AuthContext} from "../../../context/AuthContext";
 import axios from "axios";
 import Preview from "../Preview";
 import Header from "../Header";
+import {client} from "../../../helpers/initMessengerSdk";
+import {Channel, ServiceNotification} from "globalid-messaging-web-sdk/dist";
+import {AppContext} from "../../../context/AppContext";
 
 function Home() {
-    const {authToken} = useContext(AuthContext);
-    const {updateCurrentUser} = useContext(AuthContext);
+    const {authToken,updateCurrentUser} = useContext(AuthContext);
+    const {addChannel} = useContext(AppContext);
+
+
+    const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
+        console.log('Channel alias', channel);
+        console.log('Notification payload', notification);
+        if(notification.action == "NEW_CHANNEL_CREATED") {
+            addChannel(notification.payload as Channel);
+        }
+    });
+
+    console.log(token);
+
 
     const getCurrentUser = () => {
         const config = {

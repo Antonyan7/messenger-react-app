@@ -27,11 +27,6 @@ function ConversationListItem(props: IConversationsList) {
     const [isSelected, setIsSelected] = useState<boolean>(false);
     const {id, image_url, title, description} : Channel = props.data;
 
-    const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
-        console.log('Channel alias', channel)
-        console.log('Notification payload', notification)
-    });
-
     const getChannelMessages = async () => {
         const messages: MessagesResponse = await client.message().getMessages(id, 1,100);
         console.log(messages);
