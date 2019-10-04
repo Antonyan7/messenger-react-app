@@ -7,7 +7,7 @@ import {IAppContextMessage} from "../../interfaces/IAppContextMessage";
 import {MessageContext} from "../../context/MessageContext";
 
 function ChannelListener() {
-    const {authToken,updateCurrentUser} = useContext(AuthContext);
+    const {authToken} = useContext(AuthContext);
     const {addChannel, addMessage} = useContext(AppContext);
     const {updateMessage} = useContext(MessageContext);
 
@@ -24,6 +24,7 @@ function ChannelListener() {
                 updateMessage("");
             }
         });
+        localStorage.setItem('sdkClientToken', token);
     }
     return (
         <div></div>

@@ -4,5 +4,5 @@ export interface IAuthContext {
     authToken: string,
     updateAuthToken: (token: string) => void,
     currentUser: any
-    updateCurrentUser: (user: any) => void,
+    updateCurrentUser: (user: any) => void
 }
