@@ -16,7 +16,6 @@ import {client} from "../../../helpers/initMessengerSdk"
 import SettingsIcon from "../../../assets/icons/SettingsIcon";
 import PlusCircleIcon from "../../../assets/icons/PlusCircleIcon";
 import axios from "axios";
-import {async} from "q";
 
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);

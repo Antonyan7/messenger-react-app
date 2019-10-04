@@ -13,9 +13,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 function ConversationListItem(props: IConversationsList) {
     const {activeChannelId, updateMessages, updateActiveChannelId, updateActiveChannelName} = useContext(AppContext);
-    const [isSelected, setIsSelected] = useState<boolean>(false);
     const {authToken} = useContext(AuthContext);
-    const [userNames, setUserNames] = useState<Array<string>>([]);
+    const [conversationInfo, setConversationInfo] = useState<any>([]);
 
     const config = {
         headers: {'Authorization': "bearer " + authToken}
@@ -34,9 +33,13 @@ function ConversationListItem(props: IConversationsList) {
         });
 
         const participantsInfo = axios.get(process.env.REACT_APP_BASE_URL + 'v1/identities/' + filteredParticipants[0], config).then(response => {
-            setUserNames([...userNames, response.data.display_name ? response.data.display_name : response.data.gid_name]);
+            const data = {
+                title: response.data.display_name ? response.data.display_name : response.data.gid_name,
+                description: response.data.description,
+                image_url: response.data.display_image_url
+            };
+            setConversationInfo(data);
         });
-        // return participantsInfo.data.display_name ? participantsInfo.data.display_name : participantsInfo.data.gid_name;
     };
 
     const getChannelMessages = async () => {
@@ -44,7 +47,7 @@ function ConversationListItem(props: IConversationsList) {
         console.log(messages);
         const channelMessagesList = messages.data.messages;
         updateActiveChannelId(id);
-        updateActiveChannelName(title);
+        updateActiveChannelName(conversationInfo.title);
         updateMessages(channelMessagesList);
     };
 
@@ -55,7 +58,7 @@ function ConversationListItem(props: IConversationsList) {
 
     const useStyles = makeStyles({
         userPhoto: {
-            backgroundImage: "url(" + image_url + ")",
+            backgroundImage: "url(" + conversationInfo.image_url + ")",
             backgroundSize: "contain"
         },
     });
@@ -65,15 +68,15 @@ function ConversationListItem(props: IConversationsList) {
     return (
         <div className={`conversation-list-item ${activeChannelId == id ? 'conversation-selected' : ''}`}
              onClick={(e) => handleChannelClick(e)}>
-            <div className={`conversation-photo default-avatar ${image_url != null ? classes.userPhoto : ""}`}>
+            <div className={`conversation-photo default-avatar ${conversationInfo.image_url != null ? classes.userPhoto : ""}`}>
                 <h3>
-                    {image_url == null && title ? title.charAt(0) : ""}
+                    {conversationInfo.image_url == null && title ? title.charAt(0) : ""}
                 </h3>
             </div>
 
             <div className="conversation-info">
-                <h1 className="conversation-title">{userNames}</h1>
-                <p className="conversation-snippet">{description}</p>
+                <h1 className="conversation-title">{conversationInfo.title}</h1>
+                <p className="conversation-snippet">{conversationInfo.description}</p>
             </div>
         </div>
     )
