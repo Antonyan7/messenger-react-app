@@ -25,8 +25,8 @@ const Compose = (props: ICompose) => {
     const sendMessage  = async (messagePayload: any) => {
         const message: SendMessageResponse = await client.message().sendMessage(messagePayload);
         console.log(message[0]);
-        addMessage(message[0]);
-        updateMessage("");
+        // addMessage(message[0]);
+        // updateMessage("");
     };
 
 
