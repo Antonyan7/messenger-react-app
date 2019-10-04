@@ -25,6 +25,7 @@ function Home() {
             console.log('Notification payload', notification);
             if(notification.action == "NEW_CHANNEL_CREATED") {
                 addChannel(notification.payload as Channel);
+                console.log("Added")
             }
         });
     }

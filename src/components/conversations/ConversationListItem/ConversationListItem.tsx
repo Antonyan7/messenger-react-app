@@ -44,7 +44,6 @@ function ConversationListItem(props: IConversationsList) {
 
     const getChannelMessages = async () => {
         const messages: MessagesResponse = await client.message().getMessages(id, 1, 100);
-        console.log(messages);
         const channelMessagesList = messages.data.messages;
         updateActiveChannelId(id);
         updateActiveChannelName(conversationInfo.title);
