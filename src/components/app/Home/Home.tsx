@@ -18,18 +18,6 @@ function Home() {
     const {authToken,updateCurrentUser} = useContext(AuthContext);
     const {addChannel} = useContext(AppContext);
 
-
-    if(authToken){
-        const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
-            console.log('Channel alias', channel);
-            console.log('Notification payload', notification);
-            if(notification.action == "NEW_CHANNEL_CREATED") {
-                addChannel(notification.payload as Channel);
-                console.log("Added")
-            }
-        });
-    }
-
     useEffect(() =>{
         getCurrentUser();
     }, []);

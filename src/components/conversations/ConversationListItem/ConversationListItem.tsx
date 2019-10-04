@@ -47,7 +47,7 @@ function ConversationListItem(props: IConversationsList) {
         const channelMessagesList = messages.data.messages;
         updateActiveChannelId(id);
         updateActiveChannelName(conversationInfo.title);
-        updateMessages(channelMessagesList);
+        updateMessages(channelMessagesList.reverse());
     };
 
     const handleChannelClick = async (e: React.MouseEvent) => {

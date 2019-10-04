@@ -31,8 +31,8 @@ const AppContextProvider = (props: IAppContextProvider) => {
     };
 
     const addChannel = (singleChannel: Channel) => {
-        setChannels([...channels, singleChannel]);
-        setFilteredChannels([...filteredChannels, singleChannel]);
+        setChannels([singleChannel, ...channels]);
+        setFilteredChannels([singleChannel, ...filteredChannels]);
     };
 
     const updateActiveChannelId = (id: string) => {

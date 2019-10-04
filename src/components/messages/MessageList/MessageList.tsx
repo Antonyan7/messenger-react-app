@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import Compose from '../Compose';
 import Toolbar from '../../layouts/Toolbar';
 import ToolbarButton from '../../layouts/ToolbarButton';
