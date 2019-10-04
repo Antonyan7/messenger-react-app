@@ -1,6 +1,6 @@
 import {IAppContextMessage} from "./IAppContextMessage";
 import {IConversations} from "./IConversations";
-import {Channel} from "globalid-messaging-web-sdk/dist";
+import {Channel, ChannelType, Message} from "globalid-messaging-web-sdk/dist";
 
 export interface IAppContext {
     messages: Array<IAppContextMessage>,
@@ -15,5 +15,5 @@ export interface IAppContext {
     filteredChannels: Array<Channel>,
     updateFilteredChannels: (channelsList: Array<Channel>) => void,
     activeChannelName?: string,
-    updateActiveChannelName: (channelName?: string) => void,
+    updateActiveChannelName: (channelName?: string) => void
 }

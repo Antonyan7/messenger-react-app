@@ -15,6 +15,8 @@ import {Channel, ChannelsResponse, Config, GlobalidMessagingClient, init} from "
 import {client} from "../../../helpers/initMessengerSdk"
 import SettingsIcon from "../../../assets/icons/SettingsIcon";
 import PlusCircleIcon from "../../../assets/icons/PlusCircleIcon";
+import axios from "axios";
+import {async} from "q";
 
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);
@@ -30,7 +32,6 @@ function ConversationList() {
     }, []);
 
     const getChannels = async () => {
-
         const channels: ChannelsResponse = await client.channel().getChannels(1, 20);
 
         const channelsList = channels.data.channels.map((result: Channel) => {

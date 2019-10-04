@@ -29,6 +29,10 @@ function Home() {
         });
     }
 
+    useEffect(() =>{
+        getCurrentUser();
+    }, []);
+
     const getCurrentUser = () => {
         const config = {
             headers: {'Authorization': "bearer " + authToken}
@@ -41,14 +45,10 @@ function Home() {
                 name: response.data.display_name,
                 text: response.data.description
             };
+            console.log(user);
             updateCurrentUser(user);
         });
     };
-
-    useEffect(() =>{
-        getCurrentUser();
-    }, []);
-
 
     return (
         <div className="Home">

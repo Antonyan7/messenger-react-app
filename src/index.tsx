@@ -5,10 +5,12 @@ import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
 import dotenv from 'dotenv'
 import {initClient} from './helpers/initMessengerSdk';
+import {initCurrentUser} from "./helpers/initCurrentUser";
 
 (async () => {
     try {
         await initClient();
+        await initCurrentUser();
     } catch (e) {
         console.log(e)
     }

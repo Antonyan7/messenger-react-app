@@ -1,6 +1,6 @@
 import {Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
 
-const token = localStorage.getItem('token')
+const token = localStorage.getItem('token');
 export let client: GlobalidMessagingClient;
 
 export async function initSdk(token: any) {
