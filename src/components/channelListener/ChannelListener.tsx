@@ -12,19 +12,26 @@ function ChannelListener() {
     const {updateMessage} = useContext(MessageContext);
 
     if(authToken){
-        const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
-            console.log('Channel alias', channel);
-            console.log('Notification payload', notification);
-            if(notification.action == "NEW_CHANNEL_CREATED") {
-                addChannel(notification.payload as Channel);
-            }
-            if(notification.action == "NEW_MESSAGE_RECEIVED") {
-                console.log(notification.payload);
-                addMessage(notification.payload as IAppContextMessage);
-                updateMessage("");
-            }
-        });
-        localStorage.setItem('sdkClientToken', token);
+        try {
+            const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
+                console.log('Channel alias', channel);
+                console.log('Notification payload', notification);
+                if(notification.action == "NEW_CHANNEL_CREATED") {
+                    addChannel(notification.payload as Channel);
+                }
+                if(notification.action == "NEW_MESSAGE_RECEIVED") {
+                    console.log(notification.payload);
+                    addMessage(notification.payload as IAppContextMessage);
+                    updateMessage("");
+                }
+            });
+            localStorage.setItem('sdkClientToken', token);
+        }
+        catch (e) {
+            window.top.location.href = '/preview';
+            localStorage.clear();
+            console.log(e);
+        }
     }
     return (
         <div></div>

@@ -36,6 +36,8 @@ function Home() {
             };
             console.log(user);
             updateCurrentUser(user);
+        }).catch(e => {
+            localStorage.clear();
         });
     };
 
