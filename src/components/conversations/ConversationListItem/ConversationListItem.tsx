@@ -69,7 +69,7 @@ function ConversationListItem(props: IConversationsList) {
              onClick={(e) => handleChannelClick(e)}>
             <div className={`conversation-photo default-avatar ${conversationInfo.image_url != null ? classes.userPhoto : ""}`}>
                 <h3>
-                    {conversationInfo.image_url == null && title ? title.charAt(0) : ""}
+                    {conversationInfo.image_url == null && conversationInfo.title ? conversationInfo.title.charAt(0) : ""}
                 </h3>
             </div>
 
