@@ -1,5 +1,5 @@
 import { client } from '../helpers/initMessengerSdk'
-import { ServiceNotification } from 'globalid-messaging-web-sdk/dist'
+import { ServiceNotification } from 'globalid-messaging-web-sdk'
 
 const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
   console.log('Channel alias', channel);

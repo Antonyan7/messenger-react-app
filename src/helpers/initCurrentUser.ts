@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Config} from "globalid-messaging-web-sdk/dist";
+import {Config} from "globalid-messaging-web-sdk";
 
 const token = localStorage.getItem('token');
 

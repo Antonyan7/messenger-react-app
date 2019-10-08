@@ -1,7 +1,6 @@
 import React, {useContext, useState} from 'react';
 import './ConversationLocalSearch.css';
 import {AppContext} from "../../../context/AppContext";
-import {ChannelsResponse} from "globalid-messaging-web-sdk/dist";
 import {client} from "../../../helpers/initMessengerSdk";
 
 const ConversationLocalSearch = () => {

@@ -11,7 +11,6 @@ import axios from "axios";
 import Preview from "../Preview";
 import Header from "../Header";
 import {client} from "../../../helpers/initMessengerSdk";
-import {Channel, ServiceNotification} from "globalid-messaging-web-sdk/dist";
 import {AppContext} from "../../../context/AppContext";
 
 function Home() {

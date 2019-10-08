@@ -5,7 +5,7 @@ import './ConversationListItem.css'
 import {AppContext} from '../../../context/AppContext'
 import {IConversationsList} from "../../../interfaces/IConversationsList";
 import {AuthContext} from "../../../context/AuthContext";
-import {Channel, MessagesResponse} from "globalid-messaging-web-sdk/dist";
+import {Channel, MessagesResponse} from "globalid-messaging-web-sdk";
 
 import {client} from "../../../helpers/initMessengerSdk";
 import makeStyles from "@material-ui/core/styles/makeStyles";

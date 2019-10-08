@@ -10,7 +10,7 @@ import {IConversations} from "../../../interfaces/IConversations";
 import {AuthContext} from "../../../context/AuthContext";
 import ConversationListContextProvider from "../../../context/ConversationListContext";
 import UsersListDialog from "../Dialog/UsersListDialog";
-import {Channel, ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk/dist";
+import {Channel, ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk";
 
 import {client} from "../../../helpers/initMessengerSdk"
 import SettingsIcon from "../../../assets/icons/SettingsIcon";

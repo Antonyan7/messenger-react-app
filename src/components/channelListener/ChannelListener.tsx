@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {AuthContext} from "../../context/AuthContext";
 import {AppContext} from "../../context/AppContext";
 import {client} from "../../helpers/initMessengerSdk";
-import {Channel, ServiceNotification} from "globalid-messaging-web-sdk/dist";
+import {Channel, ServiceNotification} from "globalid-messaging-web-sdk";
 import {IAppContextMessage} from "../../interfaces/IAppContextMessage";
 import {MessageContext} from "../../context/MessageContext";
 
@@ -28,6 +28,7 @@ function ChannelListener() {
             localStorage.setItem('sdkClientToken', token);
         }
         catch (e) {
+            console.log(e);
             window.top.location.href = '/preview';
             localStorage.clear();
             console.log(e);

@@ -3,7 +3,7 @@ import {IAppContext} from "../interfaces/IAppContext";
 import {IAppContextProvider} from "../interfaces/IAppContextProvider";
 import {IAppContextMessage} from "../interfaces/IAppContextMessage";
 import {IConversations} from "../interfaces/IConversations";
-import {Channel} from "globalid-messaging-web-sdk/dist";
+import {Channel} from "globalid-messaging-web-sdk";
 
 export const AppContext = React.createContext<IAppContext>({} as IAppContext);
 

@@ -15,7 +15,7 @@ import {AppContext} from "../../../context/AppContext";
 import {IConversations} from "../../../interfaces/IConversations";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ConversationGlobalSearch from "../ConversationSearch/ConversationGlobalSearch";
-import {Channel, ChannelPayload, ChannelsResponse, ChannelType} from "globalid-messaging-web-sdk/dist";
+import {Channel, ChannelPayload, ChannelsResponse, ChannelType} from "globalid-messaging-web-sdk";
 import {client} from "../../../helpers/initMessengerSdk";
 import "./UsersListDialog.css";
 
