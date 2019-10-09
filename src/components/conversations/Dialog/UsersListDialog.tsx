@@ -23,7 +23,7 @@ const useStyles = makeStyles({
     orangeAvatar: {
         margin: 10,
         color: '#fff',
-        backgroundColor: '#43c89a',
+        backgroundColor: '#0D2460',
         fontFamily: 'Lato',
     },
     channelText: {
