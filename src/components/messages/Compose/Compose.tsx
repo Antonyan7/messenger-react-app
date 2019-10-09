@@ -19,14 +19,10 @@ const Compose = (props: ICompose) => {
     const {rightItems} = props;
     const {message, updateMessage} = useContext(MessageContext);
 
-    const {addMessage} = useContext(AppContext);
     const { activeChannelId } = useContext(AppContext);
 
     const sendMessage  = async (messagePayload: any) => {
         const message: SendMessageResponse = await client.message().sendMessage(messagePayload);
-        console.log(message[0]);
-        // addMessage(message[0]);
-        // updateMessage("");
     };
 
 
@@ -34,21 +30,22 @@ const Compose = (props: ICompose) => {
         updateMessage(event.target.value);
     };
 
-    const publishMessage = (e: React.KeyboardEvent) => {
-        const props = {
-            message: {
-                uuid: uuid(),
-                type: "TEXT",
-                content: JSON.stringify({text: message})
-            },
-            channels: [ activeChannelId ]
-        };
+    const publishMessage = async (e: React.KeyboardEvent) => {
+      const props = {
+        message: {
+          uuid: uuid(),
+          type: "TEXT",
+          content: JSON.stringify({text: message})
+        },
+        channels: [activeChannelId]
+      };
 
-        if(e.key === 'Enter'){
-
-            sendMessage(props);
-
+      if (e.key === 'Enter') {
+        if(message != "") {
+          updateMessage("");
+          await sendMessage(props);
         }
+      }
     };
 
     return (
