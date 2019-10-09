@@ -14,7 +14,7 @@ import SendIcon from "../../../assets/icons/SendIcon";
 import LogoutButton from "../../auth/Logout";
 
 function MessageList() {
-    const {messages} = useContext(AppContext);
+    const {messages,activeChannelName} = useContext(AppContext);
     const {currentUser} = useContext(AuthContext);
 
     const renderMessages = () => {
@@ -77,10 +77,9 @@ function MessageList() {
 
     return (
         <div className="message-list">
-
             <div className="message-list-container">
                 <div className="messages">
-                    {renderMessages()}
+                  {activeChannelName ? renderMessages() : ""}
                 </div>
             </div>
 
