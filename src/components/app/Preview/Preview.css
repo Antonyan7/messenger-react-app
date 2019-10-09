@@ -12,7 +12,6 @@
 }
 
 .preview-login-link {
-    margin-top: 50px;
     height: 60px;
     border: 1px solid #000000;
     border-radius: 5px;
@@ -20,4 +19,24 @@
     background-size: 160px;
     cursor: pointer;
     outline: none;
+}
+.app-download-info{
+  margin-top: 100px;
+  color: #7E7E80;
+}
+.store-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  margin-top: 24px;
+  width: 164px;
+  height: 64px;
+  font-size: 16px;
+  background-color: #1c1c1c;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 32px;
+}
+.app-store-icon{
+  margin-right: 16px;
 }
