@@ -25,12 +25,14 @@
   font-weight: bold;
   text-transform: capitalize;
   margin: 0;
+  text-overflow: ellipsis;
 }
 
 .conversation-snippet {
   font-size: 14px;
   color: #888;
   margin: 0;
+  text-overflow: ellipsis;
 }
 
 .default-avatar{
