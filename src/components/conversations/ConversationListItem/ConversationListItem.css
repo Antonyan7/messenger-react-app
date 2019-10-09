@@ -24,13 +24,14 @@
   font-size: 14px;
   font-weight: bold;
   text-transform: capitalize;
-  margin: 0;
+  margin: unset;
   text-overflow: ellipsis;
 }
 
 .conversation-snippet {
   font-size: 14px;
   color: #888;
+  margin: unset;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
