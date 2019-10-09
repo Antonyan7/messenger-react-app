@@ -1,7 +1,7 @@
 .conversation-list-item {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding-left: 8px;
 }
 
 .conversation-list-item:hover {
@@ -42,7 +42,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px;
+  margin: 6px;
   color: #fff;
   background-color: #0D2460;
 }
