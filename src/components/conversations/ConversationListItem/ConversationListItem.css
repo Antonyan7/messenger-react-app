@@ -31,8 +31,10 @@
 .conversation-snippet {
   font-size: 14px;
   color: #888;
-  margin: 0;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 90%;
 }
 
 .default-avatar{
@@ -42,4 +44,9 @@
   margin: 10px;
   color: #fff;
   background-color: #0D2460;
+}
+
+.conversation-info{
+  max-width: 75%;
+  width: 100%;
 }
