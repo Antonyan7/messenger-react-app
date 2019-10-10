@@ -9,7 +9,7 @@ const ConversationGlobalSearch = () => {
 
     const [searchQuery, setSearchQuery] = useState<string>("");
     const {authToken} = useContext(AuthContext);
-    const {updateSearchedChannels, updateIsSearching} = useContext(ConversationListContext);
+    const {isUsersListOpened, updateSearchedChannels, updateIsSearching} = useContext(ConversationListContext);
 
     const config = {
         headers: {'Authorization': "bearer " + authToken}

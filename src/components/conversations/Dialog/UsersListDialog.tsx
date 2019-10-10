@@ -50,9 +50,9 @@ const useStyles = makeStyles({
 export default function UsersListDialog() {
     const classes = useStyles();
     const [identities, setIdentities] = useState<Array<object>>([]);
-    const {isUsersListOpened, updateIsUsersListOpened, searchedChannels, isSearching} = useContext(ConversationListContext);
-    const {authToken, currentUser} = useContext(AuthContext);
-    const {addChannel,channels} = useContext(AppContext);
+    const {isUsersListOpened, updateIsUsersListOpened, searchedChannels, updateSearchedChannels} = useContext(ConversationListContext);
+    const {authToken} = useContext(AuthContext);
+    const {channels} = useContext(AppContext);
 
     useEffect(() => {
         getChannelsList();
@@ -63,6 +63,7 @@ export default function UsersListDialog() {
     };
 
     const handleClose = () => {
+        updateSearchedChannels(identities);
         updateIsUsersListOpened(false);
     };
 
