@@ -7,7 +7,7 @@ import {ConversationListContext} from "../../../context/ConversationListContext"
 const ConversationGlobalSearch = () => {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const {authToken} = useContext(AuthContext);
-    const {isUsersListOpened, updateSearchedChannels, updateIsSearching} = useContext(ConversationListContext);
+    const {updateSearchedChannels, updateIsSearching} = useContext(ConversationListContext);
 
     const config = {
         headers: {'Authorization': "bearer " + authToken}
