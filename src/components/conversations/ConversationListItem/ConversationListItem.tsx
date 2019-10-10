@@ -1,38 +1,36 @@
 import React, {useContext, useEffect, useState} from 'react'
 import axios from "axios"
-
-import './ConversationListItem.css'
-import {AppContext} from '../../../context/AppContext'
-import {IConversationsList} from "../../../interfaces/IConversationsList";
-import {AuthContext} from "../../../context/AuthContext";
-import {Channel, MessagesResponse} from "globalid-messaging-web-sdk";
-
-import {client} from "../../../helpers/initMessengerSdk";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-
+import {AppContext} from '../../../context/AppContext'
+import {AuthContext} from "../../../context/AuthContext";
+import {IConversationsList} from "../../../interfaces/IConversationsList";
+import {Channel, MessagesResponse} from "globalid-messaging-web-sdk";
+import {client} from "../../../helpers/initMessengerSdk";
+import './ConversationListItem.css'
+import {MessageContext} from "../../../context/MessageContext";
 
 function ConversationListItem(props: IConversationsList) {
     const {activeChannelId, updateMessages, updateActiveChannelId, updateActiveChannelName} = useContext(AppContext);
     const {authToken} = useContext(AuthContext);
+    const {updateMessage} = useContext(MessageContext);
     const [conversationInfo, setConversationInfo] = useState<any>([]);
 
     const config = {
         headers: {'Authorization': "bearer " + authToken}
     };
 
-    const {id, image_url, title, description, participants}: Channel = props.data;
-    let participantName: any;
+    const {id, participants}: Channel = props.data;
 
     useEffect(() => {
-        participantName = getParticipants();
+        getParticipants();
     }, []);
 
     const getParticipants = () => {
         const filteredParticipants = participants.filter(function (id) {
-            return id != localStorage.getItem('gid_uuid');
+            return id !== localStorage.getItem('gid_uuid');
         });
 
-        const participantsInfo = axios.get(process.env.REACT_APP_BASE_URL + 'v1/identities/' + filteredParticipants[0], config).then(response => {
+        axios.get(process.env.REACT_APP_BASE_URL + 'v1/identities/' + filteredParticipants[0], config).then(response => {
             const data = {
                 title: response.data.display_name ? response.data.display_name : response.data.gid_name,
                 description: response.data.description,
@@ -50,9 +48,9 @@ function ConversationListItem(props: IConversationsList) {
         updateMessages(channelMessagesList.reverse());
     };
 
-    const handleChannelClick = async (e: React.MouseEvent) => {
+    const handleChannelClick = async () => {
         await getChannelMessages();
-        const conversationsItems = document.getElementsByClassName("conversation-list-item");
+        updateMessage("");
     };
 
     const useStyles = makeStyles({
@@ -65,8 +63,8 @@ function ConversationListItem(props: IConversationsList) {
     const classes = useStyles();
 
     return (
-        <div className={`conversation-list-item ${activeChannelId == id ? 'conversation-selected' : ''}`}
-             onClick={(e) => handleChannelClick(e)}>
+        <div className={`conversation-list-item ${activeChannelId === id ? 'conversation-selected' : ''}`}
+             onClick={() => handleChannelClick()}>
             <div className={`conversation-photo default-avatar ${conversationInfo.image_url != null ? classes.userPhoto : ""}`}>
                 <h3>
                     {conversationInfo.image_url == null && conversationInfo.title ? conversationInfo.title.charAt(0) : ""}
