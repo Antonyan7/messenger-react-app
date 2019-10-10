@@ -1,56 +1,44 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import './Compose.css';
 import {AppContext} from "../../../context/AppContext";
-import axios from "axios";
 import uuid from "uuid";
 import {MessageContext} from "../../../context/MessageContext";
 import {ICompose} from "../../../interfaces/ICompose";
-import {AuthContext} from "../../../context/AuthContext";
-import {
-    ChannelsResponse,
-    Config,
-    GlobalidMessagingClient,
-    init,
-    SendMessageResponse
-} from "globalid-messaging-web-sdk";
 import {client} from "../../../helpers/initMessengerSdk";
+import {MessageType} from "globalid-messaging-web-sdk";
 
 const Compose = (props: ICompose) => {
     const {rightItems} = props;
     const {message, updateMessage} = useContext(MessageContext);
 
-    const { activeChannelId } = useContext(AppContext);
+    const {activeChannelId} = useContext(AppContext);
 
-    const sendMessage  = async (messagePayload: any) => {
-        const message: SendMessageResponse = await client.message().sendMessage(messagePayload);
+    const sendMessage = async (messagePayload: any) => {
+        await client.message().sendMessage(messagePayload);
     };
-
 
     const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         updateMessage(event.target.value);
     };
 
     const publishMessage = async (e: React.KeyboardEvent) => {
-      const props = {
-        message: {
-          uuid: uuid(),
-          type: "TEXT",
-          content: JSON.stringify({text: message})
-        },
-        channels: [activeChannelId]
-      };
+        const props = {
+            message: {
+                uuid: uuid(),
+                type: MessageType.Text,
+                content: JSON.stringify({text: message})
+            },
+            channels: [activeChannelId]
+        };
 
-      if (e.key === 'Enter') {
-        if(message != "") {
-          updateMessage("");
-          await sendMessage(props);
+        if (e.key === 'Enter' && message !== "") {
+            updateMessage("");
+            await sendMessage(props);
         }
-      }
     };
 
     return (
         <div className="compose">
-
             <input
                 type="text"
                 className="compose-input"
