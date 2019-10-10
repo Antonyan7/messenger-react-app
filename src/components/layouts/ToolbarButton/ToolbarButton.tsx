@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import './ToolbarButton.css';
 import {AppContext} from "../../../context/AppContext";
 import axios from "axios";
@@ -6,24 +6,22 @@ import uuid from "uuid";
 import {MessageContext} from "../../../context/MessageContext";
 import {IToolbarButton} from "../../../interfaces/IToolbarButton";
 import {AuthContext} from "../../../context/AuthContext";
-import {ConversationListContext} from "../../../context/ConversationListContext";
-import createBrowserHistory from "history/createBrowserHistory"; createBrowserHistory();
+import createBrowserHistory from "history/createBrowserHistory";
+import {MessageType} from "globalid-messaging-web-sdk"; createBrowserHistory();
 
 const ToolbarButton = (props: IToolbarButton) => {
-    const history = createBrowserHistory();
     const {icon} = props;
     const {activeChannelId} = useContext(AppContext);
-    const {authToken, updateAuthToken, setIsAuthenticated} = useContext(AuthContext);
+    const {authToken} = useContext(AuthContext);
     const {addMessage} = useContext(AppContext);
     const {message, updateMessage} = useContext(MessageContext);
-    const {updateIsUsersListOpened} = useContext(ConversationListContext);
 
     const addChannelEventHandler = () => {
         if (icon === "ion-md-send") {
             const props = {
                 message: {
                     uuid: uuid(),
-                    type: "TEXT",
+                    type: MessageType.Text,
                     content: JSON.stringify({text: message})
                 },
                 channels: [activeChannelId]
