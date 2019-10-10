@@ -3,21 +3,16 @@ import Messenger from "../Messenger";
 import {Route, Switch} from "react-router";
 import Login from "../../auth/Login";
 import Auth from "../../auth/Auth";
-
 import PrivateHomeRoute from "../../../privateRoutes/PrivateHomeRoute";
 import PrivateLoginRoute from "../../../privateRoutes/PrivateLoginRoute";
 import {AuthContext} from "../../../context/AuthContext";
 import axios from "axios";
 import Preview from "../Preview";
-import Header from "../Header";
-import {client} from "../../../helpers/initMessengerSdk";
-import {AppContext} from "../../../context/AppContext";
 
 function Home() {
-    const {authToken,updateCurrentUser} = useContext(AuthContext);
-    const {addChannel} = useContext(AppContext);
+    const {authToken, updateCurrentUser} = useContext(AuthContext);
 
-    useEffect(() =>{
+    useEffect(() => {
         getCurrentUser();
     }, []);
 
@@ -27,15 +22,14 @@ function Home() {
         };
 
         axios.get(process.env.REACT_APP_BASE_URL + 'v1/identities/me', config).then(response => {
-            const user =  {
+            const user = {
                 id: response.data.gid_uuid,
                 photo: response.data.display_image_url,
                 name: response.data.display_name,
                 text: response.data.description
             };
-            console.log(user);
             updateCurrentUser(user);
-        }).catch(e => {
+        }).catch(() => {
             localStorage.clear();
         });
     };
@@ -50,6 +44,6 @@ function Home() {
             </Switch>
         </div>
     );
-};
+}
 
 export default Home;

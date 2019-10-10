@@ -1,6 +1,5 @@
 import {IAppContextMessage} from "./IAppContextMessage";
-import {IConversations} from "./IConversations";
-import {Channel, ChannelType, Message} from "globalid-messaging-web-sdk";
+import {Channel} from "globalid-messaging-web-sdk";
 
 export interface IAppContext {
     messages: Array<IAppContextMessage>,

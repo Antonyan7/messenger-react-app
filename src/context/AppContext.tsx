@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {IAppContext} from "../interfaces/IAppContext";
 import {IAppContextProvider} from "../interfaces/IAppContextProvider";
 import {IAppContextMessage} from "../interfaces/IAppContextMessage";
-import {IConversations} from "../interfaces/IConversations";
 import {Channel} from "globalid-messaging-web-sdk";
 
 export const AppContext = React.createContext<IAppContext>({} as IAppContext);
@@ -10,7 +9,7 @@ export const AppContext = React.createContext<IAppContext>({} as IAppContext);
 const AppContextProvider = (props: IAppContextProvider) => {
     const [messages, setMessages] = useState<Array<IAppContextMessage>>([]);
     const [channels, setChannels] = useState<Array<Channel>>([]);
-    const [filteredChannels, setFilteredChannels] = useState<Array<Channel>>( []);
+    const [filteredChannels, setFilteredChannels] = useState<Array<Channel>>([]);
     const [activeChannelId, setActiveChannelId] = useState<string>("0");
     const [activeChannelName, setActiveChannelName] = useState<string>("");
 
@@ -48,7 +47,21 @@ const AppContextProvider = (props: IAppContextProvider) => {
     };
 
     return (
-        <AppContext.Provider value={{messages, addMessage, updateMessages, removeMessageById, channels, addChannels, addChannel, activeChannelId, updateActiveChannelId, filteredChannels, updateFilteredChannels, activeChannelName, updateActiveChannelName}}>
+        <AppContext.Provider value={{
+            messages,
+            addMessage,
+            updateMessages,
+            removeMessageById,
+            channels,
+            addChannels,
+            addChannel,
+            activeChannelId,
+            updateActiveChannelId,
+            filteredChannels,
+            updateFilteredChannels,
+            activeChannelName,
+            updateActiveChannelName
+        }}>
             {props.children}
         </AppContext.Provider>
     )
