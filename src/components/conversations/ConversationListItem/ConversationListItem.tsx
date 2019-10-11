@@ -41,11 +41,11 @@ function ConversationListItem(props: IConversationsList) {
     };
 
     const getChannelMessages = async () => {
-        const messages: MessagesResponse = await client.message().getMessages(id, 1, 100);
+        const messages: MessagesResponse = await client.message().getMessages(id, 1, 200);
         const channelMessagesList = messages.data.messages;
-        updateActiveChannelId(id);
         updateActiveChannelName(conversationInfo.title);
         updateMessages(channelMessagesList.reverse());
+        updateActiveChannelId(id);
     };
 
     const handleChannelClick = async () => {
