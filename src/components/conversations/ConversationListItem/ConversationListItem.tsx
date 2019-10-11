@@ -50,7 +50,6 @@ function ConversationListItem(props: IConversationsList) {
 
     const handleChannelClick = async () => {
         await getChannelMessages();
-        updateMessage("");
     };
 
     const useStyles = makeStyles({

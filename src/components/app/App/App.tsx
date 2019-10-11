@@ -7,20 +7,18 @@ import ChannelListener from "../../channelListener";
 import MessageContextProvider from "../../../context/MessageContext";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <AuthContextProvider>
-                <AppContextProvider>
-                    <MessageContextProvider>
-                        <div className="App">
-                            <ChannelListener/>
-                            <Home/>
-                        </div>
-                    </MessageContextProvider>
-                </AppContextProvider>
-            </AuthContextProvider>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <AuthContextProvider>
+        <AppContextProvider>
+          <div className="App">
+            <ChannelListener/>
+            <Home/>
+          </div>
+        </AppContextProvider>
+      </AuthContextProvider>
+    </BrowserRouter>
+  );
 };
 
 export default App;

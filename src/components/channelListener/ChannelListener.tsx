@@ -10,8 +10,6 @@ function ChannelListener() {
     const {authToken} = useContext(AuthContext);
     const {addChannel, messages, addMessage, activeChannelId} = useContext(AppContext);
 
-
-    console.log(12);
     useEffect(function () {
       if (authToken) {
         try {

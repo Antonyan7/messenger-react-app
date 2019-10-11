@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './Compose.css';
 import {AppContext} from "../../../context/AppContext";
 import uuid from "uuid";
@@ -9,16 +9,31 @@ import {MessageType} from "globalid-messaging-web-sdk";
 
 const Compose = (props: ICompose) => {
     const {rightItems} = props;
-    const {message, updateMessage} = useContext(MessageContext);
+    const [message, setMessage] = useState<string>("");
+    const [currentMessages, setCurrentMessages] = useState<any>({});
 
     const {activeChannelId} = useContext(AppContext);
+
+
+    useEffect(() => {
+      // if(message !== "") {
+      //   let unsentMessage: any = {};
+      //   unsentMessage[activeChannelId] = message;
+      //   setCurrentMessages(Object.assign(currentMessages, unsentMessage));
+      //   console.log(currentMessages);
+      //   if(activeChannelId in currentMessages) {
+      //     setMessage(currentMessages[activeChannelId]);
+      //   }
+      // }
+      setMessage('');
+    },[activeChannelId]);
 
     const sendMessage = async (messagePayload: any) => {
         await client.message().sendMessage(messagePayload);
     };
 
     const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        updateMessage(event.target.value);
+      setMessage(event.target.value);
     };
 
     const publishMessage = async (e: React.KeyboardEvent) => {
@@ -32,7 +47,7 @@ const Compose = (props: ICompose) => {
         };
 
         if (e.key === 'Enter' && message !== "") {
-            updateMessage("");
+          setMessage("");
             await sendMessage(props);
         }
     };
