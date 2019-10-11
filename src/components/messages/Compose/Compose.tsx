@@ -36,7 +36,7 @@ const Compose = (props: ICompose) => {
       setMessage(event.target.value);
     };
 
-    const publishMessage = async (e: React.KeyboardEvent) => {
+    const publishMessage = async () => {
         const props = {
             message: {
                 uuid: uuid(),
@@ -46,9 +46,13 @@ const Compose = (props: ICompose) => {
             channels: [activeChannelId]
         };
 
+        setMessage("");
+        await sendMessage(props);
+    };
+
+    const handleEnterPress = (e: React.KeyboardEvent) => {
         if (e.key === 'Enter' && message !== "") {
-          setMessage("");
-            await sendMessage(props);
+            publishMessage();
         }
     };
 
@@ -60,10 +64,10 @@ const Compose = (props: ICompose) => {
                 placeholder="Type a message ..."
                 value={message}
                 onChange={handleMessageChange}
-                onKeyPress={publishMessage}
+                onKeyPress={handleEnterPress}
             />
 
-            <div className="compose-icons">
+            <div className="compose-icons" onClick={publishMessage}>
                 {
                     rightItems
                 }
