@@ -7,6 +7,7 @@ const Message = (props: IMessage) => {
     const {
         data,
         isMine,
+        startsSequence,
         endsSequence,
         showTimestamp,
     } = props;
@@ -16,6 +17,7 @@ const Message = (props: IMessage) => {
     return (
         <div className={[
             'message',
+            `${startsSequence ? 'start' : ''}`,
             `${isMine ? 'mine' : ''}`,
             `${endsSequence ? 'end' : ''}`,
         ].join(' ')}>
