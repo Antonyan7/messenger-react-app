@@ -45,6 +45,10 @@ function ConversationListItem(props: IConversationsList) {
         const channelMessagesList = messages.data.messages;
         updateActiveChannelName(conversationInfo.title);
         updateMessages(channelMessagesList.reverse());
+        let messagesScreen = document.getElementById('messagesScreen');
+        if(messagesScreen) {
+            messagesScreen.scrollTo(0, messagesScreen.scrollHeight);
+        }
         updateActiveChannelId(id);
     };
 

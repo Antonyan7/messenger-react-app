@@ -23,6 +23,10 @@ function ChannelListener() {
               if(notification.payload.channel_id == activeChannelId){
                 console.log(messages);
                 addMessage(notification.payload as IAppContextMessage);
+                  let messagesScreen = document.getElementById('messagesScreen');
+                  if(messagesScreen) {
+                      messagesScreen.scrollTo(0, messagesScreen.scrollHeight);
+                  }
               }
             }
           });

@@ -14,7 +14,7 @@ function ConversationList() {
 
     useEffect(() => {
         if (client) {
-            getChannels()
+            getChannels();
         }
     }, []);
 

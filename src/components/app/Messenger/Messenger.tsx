@@ -15,7 +15,7 @@ function Messenger() {
                         <ConversationList/>
                     </div>
 
-                    <div className="scrollable content">
+                    <div className="scrollable content" id="messagesScreen">
                         <MessageList/>
                     </div>
                 </div>
