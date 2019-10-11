@@ -42,7 +42,7 @@ const Compose = (props: ICompose) => {
             <input
                 type="text"
                 className="compose-input"
-                placeholder="Type a message, @name"
+                placeholder="Type a message ..."
                 value={message}
                 onChange={handleMessageChange}
                 onKeyPress={publishMessage}

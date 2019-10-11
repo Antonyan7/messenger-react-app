@@ -1,28 +1,16 @@
 import React, {useEffect, useContext} from 'react';
 import ConversationLocalSearch from '../ConversationSearch';
 import ConversationListItem from '../ConversationListItem';
-import Toolbar from '../../layouts/Toolbar';
-import ToolbarButton from '../../layouts/ToolbarButton';
-
-import './ConversationList.css';
-import {AppContext} from "../../../context/AppContext";
-import {IConversations} from "../../../interfaces/IConversations";
-import {AuthContext} from "../../../context/AuthContext";
-import ConversationListContextProvider from "../../../context/ConversationListContext";
 import UsersListDialog from "../Dialog/UsersListDialog";
-import {Channel, ChannelsResponse, Config, GlobalidMessagingClient, init} from "globalid-messaging-web-sdk";
-
+import {AppContext} from "../../../context/AppContext";
+import {Channel, ChannelsResponse} from "globalid-messaging-web-sdk";
 import {client} from "../../../helpers/initMessengerSdk"
-import SettingsIcon from "../../../assets/icons/SettingsIcon";
-import PlusCircleIcon from "../../../assets/icons/PlusCircleIcon";
-import axios from "axios";
+import './ConversationList.css';
 
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);
     const {filteredChannels} = useContext(AppContext);
     const {addChannels} = useContext(AppContext);
-    const {authToken} = useContext(AuthContext);
-
 
     useEffect(() => {
         if (client) {

@@ -3,13 +3,11 @@ import './ConversationLocalSearch.css';
 import axios from "axios";
 import {AuthContext} from "../../../context/AuthContext";
 import {ConversationListContext} from "../../../context/ConversationListContext";
-import {client} from "../../../helpers/initMessengerSdk";
 
 const ConversationGlobalSearch = () => {
-
     const [searchQuery, setSearchQuery] = useState<string>("");
     const {authToken} = useContext(AuthContext);
-    const {isUsersListOpened, updateSearchedChannels, updateIsSearching} = useContext(ConversationListContext);
+    const {updateSearchedChannels, updateIsSearching} = useContext(ConversationListContext);
 
     const config = {
         headers: {'Authorization': "bearer " + authToken}

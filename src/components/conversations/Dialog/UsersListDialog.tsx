@@ -12,10 +12,9 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import {AppContext} from "../../../context/AppContext";
-import {IConversations} from "../../../interfaces/IConversations";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ConversationGlobalSearch from "../ConversationSearch/ConversationGlobalSearch";
-import {Channel, ChannelPayload, ChannelsResponse, ChannelType} from "globalid-messaging-web-sdk";
+import {Channel, ChannelPayload, ChannelType} from "globalid-messaging-web-sdk";
 import {client} from "../../../helpers/initMessengerSdk";
 import "./UsersListDialog.css";
 
@@ -67,8 +66,8 @@ export default function UsersListDialog() {
         updateIsUsersListOpened(false);
     };
 
-    const handleListItemClick = (channel: Channel) => {
-        addConversation(channel)
+    const handleListItemClick = async (channel: Channel) => {
+        await addConversation(channel)
     };
 
     const getChannelsList = () => {
@@ -86,12 +85,11 @@ export default function UsersListDialog() {
     };
 
     const addConversation = async (channelInfo: any) => {
-
         const existingChannels = channels.filter(function (channel) {
             return channel.participants.includes(channelInfo.id)
         });
 
-        if(existingChannels.length == 0) {
+        if (existingChannels.length === 0) {
             const channelPayload: ChannelPayload = {
                 uuid: uuid(),
                 type: ChannelType.Personal,
@@ -101,7 +99,7 @@ export default function UsersListDialog() {
                 participants: [channelInfo.id]
             };
 
-            const channel: Channel = await client.channel().createChannel(channelPayload);
+            await client.channel().createChannel(channelPayload);
         }
         updateIsUsersListOpened(false);
     };
@@ -114,18 +112,15 @@ export default function UsersListDialog() {
                 scroll={'paper'}
                 aria-labelledby="scroll-dialog-title"
                 fullWidth={true}
-                classes={{ paper: classes.dialogPaper }}>
+                classes={{paper: classes.dialogPaper}}>
                 <ConversationGlobalSearch/>
 
                 <DialogContent dividers={true} className="dialog-wrapper">
-                    {/*<CircularProgress  className={[*/}
-                    {/*    `${isSearching ? classes.showComponent : classes.hideComponent}`,*/}
-                    {/*].join('')} />*/}
-
-                    {(searchedChannels.length != 0 ? searchedChannels : identities).map((channel: any) => (
+                    {(searchedChannels.length !== 0 ? searchedChannels : identities).map((channel: any) => (
                         <ListItem button onClick={() => handleListItemClick(channel)} key={channel.id}>
                             <ListItemAvatar>
-                                <Avatar src={channel.photo} className={classes.orangeAvatar}>{channel.name.charAt(0)}</Avatar>
+                                <Avatar src={channel.photo}
+                                        className={classes.orangeAvatar}>{channel.name.charAt(0)}</Avatar>
                             </ListItemAvatar>
                             <ListItemText className={classes.channelText} primary={channel.name}/>
                         </ListItem>

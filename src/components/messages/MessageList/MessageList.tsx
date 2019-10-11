@@ -1,20 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import Compose from '../Compose';
-import Toolbar from '../../layouts/Toolbar';
-import ToolbarButton from '../../layouts/ToolbarButton';
 import Message from '../Message';
 import moment from 'moment';
 import {AppContext} from '../../../context/AppContext';
-
-import './MessageList.css';
-import MessageContextProvider from "../../../context/MessageContext";
 import {AuthContext} from "../../../context/AuthContext";
-import {Link} from "react-router-dom";
 import SendIcon from "../../../assets/icons/SendIcon";
-import LogoutButton from "../../auth/Logout";
+import './MessageList.css';
 
 function MessageList() {
-    const {messages,activeChannelName} = useContext(AppContext);
+    const {messages, activeChannelName} = useContext(AppContext);
     const {currentUser} = useContext(AuthContext);
 
     const renderMessages = () => {
@@ -69,7 +63,6 @@ function MessageList() {
                 />
             );
 
-            // Proceed to the next message.
             i += 1;
         }
         return messagesList;
@@ -79,7 +72,7 @@ function MessageList() {
         <div className="message-list">
             <div className="message-list-container">
                 <div className="messages">
-                  {activeChannelName ? renderMessages() : ""}
+                    {activeChannelName ? renderMessages() : ""}
                 </div>
             </div>
 
