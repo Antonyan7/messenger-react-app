@@ -1,0 +1,53 @@
+.conversation-list-item {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+
+.conversation-list-item:hover {
+  background: #eeeef1;
+  cursor: pointer;
+}
+
+.conversation-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.conversation-photo h3 {
+  margin: 0;
+}
+
+.conversation-title {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin: unset;
+  text-overflow: ellipsis;
+}
+
+.conversation-snippet {
+  font-size: 14px;
+  color: #888;
+  margin: unset;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 90%;
+}
+
+.default-avatar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 6px;
+  color: #fff;
+  background-color: #0D2460;
+}
+
+.conversation-info{
+  max-width: 75%;
+  width: 100%;
+}

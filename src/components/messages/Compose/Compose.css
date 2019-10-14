@@ -1,0 +1,43 @@
+.compose {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-top: 1px solid #eeeef1;
+  position: fixed;
+  width: calc(100% - 350px);
+  bottom: 0;
+  border-top: 1px solid #e4e4e4;
+}
+.compose-icons{
+  padding-right: 20px;
+}
+@supports (backdrop-filter: blur(20px)) {
+  .compose {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+  }
+}
+
+.compose-input {
+  padding-left: 20px;
+  flex: 1;
+  border: none;
+  font-size: 14px;
+  height: 40px;
+  background: none;
+}
+
+.compose-input::placeholder {
+  opacity: 0.3;
+}
+
+.compose .toolbar-button {
+  color: #bbbbbf;
+  margin-left: 15px;
+}
+
+.compose .toolbar-button:hover {
+  color: #99999c;
+}
