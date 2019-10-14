@@ -1,0 +1,25 @@
+image: registry.gitlab.com/globalid/infrastructure/docker-awscli:latest
+
+variables:
+  DEV_S3_BUCKET: gid-dev-web-messaging
+  DEV_CLOUDFRONT_ID: NA
+  STAGING_S3_BUCKET: gid-staging-web-messaging
+  STAGING_CLOUDFRONT_ID: NA
+  PROD_S3_BUCKET: gid-prod-web-messaging
+  PROD_CLOUDFRONT_ID: NA
+
+stages:
+  - deploy
+
+deploy-stg:
+  stage: deploy
+  script:
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_TMP
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_TMP
+    - aws s3 sync ./public/ s3://${STAGING_S3_BUCKET} --delete
+    - aws configure set preview.cloudfront true
+      #- aws cloudfront create-invalidation --distribution-id ${STAGING_CLOUDFRONT_ID} --paths "/*"
+      #- aws configure set preview.cloudfront false
+  only:
+    - master
+
