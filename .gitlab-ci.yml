@@ -22,4 +22,5 @@ deploy-stg:
       #- aws configure set preview.cloudfront false
   only:
     - master
-
+    - /^test-[a-zA-Z0-9\-]+/
+    - /^feat-[a-zA-Z0-9\-]+/
