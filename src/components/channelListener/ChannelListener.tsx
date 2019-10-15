@@ -7,13 +7,14 @@ import {IAppContextMessage} from "../../interfaces/IAppContextMessage";
 import {MessageContext} from "../../context/MessageContext";
 
 function ChannelListener() {
-    const {authToken} = useContext(AuthContext);
-    const {addChannel, messages, addMessage, activeChannelId} = useContext(AppContext);
+    const {authToken,currentUser} = useContext(AuthContext);
+    const {addChannel, addMessage, activeChannelId} = useContext(AppContext);
 
     useEffect(function () {
       if (authToken) {
         try {
           const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
+            console.log(notification);
             if (notification.action === NotificationAction.NewChannelCreated) {
               addChannel(notification.payload as Channel);
             }
@@ -21,8 +22,11 @@ function ChannelListener() {
               console.log(notification.payload);
               // @ts-ignore
               if(notification.payload.channel_id == activeChannelId){
-                console.log(messages);
-                addMessage(notification.payload as IAppContextMessage);
+                  // @ts-ignore
+                  if(currentUser.id != notification.payload.author) {
+                    addMessage(notification.payload as IAppContextMessage);
+                  }
+
                   let messagesScreen = document.getElementById('messagesScreen');
                   if(messagesScreen) {
                       messagesScreen.scrollTo(0, messagesScreen.scrollHeight);

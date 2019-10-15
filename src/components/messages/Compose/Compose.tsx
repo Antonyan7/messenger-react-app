@@ -6,14 +6,16 @@ import {MessageContext} from "../../../context/MessageContext";
 import {ICompose} from "../../../interfaces/ICompose";
 import {client} from "../../../helpers/initMessengerSdk";
 import {MessageType} from "globalid-messaging-web-sdk";
+import {IAppContextMessage} from "../../../interfaces/IAppContextMessage";
+import {AuthContext} from "../../../context/AuthContext";
 
 const Compose = (props: ICompose) => {
     const {rightItems} = props;
     const [message, setMessage] = useState<string>("");
     const [currentMessages, setCurrentMessages] = useState<any>({});
 
-    const {activeChannelId} = useContext(AppContext);
-
+    const {activeChannelId,addMessage} = useContext(AppContext);
+    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
       // if(message !== "") {
@@ -46,7 +48,20 @@ const Compose = (props: ICompose) => {
             channels: [activeChannelId]
         };
 
+        const lastMessage = {
+          id: uuid(),
+          author: currentUser.id,
+          content: props.message.content
+        };
+
         setMessage("");
+        addMessage(lastMessage as IAppContextMessage);
+
+        let messagesScreen = document.getElementById('messagesScreen');
+        if(messagesScreen) {
+          messagesScreen.scrollTo(0, messagesScreen.scrollHeight);
+        }
+
         await sendMessage(props);
     };
 
