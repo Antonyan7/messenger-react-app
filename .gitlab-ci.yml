@@ -31,6 +31,7 @@ setup:
     - globalid
   script:
     - apk update && apk upgrade
+    - npm install
     - npm init react-app app
 
 build_dev:
