@@ -4,7 +4,6 @@ import Home from "../Home";
 import AppContextProvider from "../../../context/AppContext";
 import {BrowserRouter} from "react-router-dom";
 import ChannelListener from "../../channelListener";
-import MessageContextProvider from "../../../context/MessageContext";
 
 function App() {
   return (
@@ -19,7 +18,7 @@ function App() {
       </AuthContextProvider>
     </BrowserRouter>
   );
-};
+}
 
 export default App;
 

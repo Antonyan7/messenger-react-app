@@ -4,7 +4,6 @@ import {AppContext} from "../../context/AppContext";
 import {client} from "../../helpers/initMessengerSdk";
 import {Channel, NotificationAction, ServiceNotification} from "globalid-messaging-web-sdk";
 import {IAppContextMessage} from "../../interfaces/IAppContextMessage";
-import {MessageContext} from "../../context/MessageContext";
 
 function ChannelListener() {
     const {authToken,currentUser} = useContext(AuthContext);
