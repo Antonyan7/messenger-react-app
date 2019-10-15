@@ -30,7 +30,7 @@ setup:
   tags:
     - globalid
   script:
-    - apk update && apk upgrade
+    - apk update && apk upgrade && apk add --update nodejs npm
     - npm install
     - npm init react-app app
 
