@@ -2,7 +2,7 @@ image: registry.gitlab.com/globalid/infrastructure/docker-awscli:latest
 
 variables:
   DEV_S3_BUCKET: gid-dev-web-messaging
-  DEV_CLOUDFRONT_ID: 
+  DEV_CLOUDFRONT_ID: asdasdas
   STAGING_S3_BUCKET: gid-staging-web-messaging
   STAGING_CLOUDFRONT_ID: asdasd
   PROD_S3_BUCKET: gid-prod-web-messaging
