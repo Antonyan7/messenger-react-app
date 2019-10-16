@@ -1,4 +1,4 @@
-image: registry.gitlab.com/globalid/infrastructure/docker-awscli:latest
+image: globalid/node-alpine:latest
 
 variables:
   DEV_S3_BUCKET: gid-dev-web-messaging
@@ -8,7 +8,7 @@ variables:
   PROD_S3_BUCKET: gid-prod-web-messaging
   PROD_CLOUDFRONT_ID: asdasd
 
-  cache:
+cache:
   untracked: false
   key: "$CI_COMMIT_REF_NAME"
   paths:
