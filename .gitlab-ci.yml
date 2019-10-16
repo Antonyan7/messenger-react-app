@@ -2,7 +2,7 @@ image: registry.gitlab.com/globalid/infrastructure/docker-awscli:latest
 
 variables:
   DEV_S3_BUCKET: gid-dev-web-messaging
-  DEV_CLOUDFRONT_ID: asdasdas
+  DEV_CLOUDFRONT_ID: E12NUCXLK5ITLR
   STAGING_S3_BUCKET: gid-staging-web-messaging
   STAGING_CLOUDFRONT_ID: asdasd
   PROD_S3_BUCKET: gid-prod-web-messaging
@@ -42,7 +42,7 @@ build_dev:
     SKIP_PREFLIGHT_CHECK: "true"
     NODE_ENV: "development"
     REACT_APP_AUTH_URL: $DEV_REACT_APP_AUTH_URL
-    REACT_APP_BASE_URL: "https://staging-api.gidstaging.net"
+    REACT_APP_BASE_URL: $DEV_REACT_APP_BASE_URL
   script:
     - cd app
     - npm run build
