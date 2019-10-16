@@ -25,11 +25,6 @@ function ChannelListener() {
                   if(currentUser.id != notification.payload.author) {
                     addMessage(notification.payload as IAppContextMessage);
                   }
-
-                  let messagesScreen = document.getElementById('messagesScreen');
-                  if(messagesScreen) {
-                      messagesScreen.scrollTo(0, messagesScreen.scrollHeight);
-                  }
               }
             }
           });
