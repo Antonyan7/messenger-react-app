@@ -8,30 +8,19 @@ variables:
   PROD_S3_BUCKET: gid-prod-web-messaging
   PROD_CLOUDFRONT_ID: asdasd
 
-  #cache:
-  #untracked: false
-  #key: "$CI_COMMIT_REF_NAME"
-  #paths:
-  #- node_modules/
-  #- .npmrc
+  cache:
+  untracked: false
+  key: "$CI_COMMIT_REF_NAME"
+  paths:
+  - app/build/
 
 before_script:
   - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}">.npmrc
 
 stages:
-  - setup
   - build
   - deploy
   - promote
-
-setup:
-  stage: setup
-  tags:
-    - globalid
-  script:
-    - apk update && apk upgrade && apk add --update nodejs npm
-    - npm install
-    - npm init react-app app
 
 build_dev:
   stage: build
@@ -43,6 +32,9 @@ build_dev:
     REACT_APP_AUTH_URL: $DEV_REACT_APP_AUTH_URL
     REACT_APP_BASE_URL: $DEV_REACT_APP_BASE_URL
   script:
+    - apk update && apk upgrade && apk add --update nodejs npm
+    - npm install
+    - npm init react-app app
     - cd app
     - npm run build
 
