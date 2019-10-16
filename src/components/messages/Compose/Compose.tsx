@@ -2,7 +2,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import './Compose.css';
 import {AppContext} from "../../../context/AppContext";
 import uuid from "uuid";
-import {MessageContext} from "../../../context/MessageContext";
 import {ICompose} from "../../../interfaces/ICompose";
 import {client} from "../../../helpers/initMessengerSdk";
 import {MessageType} from "globalid-messaging-web-sdk";
@@ -12,7 +11,6 @@ import {AuthContext} from "../../../context/AuthContext";
 const Compose = (props: ICompose) => {
   const {rightItems} = props;
   const [message, setMessage] = useState<string>("");
-  const [currentMessages, setCurrentMessages] = useState<any>({});
 
   const {activeChannelId, addMessage} = useContext(AppContext);
   const {currentUser} = useContext(AuthContext);
@@ -51,9 +49,9 @@ const Compose = (props: ICompose) => {
     await sendMessage(props);
   };
 
-  const handleEnterPress = (e: React.KeyboardEvent) => {
+  const handleEnterPress = async (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && message !== "") {
-      publishMessage();
+      await publishMessage();
     }
   };
 
