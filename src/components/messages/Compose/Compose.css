@@ -20,16 +20,17 @@
   }
 }
 
-.compose-input {
+.compose-field {
   padding-left: 20px;
   flex: 1;
   border: none;
   font-size: 14px;
   height: 40px;
   background: none;
+  resize: none;
 }
 
-.compose-input::placeholder {
+.compose-field::placeholder {
   opacity: 0.3;
 }
 

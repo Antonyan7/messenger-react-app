@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Compose from '../Compose';
 import Message from '../Message';
 import moment from 'moment';
@@ -10,6 +10,13 @@ import './MessageList.css';
 function MessageList() {
     const {messages, activeChannelName} = useContext(AppContext);
     const {currentUser} = useContext(AuthContext);
+
+    useEffect( () => {
+      const messageContainer = document.getElementById("messagesList");
+      if (messageContainer) {
+        messageContainer.scrollIntoView(false)
+      }
+    },[messages]);
 
     const renderMessages = () => {
         let i = 0;
@@ -69,8 +76,8 @@ function MessageList() {
     };
 
     return (
-        <div className="message-list">
-            <div className="message-list-container">
+        <div className="message-list scrollable" id="messagesScreen">
+            <div className="message-list-container" id="messagesList">
                 <div className="messages">
                     {activeChannelName ? renderMessages() : ""}
                 </div>

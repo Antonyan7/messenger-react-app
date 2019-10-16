@@ -10,85 +10,70 @@ import {IAppContextMessage} from "../../../interfaces/IAppContextMessage";
 import {AuthContext} from "../../../context/AuthContext";
 
 const Compose = (props: ICompose) => {
-    const {rightItems} = props;
-    const [message, setMessage] = useState<string>("");
-    const [currentMessages, setCurrentMessages] = useState<any>({});
+  const {rightItems} = props;
+  const [message, setMessage] = useState<string>("");
+  const [currentMessages, setCurrentMessages] = useState<any>({});
 
-    const {activeChannelId,addMessage} = useContext(AppContext);
-    const {currentUser} = useContext(AuthContext);
+  const {activeChannelId, addMessage} = useContext(AppContext);
+  const {currentUser} = useContext(AuthContext);
 
-    useEffect(() => {
-      // if(message !== "") {
-      //   let unsentMessage: any = {};
-      //   unsentMessage[activeChannelId] = message;
-      //   setCurrentMessages(Object.assign(currentMessages, unsentMessage));
-      //   console.log(currentMessages);
-      //   if(activeChannelId in currentMessages) {
-      //     setMessage(currentMessages[activeChannelId]);
-      //   }
-      // }
-      setMessage('');
-    },[activeChannelId]);
+  useEffect(() => {
+    setMessage('');
+  }, [activeChannelId]);
 
-    const sendMessage = async (messagePayload: any) => {
-        await client.message().sendMessage(messagePayload);
+  const sendMessage = async (messagePayload: any) => {
+    await client.message().sendMessage(messagePayload);
+  };
+
+  const handleMessageChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(event.target.value);
+  };
+
+  const publishMessage = async () => {
+    const props = {
+      message: {
+        uuid: uuid(),
+        type: MessageType.Text,
+        content: JSON.stringify({text: message})
+      },
+      channels: [activeChannelId]
     };
 
-    const handleMessageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setMessage(event.target.value);
+    const lastMessage = {
+      id: uuid(),
+      author: currentUser.id,
+      content: props.message.content
     };
 
-    const publishMessage = async () => {
-        const props = {
-            message: {
-                uuid: uuid(),
-                type: MessageType.Text,
-                content: JSON.stringify({text: message})
-            },
-            channels: [activeChannelId]
-        };
+    setMessage("");
+    addMessage(lastMessage as IAppContextMessage);
 
-        const lastMessage = {
-          id: uuid(),
-          author: currentUser.id,
-          content: props.message.content
-        };
+    await sendMessage(props);
+  };
 
-        setMessage("");
-        addMessage(lastMessage as IAppContextMessage);
+  const handleEnterPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && message !== "") {
+      publishMessage();
+    }
+  };
 
-        let messagesScreen = document.getElementById('messagesScreen');
-        if(messagesScreen) {
-          messagesScreen.scrollTo(0, messagesScreen.scrollHeight);
-        }
-
-        await sendMessage(props);
-    };
-
-    const handleEnterPress = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter' && message !== "") {
-            publishMessage();
-        }
-    };
-
-    return (
-        <div className="compose">
-            <input
-                type="text"
-                className="compose-input"
-                placeholder="Type a message ..."
-                value={message}
-                onChange={handleMessageChange}
-                onKeyPress={handleEnterPress}
+  return (
+    <div className="compose">
+            <textarea
+              className="compose-field"
+              placeholder="Type a message ..."
+              value={message}
+              onChange={(e) => handleMessageChange(e)}
+              onKeyPress={handleEnterPress}
             />
 
-            <div className="compose-icons" onClick={publishMessage}>
-                {
-                    rightItems
-                }
-            </div>
-        </div>
-    );
+      <div className="compose-icons" onClick={publishMessage}>
+        {
+          rightItems
+        }
+      </div>
+    </div>
+  );
 };
 
 export default Compose

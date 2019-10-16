@@ -14,7 +14,7 @@ const AppContextProvider = (props: IAppContextProvider) => {
     const [activeChannelName, setActiveChannelName] = useState<string>("");
 
     const addMessage = (singleMessage: IAppContextMessage) => {
-        setMessages([...messages, singleMessage])
+        setMessages([...messages, singleMessage]);
     };
 
     const updateMessages = (messagesList: Array<IAppContextMessage>) => {
