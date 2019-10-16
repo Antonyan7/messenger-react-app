@@ -14,14 +14,13 @@ function Messenger() {
                     <div className="scrollable sidebar">
                         <ConversationList/>
                     </div>
-
-                    <div className="content">
+                    <div className="scrollable content" id="messagesScreen">
                         <MessageList/>
                     </div>
                 </div>
             </ConversationListContextProvider>
         </div>
     );
-};
+}
 
 export default Messenger;
