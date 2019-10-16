@@ -50,7 +50,8 @@ const Compose = (props: ICompose) => {
   };
 
   const handleEnterPress = async (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && message !== "") {
+    if (e.key === 'Enter' && message.trim().length) {
+      e.preventDefault();
       await publishMessage();
     }
   };
@@ -61,6 +62,7 @@ const Compose = (props: ICompose) => {
               className="compose-field"
               placeholder="Type a message ..."
               value={message}
+              disabled={activeChannelId == "0"}
               onChange={(e) => handleMessageChange(e)}
               onKeyPress={handleEnterPress}
             />
