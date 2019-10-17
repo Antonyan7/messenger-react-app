@@ -62,7 +62,7 @@ const Compose = (props: ICompose) => {
               className="compose-field"
               placeholder="Type a message ..."
               value={message}
-              disabled={activeChannelId == "0"}
+              disabled={activeChannelId === "0"}
               onChange={(e) => handleMessageChange(e)}
               onKeyPress={handleEnterPress}
             />

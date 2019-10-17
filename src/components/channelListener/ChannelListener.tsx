@@ -20,9 +20,9 @@ function ChannelListener() {
             if (notification.action === NotificationAction.NewMessage) {
               console.log(notification.payload);
               // @ts-ignore
-              if(notification.payload.channel_id == activeChannelId){
+              if(notification.payload.channel_id === activeChannelId){
                   // @ts-ignore
-                  if(currentUser.id != notification.payload.author) {
+                  if(currentUser.id !== notification.payload.author) {
                     addMessage(notification.payload as IAppContextMessage);
                   }
               }
