@@ -33,9 +33,8 @@ build_dev:
     REACT_APP_BASE_URL: $DEV_REACT_APP_BASE_URL
   script:
     - apk update && apk upgrade && apk add --update nodejs npm
-    - npm install
-    - npm init react-app app
     - cd app
+    - npm install
     - npm run build
 
 deploy_dev:
