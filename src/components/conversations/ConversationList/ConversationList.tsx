@@ -12,38 +12,39 @@ function ConversationList() {
     const {filteredChannels} = useContext(AppContext);
     const {addChannels} = useContext(AppContext);
 
+  const getChannels = async () => {
+    const channels: ChannelsResponse = await client.channel().getChannels(1, 20);
+
+    const channelsList = channels.data.channels.map((result: Channel) => {
+      return {
+        alias: result.alias,
+        created_at: result.created_at,
+        created_by: result.created_by,
+        deleted: result.deleted,
+        description: result.description,
+        exposed: result.exposed,
+        id: result.id,
+        image_url: result.image_url,
+        message: result.message,
+        participants: result.participants,
+        title: result.title,
+        type: result.type,
+        unread_count: result.unread_count,
+        updated_at: result.updated_at,
+        updated_by: result.updated_by,
+        uuid: result.uuid
+      };
+    });
+    addChannels(channelsList);
+    updateFilteredChannels(channelsList);
+  };
+
     useEffect(() => {
         if (client) {
             getChannels();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const getChannels = async () => {
-        const channels: ChannelsResponse = await client.channel().getChannels(1, 20);
-
-        const channelsList = channels.data.channels.map((result: Channel) => {
-            return {
-                alias: result.alias,
-                created_at: result.created_at,
-                created_by: result.created_by,
-                deleted: result.deleted,
-                description: result.description,
-                exposed: result.exposed,
-                id: result.id,
-                image_url: result.image_url,
-                message: result.message,
-                participants: result.participants,
-                title: result.title,
-                type: result.type,
-                unread_count: result.unread_count,
-                updated_at: result.updated_at,
-                updated_by: result.updated_by,
-                uuid: result.uuid
-            };
-        });
-        addChannels(channelsList);
-        updateFilteredChannels(channelsList);
-    };
 
     return (
         <div className="conversation-list">

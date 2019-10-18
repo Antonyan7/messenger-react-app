@@ -15,7 +15,6 @@ const AppContextProvider = (props: IAppContextProvider) => {
 
     const addMessage = (singleMessage: IAppContextMessage) => {
         setMessages([...messages, singleMessage])
-      console.log(messages);
     };
 
     const updateMessages = (messagesList: Array<IAppContextMessage>) => {

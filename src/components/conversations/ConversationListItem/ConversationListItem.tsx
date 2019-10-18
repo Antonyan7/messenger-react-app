@@ -7,12 +7,10 @@ import {IConversationsList} from "../../../interfaces/IConversationsList";
 import {Channel, MessagesResponse} from "globalid-messaging-web-sdk";
 import {client} from "../../../helpers/initMessengerSdk";
 import './ConversationListItem.css'
-import {MessageContext} from "../../../context/MessageContext";
 
 function ConversationListItem(props: IConversationsList) {
     const {activeChannelId, updateMessages, updateActiveChannelId, updateActiveChannelName} = useContext(AppContext);
     const {authToken} = useContext(AuthContext);
-    const {updateMessage} = useContext(MessageContext);
     const [conversationInfo, setConversationInfo] = useState<any>([]);
 
     const config = {
@@ -21,24 +19,25 @@ function ConversationListItem(props: IConversationsList) {
 
     const {id, participants}: Channel = props.data;
 
+    const getParticipants = () => {
+      const filteredParticipants = participants.filter(function (id) {
+        return id !== localStorage.getItem('gid_uuid');
+      });
+
+      axios.get(process.env.REACT_APP_BASE_URL + 'v1/identities/' + filteredParticipants[0], config).then(response => {
+        const data = {
+          title: response.data.display_name ? response.data.display_name : response.data.gid_name,
+          description: response.data.description,
+          image_url: response.data.display_image_url
+        };
+        setConversationInfo(data);
+      });
+    };
+
     useEffect(() => {
         getParticipants();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const getParticipants = () => {
-        const filteredParticipants = participants.filter(function (id) {
-            return id !== localStorage.getItem('gid_uuid');
-        });
-
-        axios.get(process.env.REACT_APP_BASE_URL + 'v1/identities/' + filteredParticipants[0], config).then(response => {
-            const data = {
-                title: response.data.display_name ? response.data.display_name : response.data.gid_name,
-                description: response.data.description,
-                image_url: response.data.display_image_url
-            };
-            setConversationInfo(data);
-        });
-    };
 
     const getChannelMessages = async () => {
         const messages: MessagesResponse = await client.message().getMessages(id, 1, 200);

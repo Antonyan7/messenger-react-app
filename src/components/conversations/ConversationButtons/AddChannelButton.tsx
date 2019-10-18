@@ -17,6 +17,6 @@ function AddChannelButton() {
             </div>
         </div>
     );
-};
+}
 
 export default AddChannelButton;

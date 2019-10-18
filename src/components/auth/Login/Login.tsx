@@ -16,6 +16,6 @@ function Login() {
             </iframe>
         </div>
     );
-};
+}
 
 export default Login;

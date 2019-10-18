@@ -26,6 +26,6 @@ function LogoutButton() {
             </div>
         </div>
     );
-};
+}
 
 export default LogoutButton;

@@ -61,4 +61,5 @@
   border-bottom-left-radius: 20px;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
+  word-break: break-all;
 }

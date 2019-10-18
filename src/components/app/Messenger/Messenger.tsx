@@ -14,7 +14,6 @@ function Messenger() {
                     <div className="scrollable sidebar">
                         <ConversationList/>
                     </div>
-
                     <div className="scrollable content" id="messagesScreen">
                         <MessageList/>
                     </div>
@@ -22,6 +21,6 @@ function Messenger() {
             </ConversationListContextProvider>
         </div>
     );
-};
+}
 
 export default Messenger;
