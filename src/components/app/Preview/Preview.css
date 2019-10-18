@@ -20,7 +20,7 @@
 .preview-login-link {
     height: 100px;
     width: 250px;
-    background: url("../../../assets/globalId.svg") center no-repeat #FFFFFF;
+    background: url("../../../assets/globalId.svg") center no-repeat;
     background-size: 250px;
     cursor: pointer;
     outline: none;
