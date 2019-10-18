@@ -36,6 +36,7 @@ function ConversationListItem(props: IConversationsList) {
 
     useEffect(() => {
         getParticipants();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const getChannelMessages = async () => {

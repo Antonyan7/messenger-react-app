@@ -15,6 +15,7 @@ const AuthContextProvider = (props: IAuthContextProvider) => {
         setAuthToken(token)
     };
     const updateCurrentUser = (user: any) => {
+      console.log(user);
         setCurrentUser(user)
     };
 

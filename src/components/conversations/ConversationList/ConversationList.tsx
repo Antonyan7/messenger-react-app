@@ -43,6 +43,7 @@ function ConversationList() {
         if (client) {
             getChannels();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

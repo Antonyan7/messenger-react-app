@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import Messenger from "../Messenger";
 import {Route, Switch} from "react-router";
 import Login from "../../auth/Login";
@@ -33,6 +33,7 @@ function Home() {
 
   useEffect(() => {
     getCurrentUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

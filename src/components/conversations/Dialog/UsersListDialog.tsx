@@ -55,6 +55,7 @@ export default function UsersListDialog() {
 
     useEffect(() => {
         getChannelsList();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const config = {
