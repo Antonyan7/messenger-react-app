@@ -23,7 +23,8 @@ function Home() {
         id: response.data.gid_uuid,
         photo: response.data.display_image_url,
         name: response.data.display_name,
-        text: response.data.description
+        text: response.data.description,
+        gidName: response.data.gid_name
       };
       updateCurrentUser(user);
     }).catch(() => {

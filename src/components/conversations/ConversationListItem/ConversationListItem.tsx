@@ -65,7 +65,7 @@ function ConversationListItem(props: IConversationsList) {
     const classes = useStyles();
 
     return (
-        <div className={`conversation-list-item ${activeChannelId === id ? 'conversation-selected' : ''}`}
+        <div className={`conversation-list-item ${activeChannelId === id ? 'conversation-selected' : ''}`} id={`conversation-${id}`}
              onClick={() => handleChannelClick()}>
             <div className={`conversation-photo default-avatar ${conversationInfo.image_url != null ? classes.userPhoto : ""}`}>
                 <h3>

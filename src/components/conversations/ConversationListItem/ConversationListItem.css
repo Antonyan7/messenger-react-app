@@ -22,7 +22,7 @@
 
 .conversation-title {
   font-size: 14px;
-  font-weight: bold;
+  font-weight: normal;
   text-transform: capitalize;
   margin: unset;
   text-overflow: ellipsis;
@@ -50,4 +50,9 @@
 .conversation-info{
   max-width: 75%;
   width: 100%;
+}
+
+.conversation-highlight .conversation-info h1,.conversation-highlight .conversation-info p {
+  font-weight: 900;
+  color: #000;
 }
