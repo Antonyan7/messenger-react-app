@@ -77,6 +77,7 @@ function ConversationListItem(props: IConversationsList) {
                 <h1 className="conversation-title">{conversationInfo.title}</h1>
                 <p className="conversation-snippet">{conversationInfo.description}</p>
             </div>
+            <div className="conversation-active-dot"></div>
         </div>
     )
 }

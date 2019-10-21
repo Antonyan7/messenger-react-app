@@ -6,6 +6,19 @@
   background: #eeeef1;
 }
 
+.conversation-selected .conversation-active-dot{
+  opacity: 0;
+}
+.conversation-selected .conversation-info h1 {
+  font-weight: bold;
+  color: #2D2E30;
+}
+
+.conversation-selected .conversation-info p {
+  font-weight: normal;
+  color: #7E7E80;
+}
+
 .conversation-list .toolbar{
   height: 50px;
   border-bottom: 1px solid #e4e4e4;
