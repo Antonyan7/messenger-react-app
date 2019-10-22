@@ -13,7 +13,7 @@ function ChannelListener() {
       if (authToken) {
         try {
           const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
-            if(notification.sender != currentUser.gidName) {
+            if(notification.sender !== currentUser.gidName) {
               // @ts-ignore
               document.getElementById("conversation-"+notification.payload.channel_id).classList.add("conversation-highlight");
             }
@@ -21,7 +21,6 @@ function ChannelListener() {
               addChannel(notification.payload as Channel);
             }
             if (notification.action === NotificationAction.NewMessage) {
-              console.log(notification.payload);
               // @ts-ignore
               if(notification.payload.channel_id === activeChannelId){
                   // @ts-ignore
