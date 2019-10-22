@@ -12,7 +12,7 @@ cache:
   untracked: false
   key: "$CI_COMMIT_REF_SLUG"
   paths:
-  - app/build/
+  - build/
 
 before_script:
   - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}">.npmrc
