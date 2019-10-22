@@ -111,7 +111,7 @@ build_prod:
     - tags
 
 deploy_prod:
-  stage: deploy
+  stage: promote
   image: registry.gitlab.com/globalid/infrastructure/docker-awscli:latest
   tags:
     - globalid
