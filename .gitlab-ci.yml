@@ -8,11 +8,11 @@ variables:
   PROD_S3_BUCKET: gid-prod-web-messaging
   PROD_CLOUDFRONT_ID: asdasd
 
-cache:
-  untracked: false
-  key: "$CI_COMMIT_REF_SLUG"
-  paths:
-  - build/
+  #cache:
+  #untracked: false
+  #key: "$CI_COMMIT_REF_SLUG"
+  #paths:
+  #- build/
 
 before_script:
   - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}">.npmrc
@@ -35,6 +35,10 @@ build_dev:
     - apk update && apk upgrade && apk add --update nodejs npm
     - npm install
     - npm run build
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 day
 
 deploy_dev:
   stage: deploy
