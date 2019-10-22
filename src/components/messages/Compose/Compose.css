@@ -21,6 +21,7 @@
 }
 
 .compose-field {
+  font-family: Averta, sans-serif;
   padding-left: 20px;
   flex: 1;
   border: none;

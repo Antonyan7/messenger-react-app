@@ -3,6 +3,9 @@
   src: url("../assets/fonts/Averta-Regular.otf");
 }
 
+html, body, .root-element {
+  height: 100%;
+}
 body {
   margin: 0;
   padding: 0;

@@ -2,24 +2,22 @@ import React from 'react';
 import ConversationList from '../../conversations/ConversationList';
 import MessageList from '../../messages/MessageList';
 import './Messenger.css';
-import Header from "../Header";
 import ConversationListContextProvider from "../../../context/ConversationListContext";
 
 function Messenger() {
     return (
-        <div>
+        <React.Fragment>
             <ConversationListContextProvider>
-                <Header/>
                 <div className="messenger">
-                    <div className="scrollable sidebar">
+                    <div className="sidebar">
                         <ConversationList/>
                     </div>
-                    <div className="scrollable content" id="messagesScreen">
+                    <div className="content">
                         <MessageList/>
                     </div>
                 </div>
             </ConversationListContextProvider>
-        </div>
+        </React.Fragment>
     );
 }
 

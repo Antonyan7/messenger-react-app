@@ -35,14 +35,14 @@ function Home() {
     };
 
     return (
-        <div className="Home">
+        <React.Fragment>
             <Switch>
                 <PrivateHomeRoute path="/" exact component={Messenger}/>
                 <PrivateLoginRoute path="/login" exact component={Login}/>
                 <PrivateLoginRoute path="/preview" exact component={Preview}/>
                 <Route path="/auth" exact component={Auth}/>
             </Switch>
-        </div>
+        </React.Fragment>
     );
 }
 

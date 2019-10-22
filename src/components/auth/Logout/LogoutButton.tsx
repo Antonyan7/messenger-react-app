@@ -20,10 +20,8 @@ function LogoutButton() {
         history.push("/preview");
     };
     return (
-        <div className="LogoutButton">
-            <div onClick={handleLogoutClick}>
-                <ArrowOutIcon/>
-            </div>
+        <div className="LogoutButton" onClick={handleLogoutClick}>
+            <ArrowOutIcon/>
         </div>
     );
 }

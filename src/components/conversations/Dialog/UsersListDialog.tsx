@@ -105,7 +105,7 @@ export default function UsersListDialog() {
     };
 
     return (
-        <div>
+        <React.Fragment>
             <Dialog
                 open={isUsersListOpened}
                 onClose={handleClose}
@@ -132,6 +132,6 @@ export default function UsersListDialog() {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </React.Fragment>
     );
 }
