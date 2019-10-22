@@ -33,6 +33,10 @@ build_dev:
     paths:
       - build
     expire_in: 1 day
+  only:
+    - master
+    - /^test-[a-zA-Z0-9\-]+/
+    - /^feat-[a-zA-Z0-9\-]+/
 
 deploy_dev:
   stage: deploy
@@ -87,7 +91,7 @@ deploy_stg:
     - tags
 
 build_prod:
-  stage: build
+  stage: promote
   tags:
     - globalid
   variables:
@@ -105,9 +109,10 @@ build_prod:
     expire_in: 1 day
   only:
     - tags
+  when: manual
 
 deploy_prod:
-  stage: deploy
+  stage: promote
   image: registry.gitlab.com/globalid/infrastructure/docker-awscli:latest
   tags:
     - globalid
