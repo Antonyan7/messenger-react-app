@@ -33,6 +33,10 @@ build_dev:
     paths:
       - build
     expire_in: 1 day
+  only:
+    - master
+    - /^test-[a-zA-Z0-9\-]+/
+    - /^feat-[a-zA-Z0-9\-]+/
 
 deploy_dev:
   stage: deploy
