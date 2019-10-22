@@ -1,0 +1,41 @@
+.messenger {
+  display: grid;
+  width: 100%;
+  height: calc(100vh - 53px);
+  background: #eeeef1;
+
+  grid-template-columns: 350px auto;
+  grid-template-rows: 60px auto 60px;
+  grid-column-gap: 1px;
+  grid-row-gap: 1px;
+}
+
+.container {
+  padding: 10px;
+}
+
+.scrollable {
+  position: relative;
+  overflow-y: scroll;
+  border-top: 1px solid #e4e4e4;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sidebar {
+  background: white;
+  grid-row-start: 1;
+  grid-row-end: span 3;
+  border-right: 1px solid #e4e4e4;
+  border-top: 1px solid #e4e4e4;
+}
+
+.content {
+  background: white;
+  grid-row-start: 1;
+  grid-row-end: span 3;
+}
+
+.footer {
+  grid-column-start: 2;
+  background: white;
+}
