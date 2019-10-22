@@ -14,6 +14,7 @@ before_script:
 stages:
   - build
   - deploy
+  - build_prod
   - promote
 
 build_dev:
@@ -91,7 +92,7 @@ deploy_stg:
     - tags
 
 build_prod:
-  stage: promote
+  stage: build_prod
   tags:
     - globalid
   variables:
@@ -109,7 +110,6 @@ build_prod:
     expire_in: 1 day
   only:
     - tags
-  when: manual
 
 deploy_prod:
   stage: promote
