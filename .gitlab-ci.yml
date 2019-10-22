@@ -1,0 +1,58 @@
+image: globalid/node-alpine:latest
+
+variables:
+  DEV_S3_BUCKET: gid-dev-web-messaging
+  DEV_CLOUDFRONT_ID: E12NUCXLK5ITLR
+  STAGING_S3_BUCKET: gid-staging-web-messaging
+  STAGING_CLOUDFRONT_ID: asdasd
+  PROD_S3_BUCKET: gid-prod-web-messaging
+  PROD_CLOUDFRONT_ID: asdasd
+
+  #cache:
+  #untracked: false
+  #key: "$CI_COMMIT_REF_SLUG"
+  #paths:
+  #- build/
+
+before_script:
+  - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}">.npmrc
+
+stages:
+  - build
+  - deploy
+  - promote
+
+build_dev:
+  stage: build
+  tags:
+    - globalid
+  variables:
+    SKIP_PREFLIGHT_CHECK: "true"
+    NODE_ENV: "development"
+    REACT_APP_AUTH_URL: $DEV_REACT_APP_AUTH_URL
+    REACT_APP_BASE_URL: $DEV_REACT_APP_BASE_URL
+  script:
+    - apk update && apk upgrade && apk add --update nodejs npm
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 day
+
+deploy_dev:
+  stage: deploy
+  image: registry.gitlab.com/globalid/infrastructure/docker-awscli:latest
+  tags:
+    - globalid
+  script:
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_TMP
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_TMP
+    - aws s3 sync ./build/ s3://${DEV_S3_BUCKET} --delete
+    - aws configure set preview.cloudfront true
+    - aws cloudfront create-invalidation --distribution-id ${DEV_CLOUDFRONT_ID} --paths "/*"
+    - aws configure set preview.cloudfront false
+  only:
+    - master
+    - /^test-[a-zA-Z0-9\-]+/
+    - /^feat-[a-zA-Z0-9\-]+/
