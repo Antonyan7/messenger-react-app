@@ -8,11 +8,11 @@ variables:
   PROD_S3_BUCKET: gid-prod-web-messaging
   PROD_CLOUDFRONT_ID: asdasd
 
-  #cache:
-  #untracked: false
-  #key: "$CI_COMMIT_REF_NAME"
-  #paths:
-  #- app/build/
+cache:
+  untracked: false
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+  - app/build/
 
 before_script:
   - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}">.npmrc
