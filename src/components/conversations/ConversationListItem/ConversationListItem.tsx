@@ -47,10 +47,6 @@ function ConversationListItem(props: IConversationsList) {
         const channelMessagesList = messages.data.messages;
         updateActiveChannelName(conversationInfo.title);
         updateMessages(channelMessagesList.reverse());
-        let messagesScreen = document.getElementById('messagesScreen');
-        if(messagesScreen) {
-            messagesScreen.scrollTo(0, messagesScreen.scrollHeight);
-        }
         updateActiveChannelId(id);
     };
 
@@ -58,6 +54,11 @@ function ConversationListItem(props: IConversationsList) {
         mobileToggleChatActive(true);
         updateIsLoading(true);
         await getChannelMessages();
+        updateIsLoading(false);
+        const messageContainer = document.getElementById("messagesList");
+        if (messageContainer) {
+          messageContainer.scrollIntoView(false)
+        }
     };
 
     const useStyles = makeStyles({
