@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
-import PlusCircleIcon from "../../../assets/icons/PlusCircleIcon";
+import PlusCircleIcon from "../../../../assets/icons/PlusCircleIcon";
 import './AddChannelButton.css'
-import {ConversationListContext} from "../../../context/ConversationListContext";
+import {ConversationListContext} from "../../../../context/ConversationListContext";
 
 function AddChannelButton() {
     const {updateIsUsersListOpened} = useContext(ConversationListContext);
@@ -11,10 +11,8 @@ function AddChannelButton() {
     };
 
     return (
-        <div className="AddChannelButton">
-            <div onClick={handleClick}>
-                <PlusCircleIcon key="plusCircleIcon"/>
-            </div>
+        <div className="AddChannelButton" onClick={handleClick}>
+            <PlusCircleIcon key="plusCircleIcon"/>
         </div>
     );
 }

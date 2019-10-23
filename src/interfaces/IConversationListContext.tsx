@@ -5,4 +5,6 @@ export interface IConversationListContext {
     updateSearchedChannels: (channels: Array<object>) => void,
     isSearching: boolean,
     updateIsSearching: (state: boolean) => void
+    isLoading: boolean,
+    updateIsLoading: (state: boolean) => void
 }

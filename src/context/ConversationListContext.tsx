@@ -8,13 +8,15 @@ const ConversationListContextProvider = (props: IConversationListContextProvider
     const [isUsersListOpened, setIsUsersListOpened] = useState<boolean>(false);
     const [searchedChannels, setSearchedChannels] = useState<Array<object>>([]);
     const [isSearching, setIsSearching] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const updateIsUsersListOpened = (state: boolean) => { setIsUsersListOpened(state) };
     const updateSearchedChannels = (channels: Array<object>) => { setSearchedChannels(channels) };
     const updateIsSearching = (state: boolean) => { setIsSearching(state) };
+    const updateIsLoading = (state: boolean) => { setIsLoading(state) };
 
     return (
-        <ConversationListContext.Provider value={{isUsersListOpened, updateIsUsersListOpened, searchedChannels, updateSearchedChannels, isSearching, updateIsSearching}}>
+        <ConversationListContext.Provider value={{isUsersListOpened, updateIsUsersListOpened, searchedChannels, updateSearchedChannels, isSearching, updateIsSearching, isLoading, updateIsLoading}}>
             {props.children}
         </ConversationListContext.Provider>
     )

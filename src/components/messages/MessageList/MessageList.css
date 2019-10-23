@@ -1,13 +1,5 @@
 .message-list-container {
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-bottom: 10px;
-}
-
-.message-list {
-  max-height: calc(100vh - 117px);
-  display: grid;
-  grid-template-rows: auto 63px;
+  padding: 10px 20px;
 }
 
 .message-loader {
@@ -21,3 +13,4 @@
   width: 50px;
   height: 50px;
 }
+

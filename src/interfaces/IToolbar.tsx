@@ -1,5 +1,5 @@
 export interface IToolbar {
-    leftItems?: Array<object>,
-    rightItems?: Array<object>,
+    leftItems: Array<any>,
+    rightItems: Array<any>,
     title?: string
 }

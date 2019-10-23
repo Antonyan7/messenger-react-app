@@ -41,7 +41,7 @@ function ChannelListener() {
       };
     });
     return (
-        <div />
+        <React.Fragment />
     );
 }
 
