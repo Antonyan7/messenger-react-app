@@ -15,7 +15,6 @@
 }
 
 .scrollable {
-  position: relative;
   overflow-y: scroll;
   border-top: 1px solid #e4e4e4;
   -webkit-overflow-scrolling: touch;

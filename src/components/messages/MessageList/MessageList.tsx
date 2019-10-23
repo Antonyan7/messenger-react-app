@@ -6,6 +6,7 @@ import {AppContext} from '../../../context/AppContext';
 import {AuthContext} from "../../../context/AuthContext";
 import SendIcon from "../../../assets/icons/SendIcon";
 import './MessageList.css';
+import Loader from "../../../assets/loader/Loader";
 
 function MessageList() {
     const {messages, activeChannelName} = useContext(AppContext);
@@ -77,6 +78,10 @@ function MessageList() {
 
     return (
         <div className="message-list scrollable" id="messagesScreen">
+            {
+              !messages.length ? <Loader/> : ""
+            }
+
             <div className="message-list-container" id="messagesList">
                 <div className="messages">
                     {activeChannelName ? renderMessages() : ""}
