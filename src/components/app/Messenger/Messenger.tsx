@@ -8,7 +8,7 @@ function Messenger() {
     return (
         <React.Fragment>
             <ConversationListContextProvider>
-                <div className="messenger">
+                <div className="messenger" id="messengerContainer">
                     <div className="sidebar">
                         <ConversationList/>
                     </div>

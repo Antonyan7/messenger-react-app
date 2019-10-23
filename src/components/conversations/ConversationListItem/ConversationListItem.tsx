@@ -7,12 +7,11 @@ import {IConversationsList} from "../../../interfaces/IConversationsList";
 import {Channel, MessagesResponse} from "globalid-messaging-web-sdk";
 import {client} from "../../../helpers/initMessengerSdk";
 import './ConversationListItem.css'
-import {MessageContext} from "../../../context/MessageContext";
+import mobileToggleChatActive from '../../../helpers/mobileToggleChatActive';
 
 function ConversationListItem(props: IConversationsList) {
     const {activeChannelId, updateMessages, updateActiveChannelId, updateActiveChannelName} = useContext(AppContext);
     const {authToken} = useContext(AuthContext);
-    const {updateMessage} = useContext(MessageContext);
     const [conversationInfo, setConversationInfo] = useState<any>([]);
 
     const config = {
@@ -53,6 +52,7 @@ function ConversationListItem(props: IConversationsList) {
     };
 
     const handleChannelClick = async () => {
+        mobileToggleChatActive(true);
         await getChannelMessages();
     };
 

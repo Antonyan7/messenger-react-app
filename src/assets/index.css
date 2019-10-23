@@ -15,6 +15,10 @@ body {
   background: #eeeef0;
 }
 
+img, svg {
+  vertical-align: middle;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

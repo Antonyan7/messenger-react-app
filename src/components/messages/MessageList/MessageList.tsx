@@ -9,6 +9,7 @@ import './MessageList.css';
 import Toolbar from "../../layouts/Toolbar";
 import MobileBackToConversationList from "../../conversations/ConversationButtons/MobileBackToConversationList";
 import LogoutButton from "../../auth/Logout";
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 function MessageList() {
     const {messages, activeChannelName} = useContext(AppContext);
@@ -93,17 +94,20 @@ function MessageList() {
             {
                 activeChannelName
                 &&
-                <div className="message-list scrollable" id="messagesScreen">
-                  <div className="message-list-container" id="messagesList">
-                    <div className="messages">
-                        {renderMessages()}
+                <React.Fragment>
+                  <PerfectScrollbar>
+                    <div className="message-list" id="messagesScreen">
+                      <div className="message-list-container" id="messagesList">
+                        <div className="messages">
+                            {renderMessages()}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-
+                  </PerfectScrollbar>
                   <Compose rightItems={[
                       <SendIcon key="sendIcon"/>
                   ]}/>
-                </div>
+                </React.Fragment>
             }
         </React.Fragment>
     );

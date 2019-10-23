@@ -9,6 +9,7 @@ import './ConversationList.css';
 import Toolbar from "../../layouts/Toolbar";
 import SettingsIcon from "../../../assets/icons/SettingsIcon";
 import AddChannelButton from "../ConversationButtons/AddChannelButton";
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);
@@ -61,18 +62,20 @@ function ConversationList() {
                     ]}
                 />
             </div>
-            <div className="conversation-list scrollable">
-                <ConversationLocalSearch/>
-                {
-                    filteredChannels.map((channel: Channel) =>
+            <PerfectScrollbar>
+                <div className="conversation-list">
+                    <ConversationLocalSearch/>
+                    {
+                        filteredChannels.map((channel: Channel) =>
                             <ConversationListItem
                                 key={channel.uuid}
                                 data={channel}
                             />
-                    )
-                }
-                <UsersListDialog/>
-            </div>
+                        )
+                    }
+                    <UsersListDialog/>
+                </div>
+            </PerfectScrollbar>
         </React.Fragment>
     );
 }

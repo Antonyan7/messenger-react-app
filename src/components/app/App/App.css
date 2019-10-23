@@ -1,5 +1,8 @@
 .app-wrapper {
   height: 100%;
-  display: flex;
-  flex-direction: column;
+}
+@media screen and (max-width: 667px) {
+  .app-wrapper {
+    overflow: hidden;
+  }
 }
