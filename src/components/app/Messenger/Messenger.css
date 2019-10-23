@@ -12,6 +12,7 @@
 
 .sidebar {
   min-width: 350px;
+  max-width: 350px;
   background: white;
   border-right: 1px solid #e4e4e4;
   display: flex;
