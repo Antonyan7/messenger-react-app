@@ -9,10 +9,11 @@ const style = {
 };
 
 function Login() {
+    const authUrl: string | undefined = process.env.REACT_APP_AUTH_URL;
     return (
         <div className="Login">
             <iframe scrolling='no' title="authComponent" style={style}
-                    src={process.env.REACT_APP_AUTH_URL}>
+                    src={authUrl}>
             </iframe>
         </div>
     );

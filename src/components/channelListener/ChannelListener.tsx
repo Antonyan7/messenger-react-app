@@ -32,8 +32,9 @@ function ChannelListener() {
           });
           localStorage.setItem('sdkClientToken', token);
         } catch (e) {
-          window.top.location.href = '/preview';
-          localStorage.clear();
+            console.log(e)
+          // window.location.href = '/preview';
+          // localStorage.clear();
         }
       }
       return function cleanup() {

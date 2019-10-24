@@ -12,7 +12,6 @@ import Preview from "../Preview";
 function Home() {
   const {authToken, updateCurrentUser} = useContext(AuthContext);
 
-
   const getCurrentUser = () => {
     const config = {
       headers: {'Authorization': "bearer " + authToken}
