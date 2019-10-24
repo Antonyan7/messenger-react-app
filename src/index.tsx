@@ -4,7 +4,6 @@ import './assets/index.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import App from './components/app/App';
 import * as serviceWorker from './serviceWorker';
-import dotenv from 'dotenv'
 import {initClient} from './helpers/initMessengerSdk';
 import {initCurrentUser} from "./helpers/initCurrentUser";
 
@@ -16,7 +15,6 @@ import {initCurrentUser} from "./helpers/initCurrentUser";
         console.log(e)
     }
 
-    dotenv.config();
     ReactDOM.render(<App/>, document.getElementById('root'));
 })();
 
