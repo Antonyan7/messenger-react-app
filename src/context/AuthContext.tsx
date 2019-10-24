@@ -5,7 +5,7 @@ import {IAuthContextProvider} from "../interfaces/IAuthContextProvider";
 export const AuthContext = React.createContext<IAuthContext>({} as IAuthContext);
 
 const token = localStorage.getItem("token");
-
+console.log(token, 'IAuthContextProvider');
 const AuthContextProvider = (props: IAuthContextProvider) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!token);
     const [authToken, setAuthToken] = useState<string>(token || "");
