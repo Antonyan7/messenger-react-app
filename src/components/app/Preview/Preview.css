@@ -16,13 +16,12 @@
     color: #7E7E80;
     text-align: center;
 }
+
 .preview-login-link {
-    height: 60px;
-    width: 240px;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    background: url("../../../assets/globalId.svg") center no-repeat #FFFFFF;
-    background-size: 160px;
+    height: 100px;
+    width: 250px;
+    background: url("../../../assets/globalId.svg") center no-repeat;
+    background-size: 250px;
     cursor: pointer;
     outline: none;
 }

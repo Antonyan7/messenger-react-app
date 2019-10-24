@@ -6,10 +6,17 @@ import {AppContext} from '../../../context/AppContext';
 import {AuthContext} from "../../../context/AuthContext";
 import SendIcon from "../../../assets/icons/SendIcon";
 import './MessageList.css';
+import Toolbar from "../../layouts/Toolbar";
+import MobileBackToConversationList from "../../conversations/ConversationButtons/MobileBackToConversationList";
+import LogoutButton from "../../auth/Logout";
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import Loader from "../../../assets/loader/Loader";
+import {ConversationListContext} from "../../../context/ConversationListContext";
 
 function MessageList() {
     const {messages, activeChannelName} = useContext(AppContext);
     const {currentUser} = useContext(AuthContext);
+    const {isLoading} = useContext(ConversationListContext);
 
     useEffect( () => {
       const messageContainer = document.getElementById("messagesList");
@@ -25,7 +32,7 @@ function MessageList() {
 
         while (i < messageCount) {
             let previous = messages[i - 1];
-            let current = messages[i];
+            let current: any = messages[i];
             let next = messages[i + 1];
             let isMine = current.author === currentUser.id;
             let currentMoment = moment(current.timestamp);
@@ -61,7 +68,7 @@ function MessageList() {
 
             messagesList.push(
                 <Message
-                    key={i}
+                    key={current.uuid || i}
                     isMine={isMine}
                     startsSequence={startsSequence}
                     endsSequence={endsSequence}
@@ -76,17 +83,37 @@ function MessageList() {
     };
 
     return (
-        <div className="message-list scrollable" id="messagesScreen">
-            <div className="message-list-container" id="messagesList">
-                <div className="messages">
-                    {activeChannelName ? renderMessages() : ""}
-                </div>
+        <React.Fragment>
+            <div className="messages-toolbar">
+                <Toolbar
+                    title={activeChannelName}
+                    leftItems={activeChannelName ? [
+                        <MobileBackToConversationList key='MobileBackToConversationList' />
+                    ] : []}
+                    rightItems={[
+                        <LogoutButton key="logoutButton"/>
+                    ]}
+                />
             </div>
-
-            <Compose rightItems={[
-                <SendIcon key="sendIcon"/>
-            ]}/>
-        </div>
+            {
+                isLoading ? <Loader/> :
+                activeChannelName &&
+                <React.Fragment>
+                  <PerfectScrollbar>
+                    <div className="message-list" id="messagesScreen">
+                      <div className="message-list-container" id="messagesList">
+                        <div className="messages">
+                            {renderMessages()}
+                        </div>
+                      </div>
+                    </div>
+                  </PerfectScrollbar>
+                  <Compose rightItems={[
+                      <SendIcon key="sendIcon"/>
+                  ]}/>
+                </React.Fragment>
+            }
+        </React.Fragment>
     );
 }
 

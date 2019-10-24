@@ -1,0 +1,8 @@
+.app-wrapper {
+  height: 100%;
+}
+@media screen and (max-width: 667px) {
+  .app-wrapper {
+    overflow: hidden;
+  }
+}

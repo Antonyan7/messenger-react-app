@@ -4,15 +4,9 @@ variables:
   DEV_S3_BUCKET: gid-dev-web-messaging
   DEV_CLOUDFRONT_ID: E12NUCXLK5ITLR
   STAGING_S3_BUCKET: gid-staging-web-messaging
-  STAGING_CLOUDFRONT_ID: asdasd
+  STAGING_CLOUDFRONT_ID: E25A3056Y9YADY
   PROD_S3_BUCKET: gid-prod-web-messaging
-  PROD_CLOUDFRONT_ID: asdasd
-
-  #cache:
-  #untracked: false
-  #key: "$CI_COMMIT_REF_SLUG"
-  #paths:
-  #- build/
+  PROD_CLOUDFRONT_ID: E3F13YZRF4ZQM
 
 before_script:
   - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}">.npmrc
@@ -20,6 +14,7 @@ before_script:
 stages:
   - build
   - deploy
+  - build_prod
   - promote
 
 build_dev:
@@ -39,6 +34,10 @@ build_dev:
     paths:
       - build
     expire_in: 1 day
+  only:
+    - master
+    - /^test-[a-zA-Z0-9\-]+/
+    - /^feat-[a-zA-Z0-9\-]+/
 
 deploy_dev:
   stage: deploy
@@ -56,3 +55,75 @@ deploy_dev:
     - master
     - /^test-[a-zA-Z0-9\-]+/
     - /^feat-[a-zA-Z0-9\-]+/
+
+build_stg:
+  stage: build
+  tags:
+    - globalid
+  variables:
+    SKIP_PREFLIGHT_CHECK: "true"
+    NODE_ENV: "staging"
+    REACT_APP_AUTH_URL: $STG_REACT_APP_AUTH_URL
+    REACT_APP_BASE_URL: $STG_REACT_APP_BASE_URL
+  script:
+    - apk update && apk upgrade && apk add --update nodejs npm
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 day
+  only:
+    - tags
+
+deploy_stg:
+  stage: deploy
+  image: registry.gitlab.com/globalid/infrastructure/docker-awscli:latest
+  tags:
+    - globalid
+  script:
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_TMP
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_TMP
+    - aws s3 sync ./build/ s3://${STAGING_S3_BUCKET} --delete
+    - aws configure set preview.cloudfront true
+    - aws cloudfront create-invalidation --distribution-id ${STAGING_CLOUDFRONT_ID} --paths "/*"
+    - aws configure set preview.cloudfront false
+  only:
+    - tags
+
+build_prod:
+  stage: build_prod
+  tags:
+    - globalid
+  variables:
+    SKIP_PREFLIGHT_CHECK: "true"
+    NODE_ENV: "production"
+    REACT_APP_AUTH_URL: $PROD_REACT_APP_AUTH_URL
+    REACT_APP_BASE_URL: $PROD_REACT_APP_BASE_URL
+  script:
+    - apk update && apk upgrade && apk add --update nodejs npm
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 day
+  only:
+    - tags
+
+deploy_prod:
+  stage: promote
+  image: registry.gitlab.com/globalid/infrastructure/docker-awscli:latest
+  tags:
+    - globalid
+  script:
+    - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_TMP
+    - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_TMP
+    - aws s3 sync ./build/ s3://${PROD_S3_BUCKET} --delete
+    - aws configure set preview.cloudfront true
+    - aws cloudfront create-invalidation --distribution-id ${PROD_CLOUDFRONT_ID} --paths "/*"
+    - aws configure set preview.cloudfront false
+  only:
+    - tags
+  when: manual
+

@@ -6,6 +6,10 @@ import {AppContext} from "../../../context/AppContext";
 import {Channel, ChannelsResponse} from "globalid-messaging-web-sdk";
 import {client} from "../../../helpers/initMessengerSdk"
 import './ConversationList.css';
+import Toolbar from "../../layouts/Toolbar";
+import SettingsIcon from "../../../assets/icons/SettingsIcon";
+import AddChannelButton from "../ConversationButtons/AddChannelButton";
+import PerfectScrollbar from 'react-perfect-scrollbar';
 
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);
@@ -47,18 +51,33 @@ function ConversationList() {
     }, []);
 
     return (
-        <div className="conversation-list">
-            <ConversationLocalSearch/>
-            {
-                filteredChannels.map((channel: Channel) =>
-                    <ConversationListItem
-                        key={channel.uuid}
-                        data={channel}
-                    />
-                )
-            }
-            <UsersListDialog/>
-        </div>
+        <React.Fragment>
+            <div className="conversations-toolbar">
+                <Toolbar
+                    title="Messenger"
+                    leftItems={[
+                        <SettingsIcon key="settingsIcon"/>
+                    ]}
+                    rightItems={[
+                        <AddChannelButton key="addChannelButton"/>
+                    ]}
+                />
+            </div>
+            <PerfectScrollbar>
+                <div className="conversation-list">
+                    <ConversationLocalSearch/>
+                    {
+                        filteredChannels.map((channel: Channel) =>
+                            <ConversationListItem
+                                key={channel.uuid}
+                                data={channel}
+                            />
+                        )
+                    }
+                    <UsersListDialog/>
+                </div>
+            </PerfectScrollbar>
+        </React.Fragment>
     );
 }
 
