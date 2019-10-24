@@ -16,7 +16,7 @@ import {ConversationListContext} from "../../../context/ConversationListContext"
 function MessageList() {
     const {messages, activeChannelName} = useContext(AppContext);
     const {currentUser} = useContext(AuthContext);
-    const {isLoading, updateIsLoading} = useContext(ConversationListContext);
+    const {isLoading} = useContext(ConversationListContext);
 
     useEffect( () => {
       const messageContainer = document.getElementById("messagesList");
