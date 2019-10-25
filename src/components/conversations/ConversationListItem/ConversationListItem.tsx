@@ -23,8 +23,9 @@ function ConversationListItem(props: IConversationsList) {
     const {id, participants}: Channel = props.data;
 
     const getParticipants = () => {
+      const gid_uuid = localStorage.getItem('gid_uuid');
       const filteredParticipants = participants.filter(function (id) {
-        return id !== localStorage.getItem('gid_uuid');
+        return id !== gid_uuid;
       });
 
       axios.get(process.env.REACT_APP_BASE_URL + 'v1/identities/' + filteredParticipants[0], config).then(response => {
@@ -83,7 +84,7 @@ function ConversationListItem(props: IConversationsList) {
                 <h1 className="conversation-title">{conversationInfo.title}</h1>
                 <p className="conversation-snippet">{conversationInfo.description}</p>
             </div>
-            <div className="conversation-active-dot"></div>
+            <div className="conversation-active-dot"/>
         </div>
     )
 }

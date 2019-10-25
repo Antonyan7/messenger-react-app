@@ -95,8 +95,6 @@ export default function UsersListDialog() {
                 uuid: uuid(),
                 type: ChannelType.Personal,
                 exposed: false,
-                title: channelInfo.name,
-                image_url: channelInfo.photo,
                 participants: [channelInfo.id]
             };
 
