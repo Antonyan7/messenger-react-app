@@ -1,21 +1,19 @@
-import React, {useEffect} from "react";
+import React, {Component} from "react";
 
-function Auth() {
-    let urlParams = window.location.href.split("#token=");
-    console.log(urlParams, 'urlParams');
-    let token = urlParams[urlParams.length - 1];
-    localStorage.setItem("token", token);
-    console.log(token)
-    alert(urlParams)
+class Auth extends Component {
+    UNSAFE_componentWillMount(): void {
+        let urlParams = window.location.href.split("#token=");
+        let token = urlParams[urlParams.length - 1];
+        localStorage.setItem("token", token);
+        window.top.location.href = `/`;
+    }
 
-    useEffect(() => {
-        window.top.location.href = '/';
-    }, []);
-
-    return (
-        <div className="Auth">
-        </div>
-    );
+    render(): any {
+        return (
+            <div className="Auth">
+            </div>
+        )
+    }
 }
 
 export default Auth;
