@@ -4,13 +4,14 @@ import Home from "../Home";
 import AppContextProvider from "../../../context/AppContext";
 import {BrowserRouter} from "react-router-dom";
 import ChannelListener from "../../channelListener";
+import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
         <AppContextProvider>
-          <div className="App">
+          <div className="app-wrapper">
             <ChannelListener/>
             <Home/>
           </div>

@@ -6,11 +6,14 @@ import {AuthContext} from "../../../context/AuthContext";
 import {IConversationsList} from "../../../interfaces/IConversationsList";
 import {Channel, MessagesResponse} from "globalid-messaging-web-sdk";
 import {client} from "../../../helpers/initMessengerSdk";
-import './ConversationListItem.css'
+import './ConversationListItem.css';
+import mobileToggleChatActive from '../../../helpers/mobileToggleChatActive';
+import {ConversationListContext} from "../../../context/ConversationListContext";
 
 function ConversationListItem(props: IConversationsList) {
     const {activeChannelId, updateMessages, updateActiveChannelId, updateActiveChannelName} = useContext(AppContext);
     const {authToken} = useContext(AuthContext);
+    const {updateIsLoading} = useContext(ConversationListContext);
     const [conversationInfo, setConversationInfo] = useState<any>([]);
 
     const config = {
@@ -20,8 +23,9 @@ function ConversationListItem(props: IConversationsList) {
     const {id, participants}: Channel = props.data;
 
     const getParticipants = () => {
+      const gid_uuid = localStorage.getItem('gid_uuid');
       const filteredParticipants = participants.filter(function (id) {
-        return id !== localStorage.getItem('gid_uuid');
+        return id !== gid_uuid;
       });
 
       axios.get(process.env.REACT_APP_BASE_URL + 'v1/identities/' + filteredParticipants[0], config).then(response => {
@@ -44,15 +48,18 @@ function ConversationListItem(props: IConversationsList) {
         const channelMessagesList = messages.data.messages;
         updateActiveChannelName(conversationInfo.title);
         updateMessages(channelMessagesList.reverse());
-        let messagesScreen = document.getElementById('messagesScreen');
-        if(messagesScreen) {
-            messagesScreen.scrollTo(0, messagesScreen.scrollHeight);
-        }
         updateActiveChannelId(id);
     };
 
     const handleChannelClick = async () => {
+        mobileToggleChatActive(true);
+        updateIsLoading(true);
         await getChannelMessages();
+        updateIsLoading(false);
+        const messageContainer = document.getElementById("messagesList");
+        if (messageContainer) {
+          messageContainer.scrollIntoView(false)
+        }
     };
 
     const useStyles = makeStyles({
@@ -65,7 +72,7 @@ function ConversationListItem(props: IConversationsList) {
     const classes = useStyles();
 
     return (
-        <div className={`conversation-list-item ${activeChannelId === id ? 'conversation-selected' : ''}`}
+        <div className={`conversation-list-item ${activeChannelId === id ? 'conversation-selected' : ''}`} id={`conversation-${id}`}
              onClick={() => handleChannelClick()}>
             <div className={`conversation-photo default-avatar ${conversationInfo.image_url != null ? classes.userPhoto : ""}`}>
                 <h3>
@@ -77,6 +84,7 @@ function ConversationListItem(props: IConversationsList) {
                 <h1 className="conversation-title">{conversationInfo.title}</h1>
                 <p className="conversation-snippet">{conversationInfo.description}</p>
             </div>
+            <div className="conversation-active-dot"/>
         </div>
     )
 }

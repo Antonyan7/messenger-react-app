@@ -1,41 +1,55 @@
 .messenger {
-  display: grid;
+  display: flex;
   width: 100%;
-  height: calc(100vh - 53px);
+  height: 100%;
   background: #eeeef1;
-
-  grid-template-columns: 350px auto;
-  grid-template-rows: 60px auto 60px;
-  grid-column-gap: 1px;
-  grid-row-gap: 1px;
+  transition: transform .3s ease 0s;
 }
 
 .container {
   padding: 10px;
 }
 
-.scrollable {
-  position: relative;
-  overflow-y: scroll;
-  border-top: 1px solid #e4e4e4;
-  -webkit-overflow-scrolling: touch;
-}
-
 .sidebar {
+  min-width: 350px;
+  max-width: 350px;
   background: white;
-  grid-row-start: 1;
-  grid-row-end: span 3;
   border-right: 1px solid #e4e4e4;
-  border-top: 1px solid #e4e4e4;
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
-  background: white;
-  grid-row-start: 1;
-  grid-row-end: span 3;
+  position: relative;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
-.footer {
-  grid-column-start: 2;
-  background: white;
+.conversations-toolbar,
+.messages-toolbar {
+  min-height: 48px;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+@media screen and (max-width: 960px) {
+  .sidebar {
+    min-width: 320px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .sidebar {
+    min-width: 300px;
+  }
+}
+@media screen and (max-width: 667px) {
+  .messenger.f_chat_active {
+    transform: translateX(-100%);
+  }
+  .sidebar,
+  .content {
+    min-width: 100%;
+  }
 }

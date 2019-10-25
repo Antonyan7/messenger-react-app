@@ -4,11 +4,11 @@ import {IAuthContextProvider} from "../interfaces/IAuthContextProvider";
 
 export const AuthContext = React.createContext<IAuthContext>({} as IAuthContext);
 
+const token = localStorage.getItem("token");
+console.log(token, 'IAuthContextProvider');
 const AuthContextProvider = (props: IAuthContextProvider) => {
-    let token = window.localStorage.getItem("token");
-    let checkTokenAvailability = token != null;
-    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(checkTokenAvailability);
-    const [authToken, setAuthToken] = useState<string>(token != null ? token : "");
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!token);
+    const [authToken, setAuthToken] = useState<string>(token || "");
     const [currentUser, setCurrentUser] = useState<any>({});
 
     const updateAuthToken = (token: string) => {
@@ -19,7 +19,8 @@ const AuthContextProvider = (props: IAuthContextProvider) => {
     };
 
     return (
-        <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, authToken, updateAuthToken, currentUser, updateCurrentUser}}>
+        <AuthContext.Provider
+            value={{isAuthenticated, setIsAuthenticated, authToken, updateAuthToken, currentUser, updateCurrentUser}}>
             {props.children}
         </AuthContext.Provider>
     )

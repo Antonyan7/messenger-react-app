@@ -95,8 +95,6 @@ export default function UsersListDialog() {
                 uuid: uuid(),
                 type: ChannelType.Personal,
                 exposed: false,
-                title: channelInfo.name,
-                image_url: channelInfo.photo,
                 participants: [channelInfo.id]
             };
 
@@ -106,7 +104,7 @@ export default function UsersListDialog() {
     };
 
     return (
-        <div>
+        <React.Fragment>
             <Dialog
                 open={isUsersListOpened}
                 onClose={handleClose}
@@ -133,6 +131,6 @@ export default function UsersListDialog() {
                     </Button>
                 </DialogActions>
             </Dialog>
-        </div>
+        </React.Fragment>
     );
 }

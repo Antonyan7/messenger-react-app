@@ -1,0 +1,6 @@
+.AddChannelButton {
+    cursor: pointer;
+}
+.AddChannelButton svg {
+    vertical-align: middle;
+}
