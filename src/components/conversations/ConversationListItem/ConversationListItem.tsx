@@ -11,7 +11,7 @@ import mobileToggleChatActive from '../../../helpers/mobileToggleChatActive';
 import {ConversationListContext} from "../../../context/ConversationListContext";
 
 function ConversationListItem(props: IConversationsList) {
-    const {activeChannelId, updateMessages, updateActiveChannelId, updateActiveChannelName} = useContext(AppContext);
+    const {activeChannelId, updateMessages, updateActiveChannelId, updateActiveChannelName, updateActiveChannelUuid} = useContext(AppContext);
     const {authToken} = useContext(AuthContext);
     const {updateIsLoading} = useContext(ConversationListContext);
     const [conversationInfo, setConversationInfo] = useState<any>([]);
@@ -20,7 +20,7 @@ function ConversationListItem(props: IConversationsList) {
         headers: {'Authorization': "bearer " + authToken}
     };
 
-    const {id, participants}: Channel = props.data;
+    const {id, participants, uuid}: Channel = props.data;
 
     const getParticipants = () => {
       const gid_uuid = localStorage.getItem('gid_uuid');
@@ -49,6 +49,7 @@ function ConversationListItem(props: IConversationsList) {
         updateActiveChannelName(conversationInfo.title);
         updateMessages(channelMessagesList.reverse());
         updateActiveChannelId(id);
+        updateActiveChannelUuid(uuid);
     };
 
     const handleChannelClick = async () => {

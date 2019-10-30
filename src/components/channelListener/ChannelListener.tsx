@@ -13,14 +13,16 @@ function ChannelListener() {
       if (authToken) {
         try {
           const token: string = client.subscribe((channel: string, notification: ServiceNotification) => {
-            if(notification.sender !== currentUser.gidName) {
-              // @ts-ignore
-              document.getElementById("conversation-"+notification.payload.channel_id).classList.add("conversation-highlight");
-            }
             if (notification.action === NotificationAction.NewChannelCreated) {
-              addChannel(notification.payload as Channel);
+              if(currentUser.gidName !== notification.sender) {
+                addChannel(notification.payload as Channel);
+              }
             }
             if (notification.action === NotificationAction.NewMessage) {
+              if(notification.sender !== currentUser.gidName) {
+                // @ts-ignore
+                document.getElementById("conversation-"+notification.payload.channel_id).classList.add("conversation-highlight");
+              }
               // @ts-ignore
               if(notification.payload.channel_id === activeChannelId){
                   // @ts-ignore
@@ -32,9 +34,8 @@ function ChannelListener() {
           });
           localStorage.setItem('sdkClientToken', token);
         } catch (e) {
-            console.log(e)
-          // window.location.href = '/preview';
-          // localStorage.clear();
+          window.location.href = '/preview';
+          localStorage.clear();
         }
       }
       return function cleanup() {

@@ -13,8 +13,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 
 function ConversationList() {
     const {updateFilteredChannels} = useContext(AppContext);
-    const {filteredChannels} = useContext(AppContext);
-    const {addChannels} = useContext(AppContext);
+    const {addChannels, channels} = useContext(AppContext);
 
   const getChannels = async () => {
     const channels: ChannelsResponse = await client.channel().getChannels(1, 20);
@@ -67,7 +66,7 @@ function ConversationList() {
                 <div className="conversation-list">
                     <ConversationLocalSearch/>
                     {
-                        filteredChannels.map((channel: Channel) =>
+                        channels.map((channel: Channel) =>
                             <ConversationListItem
                                 key={channel.uuid}
                                 data={channel}

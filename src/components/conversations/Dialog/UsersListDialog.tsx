@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
 import axios from "axios";
-import uuid from "uuid";
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -14,8 +13,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import {AppContext} from "../../../context/AppContext";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ConversationGlobalSearch from "../ConversationSearch/ConversationGlobalSearch";
-import {Channel, ChannelPayload, ChannelType} from "globalid-messaging-web-sdk";
-import {client} from "../../../helpers/initMessengerSdk";
+import {Channel, ChannelType} from "globalid-messaging-web-sdk";
 import "./UsersListDialog.css";
 
 const useStyles = makeStyles({
@@ -51,7 +49,7 @@ export default function UsersListDialog() {
     const [identities, setIdentities] = useState<Array<object>>([]);
     const {isUsersListOpened, updateIsUsersListOpened, searchedChannels, updateSearchedChannels} = useContext(ConversationListContext);
     const {authToken} = useContext(AuthContext);
-    const {channels} = useContext(AppContext);
+    const {channels, addChannel, updateActiveChannelUuid} = useContext(AppContext);
 
     useEffect(() => {
         getChannelsList();
@@ -90,17 +88,28 @@ export default function UsersListDialog() {
             return channel.participants.includes(channelInfo.id)
         });
 
-        if (existingChannels.length === 0) {
-            const channelPayload: ChannelPayload = {
-                uuid: uuid(),
-                type: ChannelType.Personal,
-                exposed: false,
-                participants: [channelInfo.id]
-            };
+        if(!existingChannels) {
+          const channelPayload: Channel = {
+            alias: "",
+            created_at: "",
+            created_by: "",
+            deleted: false,
+            description: "",
+            title: "",
+            unread_count: 0,
+            updated_at: "",
+            updated_by: "",
+            id: Math.random().toString().slice(2, 15),
+            uuid: channelInfo.id,
+            type: ChannelType.Personal,
+            exposed: false,
+            participants: [channelInfo.id]
+          };
 
-            await client.channel().createChannel(channelPayload);
+          updateActiveChannelUuid(channelInfo.id);
+          addChannel(channelPayload);
+          updateIsUsersListOpened(false);
         }
-        updateIsUsersListOpened(false);
     };
 
     return (
